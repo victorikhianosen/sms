@@ -270,7 +270,7 @@
                                 <!-- No Payment Row Below the Header -->
                                 <tr>
                                     <td colspan="9" class="px-4 py-4 text-center text-sm text-gray">
-                                        No recent Messages
+                                        No recent payment
                                     </td>
                                 </tr>
                             @else

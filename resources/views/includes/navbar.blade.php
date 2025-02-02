@@ -31,5 +31,10 @@
         </div>
     </div> --}}
 
+
     <livewire:include.nav-bar />
+
+
 </div>
+
+

@@ -1,0 +1,47 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->decimal('amount', 15, 2);
+            $table->string('status')->default('pending');
+            $table->string('transaction_id')->unique();
+            $table->string('reference')->nullable();
+
+            $table->string('bank_name')->nullable();
+            $table->string('account_number')->nullable();
+
+            $table->string('card_last_four')->nullable();
+            $table->string('card_brand')->nullable();
+            $table->string('currency')->default('naira');
+
+            $table->json('paystack_response')->nullable();
+            $table->json('verify_response')->nullable();
+
+            $table->string('description')->nullable();
+            $table->string('payment_type')->nullable();
+
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('payments');
+    }
+};

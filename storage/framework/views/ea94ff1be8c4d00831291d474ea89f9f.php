@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.1000ms>
     <div class="pt-4 pb-10 px-6 flex justify-between items-center">
         <h3 class="font-bold text-2xl">All Schedules</h3>
         <a href="<?php echo e(route('schedule')); ?>" wire:navigate.hover
@@ -26,8 +26,7 @@
                     <h3 class="text-lg font-medium"><?php echo e($item['description']); ?></h3>
                     <p class="text-textPrimary font-light text-sm leading-relaxed"></p>
                     <div class="pt-3 flex justify-center items-center gap-2">
-                        <a href="#"
-                            class="mt-6 px-5 py-2 block w-full rounded-lg text-white text-xs tracking-wider font-light border-none outline-none bg-blue hover:opacity-90">View</a>
+                        
                         <button type="button" wire:click.prevent="cancelSchedule(<?php echo e($item['id']); ?>)"
                             class="mt-6 px-5 py-2 w-full rounded-lg text-white text-xs tracking-wider font-light border-none outline-none bg-red-600 hover:opacity-90">Cancel</button>
                     </div>
@@ -41,7 +40,7 @@
         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
 
-        
+
 
 
 
@@ -49,6 +48,12 @@
 
 
     </div>
+
+      <div class="mt-12">
+        <?php echo e($allSchedule->links()); ?>
+
+    </div>
+
 
 </div>
 <?php /**PATH C:\Users\HP\Documents\GGT\sms\resources\views/livewire/user/schedule-sms-view.blade.php ENDPATH**/ ?>

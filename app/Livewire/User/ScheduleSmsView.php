@@ -18,7 +18,7 @@ class ScheduleSmsView extends Component
         $allSchedule = ScheduledMessage::where('user_id', $userID)
             ->whereNotIn('status', ['cancel', 'delete'])
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(12);
 
         // dd($allSchedule);
 
@@ -31,17 +31,23 @@ class ScheduleSmsView extends Component
     public function cancelSchedule($id)
     {
 
-        $userID = Auth::id();
-        $getSchedule = ScheduledMessage::where('user_id', $userID)
+        $user = Auth::user();
+        $getSchedule = ScheduledMessage::where('user_id', $user['id'])
             ->where('id', $id)->first();
-        // dd($message);
+        // dd($getSchedule['amount'], $user);
 
         if ($getSchedule['status'] !== 'pending') {
             $status  = $getSchedule['status'];
             $this->dispatch('alert', type: 'error', text: "Oops! Sorry, you can't cancel the $status messages.", position: 'center', timer: 10000, button: false);
         }
 
+
         $getSchedule->update(['status' => 'cancel']);
+
+        $user->update([
+            'balance' => $user->balance + $getSchedule['amount']
+        ]);
+
 
         $this->dispatch('alert', type: 'success', text: "Schedule canceled successfully.", position: 'center', timer: 10000, button: false);
     }

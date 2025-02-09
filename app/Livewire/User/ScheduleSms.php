@@ -36,7 +36,7 @@ class ScheduleSms extends Component
     #[Validate('required|date|after_or_equal:now')]
     public $date_time;
 
-    #[Validate('required')]
+    #[Validate('required|max:20')]
     public $description;
 
 

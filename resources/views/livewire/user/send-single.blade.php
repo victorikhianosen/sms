@@ -110,21 +110,21 @@
                     <div class="pt-8">
                         <label class="text-gray-800 text-sm mb-2 block">Sender</label>
                         <input type="text" autocomplete="off" wire:model="sender"
-                            class="w-1/4 px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
+                            class="w-1/4 px-3 py-2 bg-grayBg border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                             placeholder="Sender" readonly />
                     </div>
 
                     <div>
                         <label class="text-gray-800 text-sm mb-2 block">Phone</label>
                         <textarea autocomplete="off" wire:model="phone_number"
-                            class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
+                            class="w-full px-3 bg-grayBg py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                             placeholder="Phone" disabled></textarea>
                     </div>
 
                     <div>
                         <label class="text-gray-800 text-sm mb-2 block">Text</label>
                         <textarea autocomplete="off" wire:model="message"
-                            class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
+                            class="w-full px-3 py-2 bg-grayBg border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                             placeholder="Text" disabled></textarea>
                     </div>
 

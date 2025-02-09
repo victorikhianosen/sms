@@ -96,6 +96,17 @@
                             Schedule SMS
                         </a>
                     </li>
+
+
+                    
+                    <li>
+                        <a href="{{ route('schedule.view') }}" wire:navigate.hover @click.prevent="activeLink = 'bulk'"
+                            :class="{ 'text-blue font-semibold': activeLink === 'bulk', 'text-gray': activeLink !== 'bulk' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            View Scheduled
+                        </a>
+                    </li>
                 </div>
 
 

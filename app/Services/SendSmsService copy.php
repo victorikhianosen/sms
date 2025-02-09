@@ -28,19 +28,16 @@ class SendSmsService
             return $this->transactional($validated);
         } elseif ($smsRoute === 'exchange_pro') {
             return $this->promotional($validated);
-
         } else {
             return $this->error('Unknow Sender', 500);
         }
-
-
     }
 
     public function transactional($validated)
     {
 
         $user = User::where('api_key', '=', $validated['api_key'])
-        ->where('api_secret', $validated['api_secret'])->first();
+            ->where('api_secret', $validated['api_secret'])->first();
 
         $sender = SmsSender::whereRaw('BINARY name = ?', [$validated['sender']])->first();
         if (!$user) {
@@ -68,7 +65,7 @@ class SendSmsService
         $password = env('EXCHANGE_TRANS_PASSWORD');
         $smsDoc = env('EXCHANGE_SMS_DCS');
         $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
-        $callURL = env('GGT_CALLBACK');
+        $callURL = env('SMS_CALLBACK');
 
 
         $messageID = Str::uuid()->toString();
@@ -115,7 +112,6 @@ class SendSmsService
         } catch (\Exception $e) {
             return $this->error('An error occurred while sending the message', 500);
         }
-
     }
 
 
@@ -151,7 +147,7 @@ class SendSmsService
         $password = env('EXCHANGE_PRO_PASSWORD');
         $smsDoc = env('EXCHANGE_SMS_DCS');
         $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
-        $callURL = env('GGT_CALLBACK');
+        $callURL = env('SMS_CALLBACK');
 
 
         $messageID = Str::uuid()->toString();
@@ -184,7 +180,7 @@ class SendSmsService
             '&X-External-Id=' . urlencode($enternalID) .
             '&X-Delivery-URL=' . urlencode($callURL);;
 
-            return $url;
+        return $url;
         try {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
@@ -192,12 +188,11 @@ class SendSmsService
             ])->get($url);
 
             if ($response->successful()) {
-                return $this->success($messageID,'Message sent successfully');
+                return $this->success($messageID, 'Message sent successfully');
             }
             return $this->error('Failed to send message. Please try again later.', 500);
         } catch (\Exception $e) {
             return $this->error('An error occurred while sending the message', 500);
-
         }
     }
 }

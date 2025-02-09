@@ -25,6 +25,7 @@ class Groups extends Component
     #[Validate('required|file|mimes:csv,xls,xlsx')]
     public $numbers;
 
+    public $showModal = false;
     protected $numberExtractor;
 
     public function __construct()
@@ -35,13 +36,27 @@ class Groups extends Component
     #[Title('Groups')]
     public function render()
     {
+
+        $userID = Auth::id();
+        $allGroups = Group::where('user_id', $userID)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+            
         // Fetch groups with pagination and pass it to the view
         return view('livewire.user.groups', [
-            'allGroups' => Group::latest()->paginate(16),
+            'allGroups' => $allGroups,
         ])->extends('layouts.auth_layout')->section('auth-section');
     }
 
-  
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->reset();
+    }
+
+
     public function addGroup()
     {
         $validated = $this->validate();
@@ -59,7 +74,26 @@ class Groups extends Component
         Group::create($validated);
 
         $this->reset(['name', 'description', 'numbers']);
+        $this->closeModal();
+
 
         $this->dispatch('alert', type: 'success', text: 'Upload Successful!', position: 'center', timer: 10000, button: false);
     }
+
+
+    public function deletGroup($id)
+    {
+        $user = Auth::user();
+
+        $group = Group::find($id);
+
+        if ($group && $group->user_id === $user->id) {
+            $group->delete();
+
+            $this->dispatch('alert', type: 'success', text: 'Group deleted successfully!', position: 'center', timer: 10000, button: false);
+        } else {
+            $this->dispatch('alert', type: 'error', text: 'You are not authorized to delete this group!', position: 'center', timer: 10000, button: false);
+        }
+    }
+
 }

@@ -2,7 +2,9 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
-            <div class="flex justify-between mb-4" wire:init='getBalance'>
+            {{-- <div class="flex justify-between mb-4" wire:init='getBalance'> --}}
+                <div class="flex justify-between mb-4" wire:poll.5s="getBalance">
+
                 <div>
                     <div class="flex items-center mb-1">
                         @if (!isset($accountBalance))
@@ -87,7 +89,7 @@
 
 
 
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5" wire:init="getAllGroups">
+        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5" wire:poll.5s="getAllGroups">
             <div class="flex justify-between mb-4">
                 <div>
 
@@ -142,7 +144,7 @@
 
 
 
-    <div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2" wire:init="getRecentMessage">
+    <div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2" wire:poll.5s="getRecentMessage">
         <h3 class="font-bold text-2xl">Recent Messages</h3>
         <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
@@ -225,7 +227,7 @@
 
 
 
-    <div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2" wire:init="allRecentPayment">
+    <div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2" wire:poll.5s="allRecentPayment">
         <h3 class="font-bold text-2xl">Latest Payment</h3>
 
         <div class="-m-1.5 overflow-x-auto">

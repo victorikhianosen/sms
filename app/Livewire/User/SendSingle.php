@@ -51,7 +51,6 @@ class SendSingle extends Component
         $user = Auth::user();
         $smsRate = $user->sms_rate;
         $smsCharLimit = $user->sms_char_limit;
-
         $accountBalance = $user['balance'];
 
         $messageLength = strlen($validated['message']);
@@ -64,21 +63,16 @@ class SendSingle extends Component
         }
 
         $this->smsRate = $smsRate;
-        // $this->smsCharLimit = $smsCharLimit;
         $this->totalCharge = $totalCharge;
         $this->messageLength = $messageLength;
         $this->smsUnits = $smsUnits;
-
-        // Set the showModal to true so the modal is shown
         $this->showModal = true;
     }
 
     public function closeModal()
     {
-        // Reset modal state and other properties
         $this->showModal = false;
-        // $this->resetErrorBag();
-        // $this->reset(['sender', 'message', 'phone_number']);
+
     }
 
     public function sendMessage()
@@ -88,7 +82,6 @@ class SendSingle extends Component
         // dd($sender);
         if (!$sender) {
             $this->dispatch('alert', type: 'error', text: 'Invalid Sender ID', position: 'center', timer: 10000, button: false);
-
         }
 
         $smsRoute = $sender->smsroute->name;
@@ -102,18 +95,17 @@ class SendSingle extends Component
         $user->balance = $accountBalance - $this->totalCharge;
         $user->save();
 
-        // Get environment variables for SMS API integration
+
         $baseURL = env('EXCHANGE_BASEURL');
-        $username = env($sender['name'] === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
-        $password = env($sender['name'] === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
+        $username = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
+        $password = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
         $smsDoc = env('EXCHANGE_SMS_DCS');
         $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
-        $callURL = env('GGT_CALLBACK');
+        $callURL = env('SMS_CALLBACK');
 
         // Generate a unique message ID
         $messageID = Str::uuid()->toString();
-
-        // Save the message details to the database
+        $finalPhone = '234' . substr($this->phone_number, 1);
         $message = Message::create([
             'user_id' => $user->id,
             'sms_sender_id' => $sender->id,
@@ -124,46 +116,34 @@ class SendSingle extends Component
             'amount' => $this->totalCharge,
             'message' => $this->message,
             'message_id' => $messageID,
-            'destination' => $this->phone_number,
+            'destination' => $finalPhone,
             'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
 
-        // Construct the URL for sending the message
         $url = $baseURL .
-            '?X-Service=' . urlencode($username) .
-            '&X-Password=' . urlencode($password) .
-            '&X-Sender=' . urlencode($sender['name']) .
-            '&X-Recipient=' . urlencode($this->phone_number) .
-            '&X-Message=' . urlencode($this->message) .
-            '&X-SMS-DCS=' . urlencode($smsDoc) .
-            '&X-External-Id=' . urlencode($enternalID) .
-            '&X-Delivery-URL=' . urlencode($callURL);
+            '?X-Service=' . strval($username) .
+            '&X-Password=' . strval($password) .
+            '&X-Sender=' . strval($sender['name']) .
+            '&X-Recipient=' . strval($finalPhone) .
+            '&X-Message=' . strval($this->message) .
+            '&X-SMS-DCS=' . strval($smsDoc) .
+            '&X-External-Id=' . strval($enternalID) .
+            '&X-Delivery-URL=' . strval($callURL);
 
-
-            // dd($url);
-
-                    try {
+        try {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-            ])->get($url);
+            ])->get($url)->json();
 
-            if ($response->successful()) {
 
-                $this->reset();
-                $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
-
-            }
-
-                $this->dispatch('alert', type: 'error', text: 'Failed to send message. Please try again later.', position: 'center', timer: 5000, button: false);
+            $this->reset();
+            $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
+            $this->closeModal();
 
         } catch (\Exception $e) {
-
-                $this->dispatch('alert', type: 'error', text: 'An error occurred while sending the message', position: 'center', timer: 5000, button: false);
-
+            $this->dispatch('alert', type: 'error', text: 'Sending failed!', position: 'center', timer: 5000, button: false);
         }
-
-
 
     }
 }

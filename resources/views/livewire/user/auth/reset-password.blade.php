@@ -10,7 +10,7 @@
         <div class="col-span-5 lg:col-span-3 ">
             <di class="">
                 <a href="{{ route('home') }}" wire:navigate.hover>
-                    <img class="p-6" src="{{ asset('assets/images/logo.png') }}" alt="" />
+                    <img class="p-6 w-52" src="{{ asset('assets/images/logo.png') }}" alt="" />
                 </a>
             </di>
             <div class="flex-grow  flex items-center justify-center">

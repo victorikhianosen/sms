@@ -15,19 +15,17 @@
                     copy
                 </button>
 
-            
-
                 <h2 class="text-2xl font-semibold mb-4 pb-4">Account Details</h2>
                 <div class="space-y-2">
                     <p class="text-lg">
                         <span class="font-bold">Account Name:</span>
-                        <span id="account-name">Victor Ikhianosen</span>
+                        <span id="account-name">{{$firstName}} {{$lastName}}</span>
                     </p>
                     <p class="text-lg flex items-center">
                         <span class="font-bold">Account Number:</span>
                         <span id="account-number"
                             class="ml-2 text-white bg-gray-800 px-3 py-1 rounded-md tracking-widest whitespace-nowrap">
-                            703 327 4155
+                            {{$accountNumber}}
                         </span>
                     </p>
                     <p class="text-lg">

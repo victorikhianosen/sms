@@ -5,71 +5,86 @@ namespace App\Console\Commands;
 use Carbon\Carbon;
 use App\Models\Message;
 use Illuminate\Support\Str;
+use App\Services\LogService;
 use Illuminate\Console\Command;
 use App\Models\ScheduledMessage;
-use Illuminate\Support\Facades\Http;
+use App\Services\SendSmsService;
 
 class SendScheduledMessages extends Command
 {
     protected $signature = 'sms:send-scheduled';
     protected $description = 'Send scheduled SMS messages that are due.';
+    protected $smsService;
+
+    public function __construct(SendSmsService $smsService)
+    {
+        parent::__construct();
+        $this->smsService = $smsService;
+    }
 
     public function handle()
     {
         $now = Carbon::now();
+        LogService::scheduleSms("Checking for scheduled messages to send at: " . $now);
 
+        // $scheduledMessages = ScheduledMessage::where('status', 'pending')->get();
         $scheduledMessages = ScheduledMessage::where('status', 'pending')
-            ->where('scheduled_time', '<=', $now)
-            ->get();
+        ->whereTime('scheduled_time', '<=', $now) // Compare time only
+        ->get();
 
-        foreach ($scheduledMessages as $sms) {
-            $user = $sms->user;
-            $sender = $sms->smsSender;
 
-            $phoneNumbers = explode(',', $sms->destination);
+        LogService::scheduleSms("Pending Scheduled messages found: " . $scheduledMessages->count());
 
-            $baseURL = env('EXCHANGE_BASEURL');
-            $username = env($sender->name === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
-            $password = env($sender->name === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
-            $smsDoc = env('EXCHANGE_SMS_DCS');
-            $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
-            $callURL = env('GGT_CALLBACK');
+        foreach ($scheduledMessages as $scheduled) {
+            LogService::scheduleSms("Processing message for User ID: " . $scheduled->user_id);
 
-            foreach ($phoneNumbers as $phoneNumber) {
-                try {
-                    $messageID = Str::uuid()->toString();
+            $destinations = explode(",", $scheduled->destination); // Convert to array
+            $numRecipients = count($destinations); // Get the number of recipients
 
-                    Message::create([
-                        'user_id' => $user->id,
-                        'sms_sender_id' => $sender->id,
-                        'sender' => $sender->name,
-                        'page_number' => $sms->sms_units,
-                        'page_rate' => $sms->amount / count($phoneNumbers),
-                        'status' => 'sent',
-                        'amount' => $sms->amount / count($phoneNumbers),
-                        'message' => $sms->message,
-                        'message_id' => $messageID,
-                        'destination' => $phoneNumber,
-                        'route' => $sender->smsroute->name === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
-                    ]);
+            if ($numRecipients === 0) {
+                LogService::scheduleSms("No valid recipients found for scheduled message ID: " . $scheduled->id);
+                continue;
+            }
 
-                    $url = $baseURL .
-                        '?X-Service=' . urlencode($username) .
-                        '&X-Password=' . urlencode($password) .
-                        '&X-Sender=' . urlencode($sender->name) .
-                        '&X-Recipient=' . urlencode($phoneNumber) .
-                        '&X-Message=' . urlencode($sms->message) .
-                        '&X-SMS-DCS=' . urlencode($smsDoc) .
-                        '&X-External-Id=' . urlencode($enternalID) .
-                        '&X-Delivery-URL=' . urlencode($callURL);
+            $messageLength = strlen($scheduled->message); // Get the total characters in message
+            $pageNumber = ceil($messageLength / 150); // Each page contains 150 characters
 
-                    Http::get($url);
+            // Ensure $scheduled->amount is not zero to avoid division by zero
+            $totalAmount = max($scheduled->amount, 0);
+            $amountPerRecipient = $totalAmount / $numRecipients;
+            $totalChargePerRecipient = $pageNumber * $scheduled->page_rate; // Charge per recipient
 
-                    // Update scheduled message status
-                    $sms->update(['status' => 'sent']);
-                } catch (\Exception $e) {
-                    $sms->update(['status' => 'failed']);
-                }
+            foreach ($destinations as $number) {
+                $finalPhone = '234' . ltrim(preg_replace('/[^0-9]/', '', trim($number)), '0');
+                LogService::scheduleSms("Final phone: " . $finalPhone);
+
+                // Sending SMS (commented out for now)
+                $this->smsService->sendSms(
+                    $scheduled->sender,
+                    $scheduled->sms_sender_id === 'exchange_trans' ? 'exchange_trans' : 'exchange_pro',
+                    $finalPhone,
+                    $scheduled->message
+                );
+
+                // Saving message details
+                Message::create([
+                    'user_id' => $scheduled->user_id,
+                    'sms_sender_id' => $scheduled->sms_sender_id,
+                    'sender' => $scheduled->sender,
+                    'page_number' => $pageNumber,
+                    'page_rate' => $scheduled->page_rate,
+                    'status' => 'sent',
+                    'amount' => min($amountPerRecipient, $totalChargePerRecipient), // Amount deducted per recipient
+                    'message' => $scheduled->message,
+                    'message_id' => Str::uuid()->toString(),
+                    'destination' => $finalPhone,
+                    'route' => $scheduled->sms_sender_id === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
+                ]);
+                $scheduled->update(['status' => 'sent']);
+
+
+                LogService::scheduleSms("scheduled message: " . "====================");
+
             }
         }
 

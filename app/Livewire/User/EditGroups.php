@@ -18,7 +18,7 @@ class EditGroups extends Component
     public $description;
 
     // Updated regex to allow multiple spaces or no space after commas
-    #[Validate('required|string|regex:/^(\d{11})(\s*,\s*\d{11})*$/')]
+    #[Validate('required|string')]
     public $numbers;
 
     #[Title('Edit Groups')]
@@ -49,6 +49,7 @@ class EditGroups extends Component
     {
         // Step 1: Validate the input based on the regex and uniqueness
         $validated = $this->validate();
+
 
         // Step 2: Extract the numbers and ensure each is 11 digits
         $numbersArray = array_map('trim', explode(',', $this->numbers));

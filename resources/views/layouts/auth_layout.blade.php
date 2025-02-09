@@ -188,7 +188,7 @@
         </div>
 
 
-        <div class="relative bg-[#f2f2f2] ml-0 lg:ml-[240px] mt-0 lg:mt-[80px] h-full overflow-y-auto pt-24 pb-6 px-6">
+        <div class="relative bg-[#f2f2f2] ml-0 lg:ml-[240px] mt-0 lg:mt-[80px] h-full overflow-y-auto pt-24 lg:pt-6 pb-6 px-6">
 
             @yield('auth-section')
         </div>

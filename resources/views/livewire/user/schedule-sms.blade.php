@@ -10,84 +10,114 @@
         {{-- @dd($sendersAll); --}}
 
         <div class="-m-1.5 overflow-x-auto">
-            <div class="p-1.5 min-w-full inline-block align-middle">
+            <div class="p-1.5 w-full inline-block align-middle">
 
                 <div class="overflow-x-auto">
 
                     <form class="space-y-4" x-data="{ files: [] }">
                         <!-- Sender Field -->
-                        <div>
-                            <label class="block text-start text-base font-light text-textPrimary">Sender</label>
-                            <select autocomplete="off" wire:model='sender'
-                                class="w-full lg:w-2/5 px-3 py-3 border-2 text-sm border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue">
-                                <option>Select a sender ID</option>
-                                @foreach ($sendersAll as $item)
-                                    <option value="{{ $item['name'] }}">{{ $item['name'] }}</option>
-                                @endforeach
-                            </select>
 
-                            @error('sender')
-                                <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-start text-base font-light text-textPrimary">Sender</label>
+                                <select autocomplete="off" wire:model='sender'
+                                    class="w-full px-3 py-3 border-2 text-sm border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue">
+                                    <option>Select a sender ID</option>
+                                    @foreach ($sendersAll as $item)
+                                        <option value="{{ $item['name'] }}">{{ $item['name'] }}</option>
+                                    @endforeach
+                                </select>
 
-                        <!-- Other Fields -->
-                        <div>
-                            <label class="block text-start text-base font-light text-textPrimary">Send to Phone
-                                Groups</label>
-                            <select autocomplete="off" wire:model="group_numbers"
-                                class="w-full lg:w-2/5 px-3 py-3 border-2 text-sm border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue">
-                                <option>Select a Group</option>
+                                @error('sender')
+                                    <span
+                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                                @foreach ($allGroups as $item)
-                                    <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
-                                @endforeach
-                            </select>
+                            <!-- Other Fields -->
+                            <div>
+                                <label class="block text-start text-base font-light text-textPrimary">Send to Phone
+                                    Groups</label>
+                                <select autocomplete="off" wire:model="group_numbers"
+                                    class="w-full px-3 py-3 border-2 text-sm border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue">
+                                    <option>Select a Group</option>
 
-                            @error('group_numbers')
-                                <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
+                                    @foreach ($allGroups as $item)
+                                        <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                    @endforeach
+                                </select>
 
-
-
-                        <div x-data="{ phoneNumbers: @entangle('phone_number') }">
-                            <label class="block text-start text-base font-light text-textPrimary">Phone Numbers</label>
-                            <textarea x-model="phoneNumbers"
-                                class="w-full lg:w-2/5 px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
-                                placeholder="Enter phone numbers separated by a comma" cols="20" rows="3"
-                                x-on:input="phoneNumbers = phoneNumbers.replace(/\D/g, '').replace(/(\d{11})(?=\d)/g, '$1, ').trim()"></textarea>
-
-                            @error('phone_number')
-                                <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label class="block text-start text-base font-light text-textPrimary">Message</label>
-                            <textarea wire:model="message"
-                                class="w-full lg:w-2/5 px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
-                                placeholder="Enter your message" cols="20" rows="3"></textarea>
-
-                            @error('message')
-                                <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
-                            @enderror
+                                @error('group_numbers')
+                                    <span
+                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
 
 
-                        <div>
-                            <label class="block text-start text-base font-light text-textPrimary">Select Date and
-                                Time</label>
-                            <input type="datetime-local" wire:model="date_time"
-                                class="w-full lg:w-2/5 px-3 py-3 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm">
-                            @error('date_time')
-                                <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
-                            @enderror
+
+
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-start text-base font-light text-textPrimary">Select Date and
+                                    Time</label>
+                                <input type="datetime-local" wire:model="date_time"
+                                    class="w-full px-3 py-3 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm">
+                                @error('date_time')
+                                    <span
+                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="block text-start text-base font-light text-textPrimary">Title
+                                    </label>
+                                <input type="text" wire:model="description" placeholder="Enter Title"
+                                    class="w-full px-3 py-3 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm">
+                                @error('description')
+                                    <span
+                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                         </div>
+
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div x-data="{ phoneNumbers: @entangle('phone_number') }">
+                                <label class="block text-start text-base font-light text-textPrimary">Phone
+                                    Numbers</label>
+                                <textarea x-model="phoneNumbers"
+                                    class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
+                                    placeholder="Enter phone numbers separated by a comma" cols="20" rows="3"
+                                    x-on:input="phoneNumbers = phoneNumbers.replace(/\D/g, '').replace(/(\d{11})(?=\d)/g, '$1, ').trim()"></textarea>
+
+                                @error('phone_number')
+                                    <span
+                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label class="block text-start text-base font-light text-textPrimary">Message</label>
+                                <textarea wire:model="message"
+                                    class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
+                                    placeholder="Enter your message" cols="20" rows="3"></textarea>
+
+                                @error('message')
+                                    <span
+                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+             
+
 
                         <div class="pt-4">
                             <button wire:click.prevent="processSchedule"
-                                class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
+                                class="bg-blue md:w-2/4 py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
                                 Process Message
                             </button>
                         </div>

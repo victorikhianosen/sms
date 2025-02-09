@@ -7,9 +7,11 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http; // Correct namespace for the User model
+use Illuminate\Support\Facades\Http;
+use App\Jobs\CreateVirtualAccountJob; // Correct namespace for the User model
 
 class Register extends Component
 {
@@ -43,76 +45,91 @@ class Register extends Component
         return view('livewire.user.auth.register')->extends('layouts.guest_layout')->section('guest-section');
     }
 
-
-
     public function registerUser()
     {
         $validated = $this->validate();
         unset($validated['password_confirmation']);
+
         $user = User::create($validated);
         $this->generateApiCredentials($user);
+        CreateVirtualAccountJob::dispatch($user, $validated);
+
+        // $this->createVirtualAccount($validated, $user);
+
         $this->reset();
-        // dd($this->createVirtualAccount());
         Auth::login($user);
 
-
-        $this->dispatch('alert', type: 'success', text: 'Registration successfully.', position: 'center', timer: 10000, button: false);
+        $this->dispatch('alert', type: 'success', text: 'Registration successful.', position: 'center', timer: 10000, button: false);
         return redirect()->route('dashboard');
     }
 
+
     private function generateApiCredentials(User $user)
     {
-        $apiKey = Str::random(length: 32);
-        while (User::where('api_key', $apiKey)->exists()) {
-            $apiKey = Str::random(32);
-        }
-        $apiSecret = Str::random(32);
+        do {
+            $apiKey = 'TRIX_' . Str::random(32);
+        } while (User::where('api_key', $apiKey)->exists());
+
+        do {
+            $apiSecret = 'TRIX_SECRET_' . Str::random(32);
+        } while (User::where('api_secret', $apiSecret)->exists());
+
         $user->api_key = $apiKey;
         $user->api_secret = $apiSecret;
         $user->save();
     }
 
 
-    public function createVirtualAccount()
+    // private function generateApiCredentials(User $user)
+    // {
+    //     $apiKey = Str::random(length: 32);
+    //     while (User::where('api_key', $apiKey)->exists()) {
+    //         $apiKey = Str::random(32);
+    //     }
+    //     $apiSecret = Str::random(32);
+    //     $user->api_key = $apiKey;
+    //     $user->api_secret = $apiSecret;
+    //     $user->save();
+    // }
+
+
+    public function createVirtualAccount($validated, $user)
     {
         $url = rtrim(env('CASHMATRIX_BASE_URL'), '/') . '/virtual-account/create'; // Ensure proper URL format
-
-        // dd($url);
         $headers = [
             'Content-Type' => 'application/json',
-            'public_key' => env('CASHMATRIX_PUBLIC_KEY'),
-            'secret_key' => env('CASHMATRIX_SECRET_KEY')
+            'publickey' => env('CASHMATRIX_PUBLIC_KEY'),
+            'secretkey' => env('CASHMATRIX_SECRET_KEY')
         ];
 
+        // dd($user);
+
+        $fetchUser = User::where('id', $user['id'])->where('email', $user['email'])->first();
+
+        // dd($fetchUser);
+
+
+        $full_name = $fetchUser['first_name'] . ' ' . $fetchUser['last_name'];
+
+        $account_number = substr($fetchUser, 1);
         $payload = [
-            "accountName" => "$this->first_name $this->last_name",
-            "accountNumber" => substr($this->phone, 1),
+            "accountName" => $full_name,
+            "accountNumber" => $account_number,
             "SettlementAccountNumber" => env('SETTLEMENT_ACCOUNT_NUMBER')
         ];
 
-        $response = Http::withHeaders($headers)->post($url, $payload);
+        $response = Http::withHeaders($headers)->post($url, $payload)->json();
 
-        dd($response);
+        // $response['accountNumber'] = $account_number;
+        // return $response;
+
+        if($response['status'] === true && $response['responseCode'] === "00") {
+            $fetchUser->update(['account_number' => $account_number]);
+            // return $account_number;
+        } else {
+            Log::info("MAtricPay Account creation {$account_number} not found.");
+        }
     }
 
 
-
-
-    // public function registerUser(){
-
-    //     $validated = $this->validate();
-
-    //     $validated['username'] = $validated['email'];
-
-    //     unset($validated['password_confirmation']);
-
-    //     $user = User::create($validated);
-
-    //     $this->reset();
-
-    //     Auth::login($user);
-    //     $this->dispatch('alert', type: 'success', text: 'Registration successfully.', position: 'center', timer: 10000, button: false);
-
-    //     return redirect()->route('dashboard');
-    // }
 }

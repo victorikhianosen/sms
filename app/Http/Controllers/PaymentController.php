@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Credit;
 use App\Models\Message;
 use App\Models\Payment;
 use App\Models\Accounts;
+use App\Models\BankTransfer;
+use App\Services\LogService;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
+
 class PaymentController extends Controller
 {
+    use HttpResponses;
+
     public function verifyPayment($reference)
     {
         $response = $this->verifyTransaction($reference);
@@ -24,8 +32,6 @@ class PaymentController extends Controller
                 ->with('error', 'Transaction verification failed. Please try again.');
         }
     }
-
-
 
 
     private function verifyTransaction($reference)
@@ -116,76 +122,49 @@ class PaymentController extends Controller
         }
     }
 
+    
+    public function matrixCallback(Request $request)
+    {
+
+        LogService::payment("CashMatrix received:', $request->all()");
 
 
-    // private function verifyTransaction($reference)
-    // {
-    //     $secretKey = env('PAYSTACK_SECRET_KEY');
+        $accountNumber = $request->accountNumber;
+        $amount = (float) $request->amount;
 
-    //     $response = Http::withHeaders([
-    //         'Authorization' => "Bearer {$secretKey}",
-    //         'Accept' => 'application/json',
-    //     ])->get("https://api.paystack.co/transaction/verify/{$reference}");
+        $user = User::where('account_number', $accountNumber)->first();
 
-    //     if ($response->failed()) {
-    //         session()->flash('alert', [
-    //             'type' => 'error',
-    //             'text' => 'Unable to verify payment at the moment!',
-    //             'position' => 'center',
-    //             'timer' => 4000,
-    //             'button' => false,
-    //         ]);
-    //         return redirect()->route('payment.paystack');
-    //     }
+        if ($user) {
+            $user->update([
+                'account_balance' => $user->account_balance + $amount
+            ]);
 
-    //     $response = $response->json();
+            Payment::create([
+                'user_id' => $user->id,
+                'amount' => $amount,
+                'status' => 'success',
+                'transaction_id' => $request->sessionId,
+                'reference' => $request->narration,
+                'bank_name' => $request->sourceAccountName, 
+                'account_number' => $request->sourceAccountNumber, 
+                'currency' => 'naira', 
+                'payment_type' => 'bank_transfer', 
+                'description' => "Bank transfer received from {$request->sourceAccountName}",
+                
+            ]);
 
-    //     if ($response['status'] && $response['data']['status'] === 'success') {
-    //         $result = $response['data'];
-    //         $user = Auth::user();
+            LogService::payment("Account balance updated for {$accountNumber}");
+        } else {
 
-    //         // Save payment details to the Payment table
-    //         $payment = Payment::create([
-    //             'user_id' => $user->id,
-    //             'amount' => $result['amount'] / 100, // Convert amount to the correct unit
-    //             'status' => $result['status'],
-    //             'transaction_id' => $result['id'],
-    //             'reference' => $result['reference'],
-    //             'bank_name' => $result['authorization']['bank'] ?? null,
-    //             'account_number' => $result['authorization']['receiver_bank_account_number'] ?? null,
-    //             'card_last_four' => $result['authorization']['last4'],
-    //             'card_brand' => $result['authorization']['brand'],
-    //             'currency' => $result['currency'],
-    //             'payment_type' => 'card',
-    //             'paystack_response' => json_encode($response),
-    //             'verify_response' => json_encode($response),
-    //             'description' => "Credit updated for Paystack transaction reference " . $result['reference'],
-    //         ]);
+            LogService::payment("Account number {$accountNumber} not found.");
+        }
 
-    //         $user->balance = ($user->balance ?? 0) + ($result['amount'] / 100);
-    //         $user->last_payment_reference = $result['reference'];
-    //         $user->save();
+        // Log::warning("Account number {$accountNumber} not found.");
 
-    //         session()->flash('alert', [
-    //             'type' => 'success',
-    //             'text' => 'Payment Successful!',
-    //             'position' => 'center',
-    //             'timer' => 4000,
-    //             'button' => false,
-    //         ]);
+        LogService::payment("Callback processed");
 
-    //         return redirect()->route('dashboard');
-    //     } else {
-    //         session()->flash('alert', [
-    //             'type' => 'error',
-    //             'text' => 'Payment verification failed!',
-    //             'position' => 'center',
-    //             'timer' => 4000,
-    //             'button' => false,
-    //         ]);
-    //         return redirect()->route('payment.paystack');
-    //     }
-    // }
+
+    }
 
 
 }

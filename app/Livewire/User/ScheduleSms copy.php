@@ -47,6 +47,7 @@ class ScheduleSms extends Component
     public $numbersToSend;
     public $scheduleTime;
 
+    public $smsRate;
     #[Title('Schedule')]
     public function render()
     {
@@ -62,85 +63,102 @@ class ScheduleSms extends Component
 
     public function processSchedule()
     {
-        // Validate the inputs
         $validated = $this->validate();
-
-        // dd($this->phone_number);
-
         $user = Auth::user();
-
-        // Initialize the numbers array
         $finalNumbers = [];
 
-        // Fetch group numbers if a group is selected
+        // dd($validated['date_time']);
+
         if (!empty($this->group_numbers)) {
             $group = $user->groups()->find($this->group_numbers);
             $groupNumbers = $group ? json_decode($group->numbers, true) : [];
             $finalNumbers = array_merge($finalNumbers, $groupNumbers);
         }
 
-        // Add individual phone numbers if provided
         if (!empty($this->phone_number)) {
-            $individualNumbers = explode(',', $this->phone_number); // Convert string to array
+            $individualNumbers = explode(',', $this->phone_number);
             $finalNumbers = array_merge($finalNumbers, $individualNumbers);
         }
 
-        // Remove duplicate numbers
         $finalNumbers = array_unique($finalNumbers);
-
-
-
         $finalNumbers = array_filter($finalNumbers, function ($number) {
-            return preg_match('/^\d{11}$/',
-                trim($number)
-            );  // Ensure number is exactly 11 digits
+            return preg_match('/^\d{11}$/', trim($number));
         });
 
         $finalNumbers = array_values($finalNumbers);
-        // If no numbers are present, throw a validation error
         if (empty($finalNumbers)) {
-            $this->addError('phone_number', 'No phone numbers provided.');
+            $this->addError('phone_number', 'No valid phone numbers provided.');
             return;
         }
 
-        // Convert numbers back to a comma-separated string
         $numbersToSend = implode(',', $finalNumbers);
-
-        // Converting the numbers string to an array
         $numbersArray = explode(',', $numbersToSend);
-
-        // Assign the count of numbers to a variable
         $numberCount = count($numbersArray);
 
-
-        // Calculate the sms rate.
         $smsRate = $user->sms_rate;
         $smsCharLimit = $user->sms_char_limit;
-        $accountBalance = $user['balance'];
-
+        $accountBalance = $user->balance;
         $messageLength = strlen($validated['message']);
-
         $smsUnits = ceil($messageLength / $smsCharLimit);
-        $total = $smsUnits * $smsRate;
-        $totalCharge = $total * $numberCount;
-
-        $phoneNumbers = explode(',', str_replace(' ', '', $this->numbersToSend));
-        if ($user->balance < ($totalCharge * count($phoneNumbers))) {
-            $this->dispatch('alert', type: 'error', text: 'Insufficient funds!', position: 'center', timer: 10000, button: false);
-            return;
-        }
+        $totalCharge = $smsUnits * $smsRate * $numberCount;
 
         if ($accountBalance < $totalCharge) {
             $this->dispatch('alert', type: 'error', text: 'Insufficient funds!', position: 'center', timer: 10000, button: false);
             return;
         }
 
+        $this->smsRate =  $smsRate;
         $this->totalCharge = $totalCharge;
         $this->numberCount = $numberCount;
         $this->smsUnits = $smsUnits;
         $this->numbersToSend = $numbersToSend;
-        $this->scheduleTime = str_replace('T', ' ', $validated['date_time']);
+        $this->scheduleTime = date("Y-m-d h:i A", strtotime(str_replace('T', ' ', $validated['date_time'])));
+
         $this->showModal = true;
+    }
+
+
+
+    public function sendScheduleMessage()
+    {
+        if (!$this->numbersToSend) {
+            $this->dispatch('alert', type: 'error', text: 'No numbers found!', position: 'center', timer: 5000, button: false);
+            return;
+        }
+
+        $sender = SmsSender::whereRaw('BINARY name = ?', [$this->sender])->first();
+        if (!$sender) {
+            $this->dispatch('alert', type: 'error', text: 'Invalid Sender ID', position: 'center', timer: 5000, button: false);
+            return;
+        }
+
+        $smsRoute = $sender->smsroute->name;
+
+        // dd($smsRoute);
+
+        $user = Auth::user();
+        $user->balance -= $this->totalCharge;
+        $user->save();
+
+        // Convert the string to an array first before encoding as JSON
+        $numbersArray = explode(',', $this->numbersToSend);
+
+        ScheduledMessage::create([
+            'user_id' => $user['id'],
+            'sms_sender_id' => $sender->id,
+            'sender' => $sender['name'],
+            'page_number' => $this->smsUnits,
+            'page_rate' => $this->smsRate,
+            'amount' => $this->totalCharge,
+            'message' => $this->message,
+            'destination' => json_encode($numbersArray),
+            'route' => $smsRoute,  // Now encoding the array as JSON
+            'scheduled_time' => Carbon::parse($this->date_time),
+        ]);
+
+        $this->reset();
+        $this->dispatch('alert', type: 'success', text: "Schedule successfully.", position: 'center', timer: 5000, button: false);
+        $this->closeModal();
     }
 
     public function closeModal()
@@ -149,93 +167,5 @@ class ScheduleSms extends Component
         $this->showModal = false;
         // $this->resetErrorBag();
         // $this->reset(['sender', 'message', 'phone_number']);
-    }
-
-    public function sendScheduleMessage()
-    {
-        $phoneNumbers = explode(',', str_replace(' ', '', $this->numbersToSend));
-        // Validate sender ID
-        $sender = SmsSender::whereRaw('BINARY name = ?', [$this->sender])->first();
-        if (!$sender) {
-            $this->dispatch('alert', type: 'error', text: 'Invalid Sender ID', position: 'center', timer: 10000, button: false);
-            return;
-        }
-
-        $smsRoute = $sender->smsroute->name;
-        if (!in_array($smsRoute, ['exchange_trans', 'exchange_pro'])) {
-            $this->dispatch('alert', type: 'error', text: 'Unknown sender', position: 'center', timer: 10000, button: false);
-            return;
-        }
-
-        $user = Auth::user();
-        $smsRate = $user->sms_rate;
-        $smsCharLimit = $user->sms_char_limit;
-        $messageLength = strlen($this->message);
-        $smsUnits = ceil($messageLength / $smsCharLimit);
-        $totalChargePerSms = $smsUnits * $smsRate;
-
-        // Check if user has enough balance
-        if ($user->balance < ($totalChargePerSms * count($phoneNumbers))) {
-            $this->dispatch('alert', type: 'error', text: 'Insufficient funds!', position: 'center', timer: 10000, button: false);
-            return;
-        }
-
-        // Environment variables
-        $baseURL = env('EXCHANGE_BASEURL');
-        $username = env($sender['name'] === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
-        $password = env($sender['name'] === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
-        $smsDoc = env('EXCHANGE_SMS_DCS');
-        $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
-        $callURL = env('GGT_CALLBACK');
-
-        foreach ($phoneNumbers as $phoneNumber) {
-            // Deduct per SMS charge
-            $user->balance -= $totalChargePerSms;
-            $user->save();
-
-            // Generate unique message ID
-            $messageID = Str::uuid()->toString();
-
-            // Save message to database
-            Message::create([
-                'user_id' => $user->id,
-                'sms_sender_id' => $sender->id,
-                'sender' => $sender['name'],
-                'page_number' => $smsUnits,
-                'page_rate' => $smsRate,
-                'status' => 'sent',
-                'amount' => $totalChargePerSms,
-                'message' => $this->message,
-                'message_id' => $messageID,
-                'destination' => $phoneNumber,
-                'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
-            ]);
-
-            // Construct the URL for sending the message
-            $url = $baseURL .
-                '?X-Service=' . urlencode($username) .
-                '&X-Password=' . urlencode($password) .
-                '&X-Sender=' . urlencode($sender['name']) .
-                '&X-Recipient=' . urlencode($phoneNumber) .
-                '&X-Message=' . urlencode($this->message) .
-                '&X-SMS-DCS=' . urlencode($smsDoc) .
-                '&X-External-Id=' . urlencode($enternalID) .
-                '&X-Delivery-URL=' . urlencode($callURL);
-
-            try {
-                Http::withHeaders([
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                ])->get($url);
-            } catch (\Exception $e) {
-                // Log error but continue processing
-                // Log::error("Failed to send SMS to {$phoneNumber}: " . $e->getMessage());
-            }
-        }
-
-        $this->dispatch('alert', type: 'success', text: 'Messages sent successfully!', position: 'center', timer: 5000, button: false);
-        $this->closeModal();
-        $this->reset();
-    
     }
 }

@@ -215,13 +215,6 @@
                 </div>
             </div>
 
-
-
-
-
-
-
-
             <div class="space-y-4">
                 <h2 class="text-xl font-semibold text-blue-600">Response</h2>
                 <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
@@ -233,13 +226,11 @@
                 <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
                     <pre><code class="language-json">
 {
-    "status": "success",
-    "message": "SMS sent successfully",
-    "details": {
-        "phone": "07033274155",
-        "sender": "GGT Connect",
-        "message_id": "abc123xyz"
-    }
+  "status": "success",
+  "message": "Message sent successfully",
+  "data": {
+    "message_id": "adfed204-d201-44d1-b9c0-8771d2981433"
+  }
 }
         </code></pre>
                 </div>
@@ -248,8 +239,8 @@
                 <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
                     <pre><code class="language-json">
 {
-    "status": "error",
-    "message": "Invalid API key or secret."
+  "status": "error",
+  "message": "Invalid Sender ID"
 }
         </code></pre>
                 </div>

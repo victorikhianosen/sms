@@ -17,6 +17,7 @@ use App\Livewire\User\ChangePassword;
 use App\Livewire\User\PaymentHistory;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\User\PaystackPayment;
+use App\Livewire\User\ScheduleSmsView;
 use App\Livewire\User\Auth\VerifyToken;
 use App\Livewire\User\ProcessSinglesms;
 use App\Livewire\User\Auth\ResetPassword;
@@ -46,20 +47,25 @@ Route::get('verify-token/{email}', VerifyToken::class)->name('verifytoken');
 
 Route::get('reset-password/{email}', ResetPassword::class)->name('resetpassword');
 
-Route::prefix('sms')->group(function(){
 
-    Route::prefix('single')->group(function(){
-        Route::get('', SendSingle::class)->name('single');
-    });
-
-
-    Route::get('bulk', SendBulk::class)->name('bulk');
-    Route::get('schedule', ScheduleSms::class)->name('schedule');
-});
 
 
 // Authenticated routes (require user to be logged in)
 Route::middleware(['auth'])->group(function () {
+
+    Route::prefix('sms')->group(function () {
+
+        Route::prefix('single')->group(function () {
+            Route::get('', SendSingle::class)->name('single');
+        });
+
+
+        Route::get('bulk', SendBulk::class)->name('bulk');
+        Route::get('schedule', ScheduleSms::class)->name('schedule');
+        Route::get('schedule-view', ScheduleSmsView::class)->name('schedule.view');
+    });
+
+
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('message', Messages::class)->name('message');
 
@@ -82,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('verify/{reference}', [PaymentController::class, 'verifyPayment'])->name('verifypayment');
 
         // PaystackPaymentController
-      Route::get('history', PaymentHistory::class)->name('history');
+        Route::get('history', PaymentHistory::class)->name('history');
     });
 
     Route::get('logout', [LogoutController::class, 'logout'])->name('logout');

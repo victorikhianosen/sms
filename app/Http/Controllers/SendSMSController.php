@@ -15,7 +15,6 @@ class SendSMSController extends Controller
     public function __construct(SendSmsService $sendSmsService)
     {
         $this->sendSmsService = $sendSmsService;
-
     }
     public function sendSMS(SendSmsRequest $request)
     {
@@ -39,7 +38,7 @@ class SendSMSController extends Controller
 
         // $smsDoc = env('EXCHANGE_SMS_DCS');
         // $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
-        // $callURL = env('GGT_CALLBACK');
+        // $callURL = env('SMS_CALLBACK');
 
         // $url = $baseURL .
         //     '?X-Service=' . urlencode($username).

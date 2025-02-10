@@ -84,7 +84,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="/dierenartsen" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+            <a href="{{ route('message') }}" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
 
 
@@ -110,12 +110,7 @@
                         @endif
                     </div>
 
-                    {{-- <div class="flex items-center mb-1">
-                        <div class="text-2xl font-semibold">{{ $groupCount }}</div>
-                        <div
-                            class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">
-                            </div>
-                    </div> --}}
+        
                     <div class="text-sm font-medium text-gray-400">Number of Phone Groups</div>
                 </div>
                 <div class="dropdown">
@@ -138,7 +133,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="/dierenartsen" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+            <a href="{{ route('groups') }}" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
     </div>
 

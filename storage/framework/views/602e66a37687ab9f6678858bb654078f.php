@@ -85,7 +85,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="/dierenartsen" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+            <a href="<?php echo e(route('message')); ?>" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
 
 
@@ -111,7 +111,7 @@
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                     </div>
 
-                    
+        
                     <div class="text-sm font-medium text-gray-400">Number of Phone Groups</div>
                 </div>
                 <div class="dropdown">
@@ -134,7 +134,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="/dierenartsen" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+            <a href="<?php echo e(route('groups')); ?>" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
     </div>
 

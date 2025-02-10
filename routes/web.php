@@ -11,6 +11,7 @@ use App\Livewire\User\Dashboard;
 use App\Livewire\User\Auth\Login;
 use App\Livewire\User\EditGroups;
 use App\Livewire\User\SendSingle;
+use App\Livewire\Admin\AdminLogin;
 use App\Livewire\User\ScheduleSms;
 use App\Livewire\User\Auth\Register;
 use App\Livewire\User\ChangePassword;
@@ -92,4 +93,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
+});
+
+
+
+
+// Admin Login Route
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('login', AdminLogin::class)->name('login');
 });

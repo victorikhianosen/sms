@@ -1,4 +1,4 @@
-<div class="bg-white fixed top-0 left-[240px] right-0 h-[80px] hidden lg:block py-4 px-6">
+<div class="bg-white fixed top-0 left-[240px] right-0 h-[80px] hidden lg:block py-4 px-6  z-10">
     {{-- <div class="flex items-end justify-end relative">
         <!-- User Image with Dropdown -->
         <div x-data="{ open: false }">

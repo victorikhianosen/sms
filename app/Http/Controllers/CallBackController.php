@@ -16,7 +16,7 @@ class CallBackController extends Controller
     public function callback(Request $request)
     {
         Log::info('Callback received:', $request->all());
-        return $this->success( $request->all(), 'Callback successfully');
+        // return $this->success( $request->all(), 'Callback successfully');
     }
 
      public function matrixCallback(Request $request){

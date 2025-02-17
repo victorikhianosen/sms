@@ -10,6 +10,7 @@ use App\Jobs\SendBulkSmsJob;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -101,6 +102,7 @@ class SendBulk extends Component
         $this->smsUnits = $smsUnits;
         $this->numbersToSend = $numbersToSend;
         $this->showModal = true;
+        $this->smsRate = $smsRate;
     }
 
     public function closeModal()
@@ -124,6 +126,8 @@ class SendBulk extends Component
         $user = Auth::user();
         $user->balance -= $this->totalCharge;
         $user->save();
+        // dd($this->smsRate);
+        // Log::info($this->smsRate);
 
         SendBulkSmsJob::dispatch($user, $sender, $this->message, explode(',', $this->numbersToSend), $this->smsUnits, $this->smsRate, $this->totalCharge);
 

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('admin_id')->nullable()->constrained('admins')->cascadeOnDelete();
             $table->foreignId('sms_sender_id')->constrained('sms_senders')->cascadeOnDelete();
             $table->string('sender')->nullable();
             $table->string('page_number')->nullable();

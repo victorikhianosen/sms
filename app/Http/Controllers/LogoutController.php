@@ -25,4 +25,23 @@ class LogoutController extends Controller
         ]);
         return redirect()->route('login');
     }
+
+    public function adminLogout(Request $request) {
+        Auth::guard('admin')->logout(); 
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        session()->flash('alert', [
+            'type' => 'success',
+            'text' => 'Logout Successful!',
+            'position' => 'center',
+            'timer' => 4000,
+            'button' => false,
+        ]);
+        return redirect()->route('admin.login'); 
+    }
 }
+
+

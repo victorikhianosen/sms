@@ -1,5 +1,5 @@
-<div class="bg-white fixed left-0 top-0 h-full w-[250px] hidden lg:block overflow-hidden" x-data="{ activeLink: '' }">
-    <div class="pl-6 py-6 h-full flex flex-col">
+<div class="bg-white fixed left-0 top-0 h-full w-[260px] hidden lg:block overflow-hidden" x-data="{ activeLink: '' }">
+    <div class="px-6 py-6 h-full flex flex-col">
         <div class="">
             <img class="h-16" src="{{ asset('assets/images/logo.png') }}" />
         </div>
@@ -82,7 +82,7 @@
 
 
 
-                
+
                 <div class="space-y-4">
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">SMS Scheduling</p>
 
@@ -98,7 +98,7 @@
                     </li>
 
 
-                    
+
                     <li>
                         <a href="{{ route('schedule.view') }}" wire:navigate.hover @click.prevent="activeLink = 'bulk'"
                             :class="{ 'text-blue font-semibold': activeLink === 'bulk', 'text-gray': activeLink !== 'bulk' }"
@@ -134,30 +134,18 @@
                             Payment History
                         </a>
                     </li>
-                    {{-- <li>
-                        <a href="{{ route('message') }}" wire:navigate.hover @click.prevent="activeLink = 'single'"
-                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
-                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                            Delivery Report
-                        </a>
-                    </li> --}}
-
 
                 </div>
 
-
-
                 <div class=space-y-4>
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">Contacts</p>
-
 
                     <li>
                         <a href="{{ route('groups') }}" wire:navigate.hover @click.prevent="activeLink = 'bulk'"
                             :class="{ 'text-blue font-semibold': activeLink === 'bulk', 'text-gray': activeLink !== 'bulk' }"
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
                             <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                            All Groups
+                            Add Groups
                         </a>
                     </li>
                     {{-- <li>
@@ -207,8 +195,9 @@
                     </li>
 
 
-                       <li>
-                        <a href="{{ route('changepassword') }}" wire:navigate.hover @click.prevent="activeLink = 'changepassword'"
+                    <li>
+                        <a href="{{ route('changepassword') }}" wire:navigate.hover
+                            @click.prevent="activeLink = 'changepassword'"
                             :class="{ 'text-blue font-semibold': activeLink === 'changepassword', 'text-gray': activeLink !== 'changepassword' }"
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
                             <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
@@ -218,7 +207,6 @@
 
                     <li>
                         <a href="{{ route('logout') }}"
-
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
                             <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
                             Logout

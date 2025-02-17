@@ -29,6 +29,8 @@ class SendSMSController extends Controller
         // return $response = Http::get('http://197.210.194.184/fcgi-bin/jar_http_sai.fcgi?X-Service=ggttxmt&X-Password=mtggtrx&X-Sender=LAPO MFB&X-Recipient=2347033274155&X-Message=Your Login verification Code is XXXXXX. It expires in 20 minutes. Thanks for using LAPO MFB.&X-SMS-DCS=0&X-External-Id=YJlzSNW7OoPT99XxoGwZ&X-Delivery-URL=https://api.shapley.tech/tg/v1/webhook/checker')->json();
 
 
+        // http://197.210.194.184/fcgi-bin/jar_http_sai.fcgi?X-Service=ggttxmt&X-Password=mtggtrx&X-Sender=AssetMatrix&X-Recipient=2349046594124&X-Message=Testing.&X-SMS-DCS=0&X-External-Id=YJlzSNW7OoPT99XxoGwZ&X-Delivery-URL=https://sms.assetmatrixmfb.com/callback
+
         // http://197.210.194.184/fcgi-bin/jar_http_sai.fcgi?X-Service=ggttxmt&X-Password=mtggtrx&X-Sender=LAPO MFB&X-Recipient=2347033274155&X-Message=Your Login verification Code is XXXXXX. It expires in 20 minutes. Thanks for using LAPO MFB.&X-SMS-DCS=0&X-External-Id=YJlzSNW7OoPT99XxoGwZ&X-Delivery-URL=https://api.shapley.tech/tg/v1/webhook/checker
 
 

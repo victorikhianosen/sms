@@ -16,8 +16,12 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
+            $table->string('phone_number')->unique();
+            $table->decimal('balance', 15, 2)->default('0.00');
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['super_admin', 'admin', 'supervisor'])->default(('supervisor'));
             $table->enum('status', ['active', 'inactive', 'pending', 'cancel', 'delete'])->default('pending');
             $table->string('otp')->nullable();
             $table->string('otp_expired_at')->nullable();

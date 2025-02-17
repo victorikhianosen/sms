@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Models\SmsSender;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -34,6 +35,17 @@ class SendBulkSmsJob implements ShouldQueue
         $this->smsUnits = $smsUnits;
         $this->smsRate = $smsRate;
         $this->totalCharge = $totalCharge;
+
+
+        Log::info('SendBulkSmsJob Initialized', [
+            'user_id' => $user->id,
+            'sender' => $sender->name,
+            'message' => $message,
+            'numbers_count' => count($numbersArray),
+            'sms_units' => $smsUnits,
+            'sms_rate' => $smsRate,
+            'total_charge' => $totalCharge
+        ]);
     }
 
     public function handle()
@@ -48,6 +60,8 @@ class SendBulkSmsJob implements ShouldQueue
         $smsDoc = env('EXCHANGE_SMS_DCS');
         $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
         $callURL = env('SMS_CALLBACK');
+
+        // Log::info("Page Rate ". $this->smsRate);
 
         foreach ($this->numbersArray as $number) {
             $finalPhone = '234' . substr(trim($number), 1);
@@ -71,7 +85,7 @@ class SendBulkSmsJob implements ShouldQueue
                 'sender' => $this->sender->name,
                 'page_number' => $this->smsUnits,
                 'page_rate' => $this->smsRate,
-                'status' => $response->successful() ? 'sent' : 'failed',
+                'status' => 'sent',
                 'amount' => $this->totalCharge / count($this->numbersArray),
                 'message' => $this->message,
                 'message_id' => $messageID,

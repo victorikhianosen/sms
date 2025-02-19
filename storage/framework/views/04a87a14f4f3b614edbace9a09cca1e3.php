@@ -22,9 +22,25 @@
 
         <?php echo $__env->make('includes.admin.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-  
 
-        <div class="relative bg-[#f2f2f2] ml-0 lg:ml-[240px] mt-0 lg:mt-[50px] h-full overflow-y-auto lg:pt-6 pb-6 px-6">
+
+
+        <?php echo $__env->make('includes.admin.mobile_menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+
+
+
+    
+
+
+
+        
+
+
+        
+
+        <div
+            class="relative bg-[#f2f2f2] ml-0 lg:ml-[240px] mt-0 lg:mt-[50px] h-full overflow-y-auto lg:pt-6 pb-6 px-6">
 
             <?php echo $__env->yieldContent('admin-section'); ?>
         </div>

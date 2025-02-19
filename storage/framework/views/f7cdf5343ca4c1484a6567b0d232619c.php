@@ -1,4 +1,4 @@
-<div class="bg-white fixed left-0 top-0 h-full w-[250px] hidden lg:block overflow-hidden" x-data="{ activeLink: '' }">
+<div class="bg-white fixed left-0 top-0 h-full w-[350px] hidden lg:block overflow-hidden" x-data="{ activeLink: '' }">
     <div class="px-6 py-6 h-full flex flex-col">
         <div class="">
             <img class="h-16" src="<?php echo e(asset('assets/images/logo.png')); ?>" />
@@ -19,7 +19,19 @@
                     </li>
                 </div>
 
-                
+
+                <div class=space-y-4>
+                    <p class="text-textSecondary font-light text-sm pt-4 uppercase">Message Management</p>
+                    <li>
+                        <a href="<?php echo e(route('admin.sendsms')); ?>" wire:navigate.hover
+                            @click.prevent="activeLink = 'bulk'"
+                            :class="{ 'text-blue font-semibold': activeLink === 'bulk', 'text-gray': activeLink !== 'bulk' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            Send SMS
+                        </a>
+                    </li>
+                </div>
 
                 <div class="space-y-4">
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">User Management</p>
@@ -41,8 +53,6 @@
                         </a>
                     </li>
                 </div>
-
-
 
                 <div class="space-y-4">
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">Transactions</p>
@@ -75,6 +85,16 @@
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
                             <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
                             All Senders
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="<?php echo e(route('admin.group')); ?>" wire:navigate.hover
+                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            All Group
                         </a>
                     </li>
                 </div>

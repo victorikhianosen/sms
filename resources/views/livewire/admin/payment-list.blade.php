@@ -72,15 +72,10 @@
         </div>
     </div>
 
-    <!-- Pagination -->
+
     <div class="py-8">
         {{ $payments->links() }}
     </div>
-
-
-
-
-
 
     @if ($editModel)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
@@ -108,7 +103,6 @@
 
                         </div>
 
-
                         <div>
                             <label class="font-medium text-gray-700">Status</label>
                             <input type="text" wire:model="status"
@@ -116,7 +110,7 @@
                         </div>
 
                         <div>
-                            <label class="font-medium text-gray-700">Transaction ID</label>
+                            <label class="font-medium text-gray-700">Transaction iD</label>
                             <input type="text" wire:model="transaction_id"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
 
@@ -128,7 +122,6 @@
 
                         </div>
 
-
                         <div>
                             <label class="font-medium text-gray-700">Bank Name</label>
                             <input type="text" wire:model="bank_name"
@@ -136,19 +129,27 @@
 
                         </div>
 
-                        <div>
+                        @isset($account_number)
+                            <div>
+                                <label class="font-medium text-gray-700">Account Number</label>
+                                <input type="text" wire:model="account_number"
+                                    class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                            </div>
+                        @endisset
+
+
+                        {{-- <div>
                             <label class="font-medium text-gray-700">Account Number</label>
                             <input type="text" wire:model="account_number"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                        </div> --}}
 
-                        </div>
                         <div>
                             <label class="font-medium text-gray-700">Card Last Four</label>
                             <input type="text" wire:model="card_last_four"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
 
                         </div>
-
 
                         <div>
                             <label class="font-medium text-gray-700">Card Brand</label>
@@ -157,15 +158,8 @@
 
                         </div>
 
-
                         <div>
-                            <label class="font-medium text-gray-700">currency</label>
-                            <input type="text" wire:model="currency"
-                                class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
-
-                        </div>
-                        <div>
-                            <label class="font-medium text-gray-700">description</label>
+                            <label class="font-medium text-gray-700">Description</label>
                             <input type="text" wire:model="description"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
 
@@ -173,11 +167,12 @@
 
 
                         <div>
-                            <label class="font-medium text-gray-700">payment_type</label>
+                            <label class="font-medium text-gray-700">Payment Type</label>
                             <input type="text" wire:model="payment_type"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
 
                         </div>
+
 
                         <div>
                             <label class="font-medium text-gray-700">Date</label>
@@ -185,6 +180,9 @@
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
 
                         </div>
+
+
+
                     </div>
 
                     <div class="mt-6 flex justify-start pt-4 space-x-4">
@@ -192,13 +190,11 @@
                             class="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-opacity-90 transition text-sm">
                             Close
                         </button>
-                       
+
                     </div>
                 </form>
             </div>
         </div>
     @endif
-
-
 
 </div>

@@ -12,11 +12,10 @@
 
             </div>
 
-
             @adminOrSuperAdmin
                 <div x-data="{ isApiKeyModalOpen: false }">
                     <button @click="isApiKeyModalOpen = true"
-                        class="bg-blue px-4 py-2 text-sm transition-all text-white rounded-lg duration-200 hover:opacity-90">
+                        class="bg-blue px-4 py-2 md:text-xs text-sm transition-all text-white rounded-lg duration-200 hover:opacity-90">
                         Add found
                     </button>
 

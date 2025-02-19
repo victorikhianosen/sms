@@ -11,6 +11,7 @@ use App\Livewire\Admin\UserList;
 use App\Livewire\Admin\UserView;
 use App\Livewire\User\Dashboard;
 use App\Livewire\Admin\AdminList;
+use App\Livewire\Admin\GroupList;
 use App\Livewire\User\Auth\Login;
 use App\Livewire\User\EditGroups;
 use App\Livewire\User\SendSingle;
@@ -19,6 +20,7 @@ use App\Livewire\Admin\MessageList;
 use App\Livewire\Admin\PaymentList;
 use App\Livewire\Admin\UserDetails;
 use App\Livewire\Admin\AdminDetails;
+use App\Livewire\Admin\AdminSendSms;
 use App\Livewire\Admin\SmsRouteList;
 use App\Livewire\User\Auth\Register;
 use App\Livewire\Admin\SmsSenderList;
@@ -63,7 +65,6 @@ Route::get('reset-password/{email}', ResetPassword::class)->name('resetpassword'
 
 // Authenticated routes (require user to be logged in)
 Route::middleware(['auth'])->group(function () {
-
     Route::prefix('sms')->group(function () {
         Route::prefix('single')->group(function () {
             Route::get('', SendSingle::class)->name('single');
@@ -72,8 +73,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('schedule', ScheduleSms::class)->name('schedule');
         Route::get('schedule-view', ScheduleSmsView::class)->name('schedule.view');
     });
-
-
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('message', Messages::class)->name('message');
     Route::get('apidocs', ApiDocs::class)->name('apidocs');
@@ -93,20 +92,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('history', PaymentHistory::class)->name('history');
     });
     Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
-    
 });
 
 
-// Admin Login Route
-
 Route::prefix('admin')->name('admin.')->group(function () {
-
     Route::get('/', function() {
         return redirect()->route('admin.login'); // Fixed missing semicolon
     });
-
     Route::get('login', AdminLogin::class)->name('login');
-
     Route::middleware('auth:admin')->group(function () {
         Route::get('dashboard', AdminDashboard::class)->name('dashboard'); 
         Route::get('user/list', UserList::class)->name('userlist');
@@ -116,12 +109,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('details/{id}', AdminDetails::class)->name('details');
         // Route::get('route-list', SmsRouteList::class)->name('smsroute');
         Route::get('sender-list', SmsSenderList::class)->name('smssender');
-
         Route::get('payment-list', PaymentList::class)->name('payment');
         Route::get('message-list', MessageList::class)->name('message');
-
-
-
-        
+        Route::get('group-list', GroupList::class)->name('group');
+        Route::get('sendsms', AdminSendSms::class)->name('sendsms');        
     });
 });

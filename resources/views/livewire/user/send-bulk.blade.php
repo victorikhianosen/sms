@@ -77,9 +77,14 @@
                         </div>
 
                         <div class="pt-4">
-                            <button wire:click.prevent="processBulkMessage"
+                            <button wire:loading.remove wire:click.prevent="processBulkMessage"
                                 class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
                                 Process Message
+                            </button>
+
+                            <button type="button" wire:loading wire:target="processBulkMessage"
+                                class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
+                                <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                             </button>
                         </div>
                     </form>
@@ -89,10 +94,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 
     @if ($showModal)
         <div x-data="{ showModal: true }" x-show="showModal"
@@ -160,10 +161,16 @@
                     </div>
 
 
-                    <div class="pt-4 text-center" wire:click.prevent="sendBulkMessage">
+                    <div class="pt-4 text-center" wire:loading.remove wire:click.prevent="sendBulkMessage">
                         <button class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
                             Send Message
                         </button>
+
+                        <button type="button" wire:loading wire:target="sendBulkMessage" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
+                            <i class="fa-solid fa-spinner animate-spin "></i> Loading...
+                        </button>
+
+
                     </div>
                 </form>
             </div>

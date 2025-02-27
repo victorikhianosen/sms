@@ -37,18 +37,30 @@ class AdminSendSms extends Component
     {
         $validate = $this->validate();
 
+        $admin = Auth::guard('admin')->user();
+        // dd($admin);
+
+        $totalCharge = 3;
+
+        if ($admin->balance < $totalCharge) {
+            $this->dispatch('alert', type: 'error', text: 'Insufficient funds', position: 'center', timer: 10000, button: false);
+            return;
+        }
+
         $sender = SmsSender::whereRaw('BINARY name = ?', [$this->sender])->first();
 
         if (!$sender) {
             $this->dispatch('alert', type: 'error', text: 'Invalid Sender ID', position: 'center', timer: 10000, button: false);
+            return;
         }
 
         $smsRoute = $sender->smsroute->name;
         if (!in_array($smsRoute, ['exchange_trans', 'exchange_pro'])) {
             $this->dispatch('alert', type: 'error', text: 'unknow sender', position: 'center', timer: 10000, button: false);
+            return;
         }
 
-        $totalCharge = 3;
+    
 
         $admin = Auth::guard('admin')->user();
 
@@ -90,12 +102,11 @@ class AdminSendSms extends Component
             '&X-SMS-DCS=' . strval($smsDoc) .
             '&X-External-Id=' . strval($enternalID) .
             '&X-Delivery-URL=' . strval($callURL);
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ])->get($url)->json();
-            $this->reset();
-            $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
-
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ])->get($url)->json();
+        $this->reset();
+        $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
     }
 }

@@ -33,6 +33,7 @@ use App\Livewire\User\ScheduleSmsView;
 use App\Livewire\Admin\Auth\AdminLogin;
 use App\Livewire\User\Auth\VerifyToken;
 use App\Livewire\User\ProcessSinglesms;
+use App\Livewire\Admin\AdminMessageList;
 use App\Livewire\User\Auth\ResetPassword;
 use App\Http\Controllers\LogoutController;
 use App\Livewire\User\Auth\ForgetPassword;
@@ -111,6 +112,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('sender-list', SmsSenderList::class)->name('smssender');
         Route::get('payment-list', PaymentList::class)->name('payment');
         Route::get('message-list', MessageList::class)->name('message');
+        Route::get('messges', AdminMessageList::class)->name('adminmessage');
+
         Route::get('group-list', GroupList::class)->name('group');
         Route::get('sendsms', AdminSendSms::class)->name('sendsms');        
     });

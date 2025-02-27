@@ -37,7 +37,7 @@ class UserDetails extends Component
     public $allUsers;
     public $api_key;
     public $api_secret;
-    public $statusOptions = ['active', 'inactive', 'pending', 'cancel', 'delete'];
+    public $statusOptions = ['active', 'inactive'];
 
 
     #[Title('User Details')]
@@ -166,7 +166,7 @@ class UserDetails extends Component
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => $this->email,
-                'balance' => $this->balance,
+                // 'balance' => $this->balance,
                 'status' => $this->status,
                 'account_number' => $this->account_number,
                 'phone' => $this->phone,

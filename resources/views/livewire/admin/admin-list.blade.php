@@ -199,12 +199,12 @@
                                                     View
                                                 </a>
 
-                                                @adminOrSuperAdmin
+                                                {{-- @adminOrSuperAdmin
                                                     <button wire:click.prevent="deleteAdmin({{ $item->id }})"
                                                         class="bg-red-600 text-sm py-2 px-2 text-white rounded-lg cursor-pointer">
                                                         Delete
                                                     </button>
-                                                @endadminOrSuperAdmin
+                                                @endadminOrSuperAdmin --}}
 
                                             </td>
                                         </tr>

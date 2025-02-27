@@ -1,4 +1,4 @@
-<div wire:init="getAllUserBalance">
+<div wire:poll.2000ms="getAllUserBalance">
     <div x-data="{ open: false, accountBalance: 1000 }">
         <div class="flex items-end justify-between relative">
             <div>

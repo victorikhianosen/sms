@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('balance', 15, 2)->default('0.00');
             $table->string('last_payment_reference')->nullable();
             // $table->string('status')->default('active');
-            $table->enum('status', ['active', 'inactive', 'pending', 'cancel', 'delete'])->default('pending')->nullable();
+            $table->enum('status', ['active', 'inactive', 'pending', 'cancel', 'delete'])->default('active')->nullable();
 
 
             $table->string('profile_picture')->nullable();

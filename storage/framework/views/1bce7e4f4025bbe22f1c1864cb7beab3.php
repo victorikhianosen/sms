@@ -1,18 +1,28 @@
 <div x-data="{ showModal: <?php if ((object) ('showModal') instanceof \Livewire\WireDirective) : ?>window.Livewire.find('<?php echo e($__livewire->getId()); ?>').entangle('<?php echo e('showModal'->value()); ?>')<?php echo e('showModal'->hasModifier('live') ? '.live' : ''); ?><?php else : ?>window.Livewire.find('<?php echo e($__livewire->getId()); ?>').entangle('<?php echo e('showModal'); ?>')<?php endif; ?> }">
 
     <div class="flex flex-col bg-white rounded-lg py-6 p-6 md:px-8">
+
         <div class="pt-4 pb-10 ">
-            <h3 class="font-bold text-2xl ">Send Single</h3>
+            <h3 class="font-bold text-2xl ">Send Bulk SMS</h3>
+
         </div>
+
+        
+
         <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
+
                 <div class="overflow-x-auto">
-                    <form class="space-y-4">
-                        <div class="">
+
+
+
+                    <form class="space-y-4" x-data="{ files: [] }">
+                        <!-- Sender Field -->
+                        <div>
                             <label class="block text-start text-base font-light text-textPrimary">Sender</label>
-                            <select autocomplete="off" wire:model="sender"
-                                class="w-full lg:w-2/5 px-3 py-4 border-2 text-sm border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue">
-                                <option>Select a sender</option>
+                            <select autocomplete="off" wire:model='sender'
+                                class="w-full lg:w-2/5 px-3 py-3 border-2 text-sm border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue">
+                                <option>Select a sender ID</option>
                                 <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $sendersAll; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($item['name']); ?>"><?php echo e($item['name']); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
@@ -30,7 +40,53 @@ endif;
 unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                         </div>
 
-                        <div class="">
+                        <div>
+                            <label class="block text-start text-base font-light text-textPrimary">Send to Phone
+                                Groups</label>
+                            <select autocomplete="off" wire:model="group_numbers"
+                                class="w-full lg:w-2/5 px-3 py-3 border-2 text-sm border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue">
+                                <option>Select a Group</option>
+
+                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allGroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($item['id']); ?>"><?php echo e($item['name']); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                            </select>
+
+                            <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['group_numbers'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <span class="text-sm text-red-600 block text-start italic pt-1"><?php echo e($message); ?></span>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
+                        </div>
+
+
+                        <div x-data="{ phoneNumbers: <?php if ((object) ('phone_number') instanceof \Livewire\WireDirective) : ?>window.Livewire.find('<?php echo e($__livewire->getId()); ?>').entangle('<?php echo e('phone_number'->value()); ?>')<?php echo e('phone_number'->hasModifier('live') ? '.live' : ''); ?><?php else : ?>window.Livewire.find('<?php echo e($__livewire->getId()); ?>').entangle('<?php echo e('phone_number'); ?>')<?php endif; ?> }">
+                            <label class="block text-start text-base font-light text-textPrimary">Phone Numbers</label>
+                            <textarea x-model="phoneNumbers"
+                                class="w-full lg:w-2/5 px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
+                                placeholder="Enter phone numbers separated by a comma" cols="20" rows="3"
+                                x-on:input="phoneNumbers = phoneNumbers.replace(/\D/g, '').replace(/(\d{11})(?=\d)/g, '$1, ').trim()"></textarea>
+
+                            <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['phone_number'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <span class="text-sm text-red-600 block text-start italic pt-1"><?php echo e($message); ?></span>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
+                        </div>
+
+
+
+                        <div>
                             <label class="block text-start text-base font-light text-textPrimary">Message</label>
                             <textarea wire:model="message"
                                 class="w-full lg:w-2/5 px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
@@ -48,41 +104,29 @@ endif;
 unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                         </div>
 
-                        
+                        <div class="pt-4">
+                            <button wire:loading.remove wire:click.prevent="processBulkMessage"
+                                class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
+                                Process Message
+                            </button>
 
-
-                        <div x-data="{ phone_number: '' }">
-                            <label class="block text-start text-base font-light text-textPrimary">Phone Number</label>
-                            <input type="text" autocomplete="off" wire:model="phone_number" maxlength="11"
-                                x-model="phone_number"
-                                x-on:input="phone_number = phone_number.replace(/\D/g, '').slice(0, 11)"
-                                class="w-full lg:w-2/5 px-3 py-4 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
-                                placeholder="Receiver's phone number">
-                            <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['phone_number'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                <span class="text-sm text-red-600 block text-start italic pt-1"><?php echo e($message); ?></span>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
-                        </div>
-
-
-                        <div class="pt-4" wire:click.prevent="previewSMS">
-                            <button class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
-                                Proceed
+                            <button type="button" wire:loading wire:target="processBulkMessage"
+                                class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
+                                <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                             </button>
                         </div>
                     </form>
+
                 </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
+
+
+
+
     <!--[if BLOCK]><![endif]--><?php if($showModal): ?>
         <div x-data="{ showModal: true }" x-show="showModal"
             class="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
@@ -108,51 +152,61 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-8">
                         <div class="text-textPrimary font-light space-y-1 flex flex-col items-center justify-center">
                             <h4 class="font-semibold text-2xl">₦<?php echo e($totalCharge); ?></h4>
-                            <p class="text-sm text-softGray uppercase">cost</p>
+                            <p class="text-sm text-softGray uppercase tracking-wider">cost</p>
                         </div>
                         <div class="text-textPrimary font-light space-y-1 flex flex-col items-center justify-center">
-                            <h4 class="font-semibold text-2xl">1</h4>
-                            <p class="text-sm text-softGray uppercase">Recipients</p>
+                            <h4 class="font-semibold text-2xl"><?php echo e($numberCount); ?></h4>
+                            <p class="text-sm text-softGray uppercase tracking-wider">Recipients</p>
                         </div>
+                        
                         <div class="text-textPrimary font-light space-y-1 flex flex-col items-center justify-center">
                             <h4 class="font-semibold text-2xl"><?php echo e($smsUnits); ?></h4>
-                            <p class="text-sm text-softGray uppercase">Page</p>
+                            <p class="text-sm text-softGray uppercase tracking-wider">
+                                <?php echo e($smsUnits > 1 ? 'Pages' : 'Page'); ?>
+
+                            </p>
                         </div>
+
                     </div>
 
                     <div class="pt-8">
                         <label class="text-gray-800 text-sm mb-2 block">Sender</label>
                         <input type="text" autocomplete="off" wire:model="sender"
-                            class="w-1/4 px-3 py-2 bg-grayBg border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
+                            class="w-1/4 px-3 text-softGray py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                             placeholder="Sender" readonly />
                     </div>
 
                     <div>
                         <label class="text-gray-800 text-sm mb-2 block">Phone</label>
-                        <textarea autocomplete="off" wire:model="phone_number"
-                            class="w-full px-3 bg-grayBg py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
+                        <textarea autocomplete="off" wire:model="numbersToSend"
+                            class="w-full px-3 text-softGray py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                             placeholder="Phone" disabled></textarea>
                     </div>
 
                     <div>
-                        <label class="text-gray-800 text-sm mb-2 block">Text</label>
+                        <label class="text-gray-800 text-sm mb-2 block ">Text</label>
                         <textarea autocomplete="off" wire:model="message"
-                            class="w-full px-3 py-2 bg-grayBg border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
+                            class="w-full px-3 py-2 text-softGray border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                             placeholder="Text" disabled></textarea>
                     </div>
 
 
-                    <div class="pt-4 text-center" >
-                        <button type="button" wire:loading.remove wire:click.prevent="sendMessage" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
+                    <div class="pt-4 text-center" wire:loading.remove wire:click.prevent="sendBulkMessage">
+                        <button class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
                             Send Message
                         </button>
-                        <button type="submit" wire:loading wire:target="sendMessage" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
-                                    <i class="fa-solid fa-spinner animate-spin "></i> Loading...
+
+                        <button type="button" wire:loading wire:target="sendBulkMessage" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
+                            <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                         </button>
+
+
                     </div>
                 </form>
             </div>
         </div>
     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+
+
 </div>
-<?php /**PATH C:\Users\HP\Documents\GGT\sms\resources\views/livewire/user/send-single.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\HP\Documents\GGT\sms\resources\views/livewire/user/send-bulk.blade.php ENDPATH**/ ?>

@@ -33,6 +33,12 @@ class Login extends Component
         // dd($validated['email']);
         $user = User::Where('email', $validated['email'])->first();
 
+        if (!$user) {
+            $this->addError('email', 'Invalid email');
+            $this->dispatch('alert', type: 'error', text: 'Invalid Credentials.', position: 'center', timer: 10000, button: false);
+            return;
+        }
+
 
         if ($user['status'] !== 'active') {
             $this->addError('email', 'Your account has been deactivated');
@@ -40,13 +46,6 @@ class Login extends Component
             return;
         }
 
-
-        
-        if(!$user) {
-            $this->addError('email', 'Invalid email');
-            $this->dispatch('alert', type: 'error', text: 'Invalid Credentials.', position: 'center', timer: 10000, button: false);
-            return;
-        }
 
         // Attempt to log the user in
         if (!Auth::attempt($validated)) {

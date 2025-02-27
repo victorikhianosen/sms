@@ -90,11 +90,12 @@ class SendSingle extends Component
         }
 
         $user = Auth::user();
+        // dd($user['id']);
+        $userID = $user['id'];
         $accountBalance = $user['balance'];
 
         $user->balance = $accountBalance - $this->totalCharge;
         $user->save();
-
 
         $baseURL = env('EXCHANGE_BASEURL');
         $username = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
@@ -106,8 +107,9 @@ class SendSingle extends Component
         // Generate a unique message ID
         $messageID = Str::uuid()->toString();
         $finalPhone = '234' . substr($this->phone_number, 1);
+        
         $message = Message::create([
-            'user_id' => $user->id,
+            'user_id' => $userID,
             'sms_sender_id' => $sender->id,
             'sender' => $sender['name'],
             'page_number' => $this->smsUnits,

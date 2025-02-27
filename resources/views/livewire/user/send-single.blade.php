@@ -129,9 +129,12 @@
                     </div>
 
 
-                    <div class="pt-4 text-center" wire:click.prevent="sendMessage">
-                        <button class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
+                    <div class="pt-4 text-center" >
+                        <button type="button" wire:loading.remove wire:click.prevent="sendMessage" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
                             Send Message
+                        </button>
+                        <button type="submit" wire:loading wire:target="sendMessage" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
+                                    <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                         </button>
                     </div>
                 </form>

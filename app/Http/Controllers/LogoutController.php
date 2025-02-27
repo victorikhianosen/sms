@@ -9,13 +9,7 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-
         Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
         session()->flash('alert', [
             'type' => 'success',
             'text' => 'Logout Successful!',
@@ -26,13 +20,9 @@ class LogoutController extends Controller
         return redirect()->route('login');
     }
 
+    
     public function adminLogout(Request $request) {
         Auth::guard('admin')->logout(); 
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
         session()->flash('alert', [
             'type' => 'success',
             'text' => 'Logout Successful!',

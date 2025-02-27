@@ -60,17 +60,7 @@
                         </div>
 
 
-                        {{-- <div class="pt-4">
-                            <button wire:click.prevent="Sendsms" wire:loading.remove
-                                class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
-                                Send
-                            </button>
-
-                            <button type="submit" wire:loading wire:target="loginUser" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
-                                <i class="fa-solid fa-spinner animate-spin "></i> Loading...
-                            </button>
-
-                        </div> --}}
+                      
                     </form>
                 </div>
             </div>

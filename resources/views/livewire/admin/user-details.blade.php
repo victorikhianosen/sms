@@ -350,7 +350,7 @@
                                     <div>
                                         <label class="font-medium text-gray-700">Balance</label>
                                         <input type="text" wire:model="balance"
-                                            class="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-600"
+                                            class="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-600" readonly
                                             id="phone">
                                     </div>
 

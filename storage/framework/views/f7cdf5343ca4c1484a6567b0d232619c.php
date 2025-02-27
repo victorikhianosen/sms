@@ -23,8 +23,7 @@
                 <div class=space-y-4>
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">Message Management</p>
                     <li>
-                        <a href="<?php echo e(route('admin.sendsms')); ?>" wire:navigate.hover
-                            @click.prevent="activeLink = 'bulk'"
+                        <a href="<?php echo e(route('admin.sendsms')); ?>" wire:navigate.hover @click.prevent="activeLink = 'bulk'"
                             :class="{ 'text-blue font-semibold': activeLink === 'bulk', 'text-gray': activeLink !== 'bulk' }"
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
                             <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
@@ -68,14 +67,25 @@
                     
                 </div>
 
-                <div class=space-y-4>
+                <div class=space-y-6>
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">Resources</p>
                     <li>
                         <a href="<?php echo e(route('admin.message')); ?>" wire:navigate.hover
                             :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
                             <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                            All Messages
+                            Users Messages
+                        </a>
+                    </li>
+
+
+                    <li>
+                <div class=space-y->
+                        <a href="<?php echo e(route('admin.adminmessage')); ?>" wire:navigate.hover
+                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            Admins Messages
                         </a>
                     </li>
 

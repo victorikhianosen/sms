@@ -2,14 +2,13 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\User;
+use App\Models\Admin;
 use App\Models\Message;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
-class MessageList extends Component
+class AdminMessageList extends Component
 {
-
 
     public $sms_sender_id, $sender, $page_number, $page_rate, $status, $amount, $message, $message_id, $destination, $route, $created_at;
 
@@ -19,15 +18,13 @@ class MessageList extends Component
 
     public $search = '';
 
+    #[Title('Admin Messeges')]
 
-
-    #[Title('All Messages')]
     public function render()
     {
-        // $messages = Message::latest()->paginate(8);
 
 
-        $messages = Message::whereNotNull('user_id') // Only messages from users
+        $messages = Message::whereNotNull('admin_id') // Only messages from admins
         ->when($this->search, function ($query) {
             $searchTerm = $this->search;
             $query->where(function ($q) use ($searchTerm) {
@@ -37,17 +34,20 @@ class MessageList extends Component
                 ->orWhere('created_at', 'like', "%{$searchTerm}%");
             });
         })
-            ->latest()
-            ->paginate(8);
-
+        ->latest()
+        ->paginate(8);
 
         // dd($messages);
 
 
-        return view('livewire.admin.message-list', compact('messages'))
-            ->extends('layouts.admin_layout')
-            ->section('admin-section');
+        // return view('livewire.admin.message-list', compact('messages'))
+        // ->extends('layouts.admin_layout')
+        // ->section('admin-section');
+
+        
+        return view('livewire.admin.admin-message-list', compact('messages'))->extends('layouts.admin_layout')->section('admin-section');
     }
+
 
     public function closeModal()
     {
@@ -59,8 +59,7 @@ class MessageList extends Component
 
         $this->editModel = true;
         $message = Message::find($id);
-        // dd($message);
-        $this->email = $message->user->email;
+        $this->email = $message->admin->email;
         $this->sms_sender_id = $message->sms_sender_id;
         $this->sender = $message->sender;
         $this->page_number = $message->page_number;

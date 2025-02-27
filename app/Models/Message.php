@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
@@ -17,6 +18,11 @@ class Message extends Model
     public function smsender()
     {
         return $this->belongsTo(SmsSender::class);
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
     }
 
 

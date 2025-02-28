@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('admin_id')->nullable()->constrained('admins')->cascadeOnDelete();
-            $table->decimal('amount', 15, 2);
             $table->enum('type', ['credit', 'debit']);
             $table->decimal('opening_balance', 8, 2);
             $table->decimal('closing_balance', 8, 2);

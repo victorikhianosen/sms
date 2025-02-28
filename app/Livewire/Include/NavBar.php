@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class NavBar extends Component
 {
     public $accountBalance;
+    public $name;
+
 
     public function mount()
     {
@@ -19,6 +21,7 @@ class NavBar extends Component
     {
         $user = Auth::user();
         $this->accountBalance = $user->balance;
+        $this->name = $user->first_name . ' ' . $user->last_name;
     }
 
     public function render()

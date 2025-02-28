@@ -5,7 +5,7 @@
         <div>
             <div class="flex justify-center items-center gap-3">
                 <div>
-                    <h4 class="text-base font-semibold text-blue">Victor</h4>
+                    <h4 class="text-base font-semibold text-blue">{{$name}}</h4>
                     <p class="text-sm font-bold transition-all duration-300"
                         :class="{
                             'text-red-500 animate-pulse': {{ $accountBalance }} < 500,

@@ -64,7 +64,6 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(Payment::class);
     }
-
     public function smssenders()
     {
         return $this->hasMany(SmsSender::class);

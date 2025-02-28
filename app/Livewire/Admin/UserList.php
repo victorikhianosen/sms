@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
 use App\Jobs\CreateVirtualAccountJob;
 
 class UserList extends Component
@@ -120,22 +121,34 @@ class UserList extends Component
         $user->balance += $this->amount;
         $user->save();
 
+        $admin = Auth::guard('admin')->user();
+        $admin_id = $admin->id;
+        $adminFirstname = $admin->first_name;
+        $adminLastname = $admin->last_name;
+
+        // Get first letters of first and last name
+        $initials = strtoupper(substr($adminFirstname, 0, 2) . substr($adminLastname, 0, 2));
+
+        // Generate the reference
+        $reference =  $admin_id . $initials . '_' . strtoupper(Str::random(10));
+
         $payment = Payment::create([
             'user_id' => $user->id,
             'amount' => $this->amount,
             'status' => 'success',
-            'transaction_id' => Str::uuid(), // Generate a unique transaction ID
-            'reference' => 'ADMIN_' . strtoupper(Str::random(10)), // Unique reference for admin transactions
-            'bank_name' => null, // Not applicable for manual transactions
+            'transaction_id' => Str::uuid(),
+            'reference' => $reference,
+            'bank_name' => null, 
             'account_number' => null,
             'card_last_four' => null,
             'card_brand' => null,
-            'currency' => 'NGN', // Default currency, change if needed
-            'payment_type' => 'manual', // Differentiate from card payments
-            'paystack_response' => null, // No response from Paystack
+            'currency' => 'NGN',
+            'payment_type' => 'manual',
+            'paystack_response' => null, 
             'verify_response' => null,
-            'description' => "Manual fund addition by admin of ₦" . number_format($this->amount, 2),
+            'description' => "Manual fund addition by admin of ₦". $reference  . number_format($this->amount, 2),
         ]);
+
 
         // Reset input fields
         $this->reset('amount', 'available_balance');

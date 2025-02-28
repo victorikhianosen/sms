@@ -2,14 +2,17 @@
 
 namespace App\Livewire\User;
 
+use App\Models\Credit;
 use App\Models\Message;
 use Livewire\Component;
+use App\Models\Accounts;
 use App\Models\SmsSender;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
-use App\Services\SendSmsService;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+
 
 class SendSingle extends Component
 {
@@ -23,18 +26,15 @@ class SendSingle extends Component
     public $phone_number;
 
     public $sendersAll;
+
     public $showModal = false;
+
+    // Validated
     public $totalCharge;
     public $smsUnits;
     public $smsRate;
     public $messageLength;
 
-    protected $sendSmsService;
-
-    public function __construct()
-    {
-        $this->sendSmsService = app(SendSmsService::class);
-    }
 
     #[Title('Messages')]
     public function render()
@@ -43,7 +43,6 @@ class SendSingle extends Component
         $this->sendersAll = $user->smssenders;
         return view('livewire.user.send-single')->extends('layouts.auth_layout')->section('auth-section');
     }
-
 
     public function previewSMS()
     {
@@ -73,33 +72,46 @@ class SendSingle extends Component
     public function closeModal()
     {
         $this->showModal = false;
+
     }
 
     public function sendMessage()
     {
+
         $sender = SmsSender::whereRaw('BINARY name = ?', [$this->sender])->first();
+        // dd($sender);
         if (!$sender) {
             $this->dispatch('alert', type: 'error', text: 'Invalid Sender ID', position: 'center', timer: 10000, button: false);
-            return;
         }
 
         $smsRoute = $sender->smsroute->name;
         if (!in_array($smsRoute, ['exchange_trans', 'exchange_pro'])) {
-            $this->dispatch('alert', type: 'error', text: 'Unknown sender', position: 'center', timer: 10000, button: false);
-            return;
+            $this->dispatch('alert', type: 'error', text: 'unknow sender', position: 'center', timer: 10000, button: false);
         }
 
         $user = Auth::user();
-        $user->balance -= $this->totalCharge;
+        // dd($user['id']);
+        $userID = $user['id'];
+        $accountBalance = $user['balance'];
+
+        $user->balance = $accountBalance - $this->totalCharge;
         $user->save();
 
-        $finalPhone = '234' . substr($this->phone_number, 1);
-        $messageID = Str::uuid()->toString();
+        $baseURL = env('EXCHANGE_BASEURL');
+        $username = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
+        $password = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
+        $smsDoc = env('EXCHANGE_SMS_DCS');
+        $enternalID = env('EXCHANGE_SMS_ENTERNAL_ID');
+        $callURL = env('SMS_CALLBACK');
 
-        Message::create([
-            'user_id' => $user->id,
+        // Generate a unique message ID
+        $messageID = Str::uuid()->toString();
+        $finalPhone = '234' . substr($this->phone_number, 1);
+        
+        $message = Message::create([
+            'user_id' => $userID,
             'sms_sender_id' => $sender->id,
-            'sender' => $sender->name,
+            'sender' => $sender['name'],
             'page_number' => $this->smsUnits,
             'page_rate' => $this->smsRate,
             'status' => 'sent',
@@ -110,9 +122,30 @@ class SendSingle extends Component
             'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
 
-        $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message);
-        $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
-        $this->closeModal();
-        $this->reset(['sender','message', 'phone_number']);
+        $url = $baseURL .
+            '?X-Service=' . strval($username) .
+            '&X-Password=' . strval($password) .
+            '&X-Sender=' . strval($sender['name']) .
+            '&X-Recipient=' . strval($finalPhone) .
+            '&X-Message=' . strval($this->message) .
+            '&X-SMS-DCS=' . strval($smsDoc) .
+            '&X-External-Id=' . strval($enternalID) .
+            '&X-Delivery-URL=' . strval($callURL);
+
+        try {
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->get($url)->json();
+
+
+            $this->reset();
+            $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
+            $this->closeModal();
+
+        } catch (\Exception $e) {
+            $this->dispatch('alert', type: 'error', text: 'Sending failed!', position: 'center', timer: 5000, button: false);
+        }
+
     }
 }

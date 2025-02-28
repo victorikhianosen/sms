@@ -12,61 +12,7 @@
 
             </div>
 
-            <!--[if BLOCK]><![endif]--><?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>
-                <div x-data="{ isApiKeyModalOpen: false }">
-                    <button @click="isApiKeyModalOpen = true"
-                        class="bg-blue px-4 py-2 md:text-xs text-sm transition-all text-white rounded-lg duration-200 hover:opacity-90">
-                        Add found
-                    </button>
-
-                    <!-- API Key Modal -->
-                    <div x-show="isApiKeyModalOpen" x-cloak
-                        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                        <div @click.away="isApiKeyModalOpen = false"
-                            class="bg-white p-8 rounded-lg shadow-lg w-[600px] max-w-lg">
-                            <div class="flex justify-between items-center border-b-2 border-softGray pb-4">
-                                <h3 class="text-2xl font-bold">Add Fund</h3>
-
-                                <button @click="isApiKeyModalOpen = false" class="text-black text-2xl">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-
-                            <form wire:submit.prevent="addAdminFund" class="mt-4 text-gray-700 space-y-4 pt-6">
-                                <div>
-                                    <label class="font-medium text-gray-700">Amount</label>
-                                    <input type="number" id="messageId" wire:model="amount" maxlength="4"
-                                        class="w-full px-4 py-3 border rounded-md bg-gray-100 text-gray-600">
-                                    <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['amount'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                        <span
-                                            class="text-sm text-red-600 block text-start italic pt-1"><?php echo e($message); ?></span>
-                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
-                                </div>
-
-
-                                <div class="mt-6 flex justify-start pt-4 space-x-4">
-                                    <button wire:loading.remove
-                                        class="px-6 py-3 bg-blue text-white rounded-lg hover:bg-opacity-90 transition text-sm">
-                                        Add
-                                    </button>
-
-                                    <button type="submit" wire:loading wire:target="addAdminFund"
-                                        class="px-6 py-3 bg-blue text-white rounded-lg hover:opacity-90 transition text-sm">
-                                        <i class="fa-solid fa-spinner animate-spin mr-1"></i> Loading...
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+       
 
         </div>
         <div class="-m-1.5 overflow-x-auto">
@@ -81,7 +27,6 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                         </div>
                     <?php else: ?>
                         
-
 
                         <form class="">
                             <div class="pt-6 grid grid-cols-1 lg:grid-cols-2 gap-8 text-gray-700">

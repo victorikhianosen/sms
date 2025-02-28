@@ -7,6 +7,7 @@ use App\Models\Message;
 use App\Models\SmsSender;
 use Illuminate\Support\Str;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
 class SendSmsService
@@ -110,6 +111,9 @@ class SendSmsService
      * @param string $message
      * @return array|null
      */
+    
+
+
     public function sendSms(string $senderName, string $smsRoute, string $finalPhone, string $message): ?array
     {
         $baseURL     = env('EXCHANGE_BASEURL');
@@ -119,7 +123,6 @@ class SendSmsService
         $externalID  = env('EXCHANGE_SMS_ENTERNAL_ID');
         $callbackURL = env('SMS_CALLBACK');
 
-        // Build the URL using dynamic values and constant environment variables
         $url = sprintf(
             '%s?X-Service=%s&X-Password=%s&X-Sender=%s&X-Recipient=%s&X-Message=%s&X-SMS-DCS=%s&X-External-Id=%s&X-Delivery-URL=%s',
             $baseURL,
@@ -134,13 +137,18 @@ class SendSmsService
         );
 
         try {
-            return Http::withHeaders([
+            $response = Http::withHeaders([
                 'Accept'       => 'application/json',
                 'Content-Type' => 'application/json',
             ])->get($url)->json();
+
+            return $response; // ✅ Return API response
         } catch (\Exception $e) {
-            // Optionally log the error: \Log::error($e->getMessage());
-            return null;
+            Log::error("SMS API Error: " . $e->getMessage());
+            return null; // ✅ Explicitly return null in case of failure
         }
     }
+
 }
+
+

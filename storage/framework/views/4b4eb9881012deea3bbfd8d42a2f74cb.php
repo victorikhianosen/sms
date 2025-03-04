@@ -83,7 +83,7 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                         <div class="pt-2">
                             <button wire:click.prevent="updateApiCredentials" wire:loading.remove
                                 class="w-1/5 bg-blue py-3 px-6 rounded-lg text-white transition-all duration-200 hover:opacity-90">
-                                Update
+                                Regenerate
                             </button>
 
 
@@ -106,8 +106,8 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                     <h3 class="text-base text">
                         URL:
                     </h3>
-                    <p class="text-sm tracking-wide text-textPrimary pt-3 font-semibold">
-                        <span class="font-medium pr-4">POST:</span> http://localhost:8000/api/sendsms
+                    <p class="text-xl tracking-wide text-textPrimary pt-3 font-semibold">
+                        <span class="font-semibold pr-4">POST:</span> https://sms.assetmatrixmfb.com/api/sendsms
                     </p>
                 </div>
             </div>

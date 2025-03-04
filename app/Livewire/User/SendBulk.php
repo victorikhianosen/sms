@@ -18,8 +18,8 @@ class SendBulk extends Component
 {
     use WithFileUploads;
 
-    public $allGroups;
-    public $sendersAll;
+    // public $allGroups = [];
+    // public $sendersAll;
 
     #[Validate('required')]
     public $sender = null;
@@ -45,10 +45,10 @@ class SendBulk extends Component
     public function render()
     {
         $user = Auth::user();
-        $this->allGroups = $user->groups;
-        $this->sendersAll = $user->smssenders;
+        $allGroups = $user->groups()->orderBy('created_at', 'desc')->get();
+        $sendersAll = $user->smssenders;
 
-        return view('livewire.user.send-bulk')
+        return view('livewire.user.send-bulk', compact('allGroups', 'sendersAll'))
             ->extends('layouts.auth_layout')
             ->section('auth-section');
     }
@@ -85,7 +85,15 @@ class SendBulk extends Component
         $numbersArray = explode(',', $numbersToSend);
         $numberCount = count($numbersArray);
 
-        $smsRate = $user->sms_rate;
+        // $smsRate = $user->sms_rate;
+
+        $smsRate = (float) $user->sms_rate;
+
+        if (!$smsRate) {
+            $this->dispatch('alert', type: 'error', text: 'Sorry, your rate has not been fixed. Contact support.', position: 'center', timer: 10000, button: false);
+            return;
+        }
+
         $smsCharLimit = $user->sms_char_limit;
         $accountBalance = $user->balance;
         $messageLength = strlen($validated['message']);

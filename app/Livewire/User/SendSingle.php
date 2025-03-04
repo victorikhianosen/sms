@@ -50,13 +50,27 @@ class SendSingle extends Component
         $validated = $this->validate();
 
         $user = Auth::user();
-        $smsRate = $user->sms_rate;
-        $smsCharLimit = $user->sms_char_limit;
-        $accountBalance = $user['balance'];
+        // $smsRate = $user->sms_rate;
+        // $smsCharLimit = $user->sms_char_limit;
+        $smsRate = (float) $user->sms_rate;
 
+        if (!$smsRate) { 
+            $this->dispatch('alert', type: 'error', text: 'Sorry, your rate has not been fixed.', position: 'center', timer: 10000, button: false);
+            return;
+        }
+        
+        $smsCharLimit = (int) $user->sms_char_limit;
+        $accountBalance = $user['balance'];
         $messageLength = strlen($validated['message']);
         $smsUnits = ceil($messageLength / $smsCharLimit);
         $totalCharge = $smsUnits * $smsRate;
+
+        // dd([
+        //     'smsRate' => $smsRate,
+        //     'smsCharLimit' => $smsCharLimit,
+        //     'smsUnits' => $smsUnits,
+        //     'totalCharge' => $totalCharge,
+        // ]);
 
         if ($accountBalance < $totalCharge) {
             $this->dispatch('alert', type: 'error', text: 'Insufficient funds!', position: 'center', timer: 10000, button: false);

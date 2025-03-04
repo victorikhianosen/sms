@@ -93,7 +93,7 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                             <div>
                                 <label class="block text-start text-base font-light text-textPrimary">Title
                                     </label>
-                                <input type="text" wire:model="description" placeholder="Enter Title"
+                                <input type="text" wire:model="description" placeholder="Enter Title" max="20" maxlength="20"
                                     class="w-full px-3 py-3 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm">
                                 <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -157,10 +157,15 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
              
 
 
-                        <div class="pt-4">
-                            <button wire:click.prevent="processSchedule"
+                        <div class="pt-4 text-center">
+                            <button wire:click.prevent="processSchedule" wire:loading.remove
                                 class="bg-blue md:w-2/4 py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
                                 Process Message
+                            </button>
+
+                              <button wire:loading wire:target="processSchedule"
+                                class="bg-blue md:w-2/4 py-3 px-12 rounded-lg text-white text-base transition-all duration-200 hover:bg-opacity-90">
+                                <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                             </button>
                         </div>
                     </form>

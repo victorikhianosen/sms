@@ -161,8 +161,8 @@
                     </div>
 
 
-                    <div class="pt-4 text-center" wire:loading.remove wire:click.prevent="sendBulkMessage">
-                        <button class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
+                    <div class="pt-4 text-center">
+                        <button type="submit" wire:loading.remove wire:click.prevent="sendBulkMessage" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
                             Send Message
                         </button>
 

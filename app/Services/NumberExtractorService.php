@@ -6,17 +6,23 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class NumberExtractorService
 {
-    /**
-     * Extract numbers from a CSV file, filter out non-11-digit numbers, and ensure uniqueness.
-     */
+
+
+
     public function extractNumbersFromCsv(string $filePath): array
     {
         $numbers = [];
         if (($handle = fopen($filePath, 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 foreach ($data as $value) {
-                    // Ensure the value is numeric and exactly 11 digits
-                    if (is_numeric($value) && strlen($value) == 11) {
+                    // Ensure it's numeric and handle missing leading zero
+                    $value = preg_replace('/\D/', '', $value); // Remove non-numeric characters
+
+                    if (strlen($value) == 10) {
+                        $value = '0' . $value; // Prepend 0 if it's 10 digits
+                    }
+
+                    if (strlen($value) == 11 && str_starts_with($value, '0')) {
                         $numbers[] = $value;
                     }
                 }
@@ -24,13 +30,9 @@ class NumberExtractorService
             fclose($handle);
         }
 
-        // Ensure the numbers are unique
         return array_unique($numbers);
     }
 
-    /**
-     * Extract numbers from an Excel file, filter out non-11-digit numbers, and ensure uniqueness.
-     */
     public function extractNumbersFromExcel(string $filePath): array
     {
         $numbers = [];
@@ -39,20 +41,25 @@ class NumberExtractorService
 
         foreach ($sheet->toArray() as $row) {
             foreach ($row as $value) {
-                // Ensure the value is numeric and exactly 11 digits
-                if (is_numeric($value) && strlen($value) == 11) {
-                    $numbers[] = $value;
+                if (!empty($value)) {
+                    $value = preg_replace('/\D/', '', $value); // Remove non-numeric characters
+
+                    if (strlen($value) == 10) {
+                        $value = '0' . $value; // Prepend 0 if it's 10 digits
+                    }
+
+                    if (strlen($value) == 11 && str_starts_with($value, '0')) {
+                        $numbers[] = $value;
+                    }
                 }
             }
         }
 
-        // Ensure the numbers are unique
         return array_unique($numbers);
     }
 
-    /**
-     * Determine the file type, extract numbers, and return them as a JSON-encoded string.
-     */
+
+
     public function extractNumbersAsJson(string $filePath, string $extension): string
     {
         $numbers = [];

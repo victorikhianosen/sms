@@ -1,10 +1,12 @@
 <div class="bg-white fixed left-0 top-0 h-full w-[260px] hidden lg:block overflow-hidden" x-data="{ activeLink: '' }">
-    <div class="px-6 py-6 h-full flex flex-col">
+    <div class="px-8 py-6 h-full flex flex-col">
         <div class="">
             <img class="h-16" src="{{ asset('assets/images/logo.png') }}" />
         </div>
 
-        <div class="p-3 flex-1 overflow-y-auto">
+        
+
+<div class="p-3 flex-1 overflow-y-auto" style="scrollbar-width: none; -ms-overflow-style: none;">
             <ul class="pt-12 space-y-6" x-data="{ openMenu: null }">
                 <div class=space-y-4>
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">Main</p>
@@ -33,7 +35,7 @@
                             </div>
 
 
-                            <span class="ml-auto block">
+                            <span class="">
                                 <i
                                     :class="openMenu === 'topup' ? 'fa-solid fa-chevron-down text-sm' :
                                         'fa-solid fa-chevron-right text-sm'"></i>

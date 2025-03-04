@@ -60,7 +60,7 @@ class PaymentList extends Component
                 });
             })
             ->latest()
-            ->paginate(10);
+            ->paginate(perPage: 10);
 
 
         // dd($payments);

@@ -1,0 +1,18 @@
+[2025-03-04 16:09:51] local.INFO: Checking for scheduled messages to send at: 2025-03-04 16:09:51  
+[2025-03-04 16:09:51] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-04 16:11:05] local.INFO: Checking for scheduled messages to send at: 2025-03-04 16:11:05  
+[2025-03-04 16:11:05] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-04 16:12:45] local.INFO: Checking for scheduled messages to send at: 2025-03-04 16:12:45  
+[2025-03-04 16:12:45] local.INFO: Pending Scheduled messages found: 1  
+[2025-03-04 16:12:45] local.INFO: Processing message for User ID: 1  
+[2025-03-04 16:12:45] local.INFO: Final phone: 2347033274155  
+[2025-03-04 16:12:46] local.INFO: scheduled message: ====================  
+[2025-03-04 16:12:46] local.INFO: Final phone: 2347063630410  
+[2025-03-04 16:12:46] local.INFO: scheduled message: ====================  
+[2025-03-04 16:15:39] local.INFO: Checking for scheduled messages to send at: 2025-03-04 16:15:39  
+[2025-03-04 16:15:39] local.INFO: Pending Scheduled messages found: 1  
+[2025-03-04 16:15:39] local.INFO: Processing message for User ID: 1  
+[2025-03-04 16:15:39] local.INFO: Final phone: 2347033274155  
+[2025-03-04 16:15:40] local.INFO: scheduled message: ====================  
+[2025-03-04 16:15:40] local.INFO: Final phone: 2347063630410  
+[2025-03-04 16:15:40] local.INFO: scheduled message: ====================  

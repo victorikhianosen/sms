@@ -27,19 +27,6 @@
                     @enderror
                 </div>
 
-
-                {{-- <div x-data="{ numbers: @entangle('numbers') }">
-                    <label class="block text-start text-base font-light text-textPrimary">Phone Numbers</label>
-                    <textarea x-model="numbers"
-                        class="w-full lg:w-2/5 px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue placeholder:text-sm"
-                        placeholder="Enter phone numbers separated by a comma" cols="20" rows="3"
-                        x-on:input="numbers = numbers.replace(/\D/g, '').replace(/(\d{11})(?=\d)/g, '$1, ').trim()"></textarea>
-
-                    @error('numbers')
-                        <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
-                    @enderror
-                </div> --}}
-
                 <div x-data="{ numbers: @entangle('numbers') }">
                     <label class="text-textPrimary text-sm mb-2 block">Numbers</label>
                     <textarea wire:model="numbers"
@@ -65,9 +52,14 @@
                     <a href="{{ route('groups') }}" wire:navigate.hover type="button"
                         class="px-6 py-3 rounded-lg text-blue text-sm border-2 border-blue outline-none tracking-wide bg-white transition-all duration-200 ease-in-out hover:bg-blue hover:text-white">Back</a>
 
-                    <button type="button" wire:click.prevent="updateGroup"
+                    <button type="button" wire:loading.remove wire:click.prevent="updateGroup"
                         class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-blue transition-all duration-200 ease-in-out hover:bg-opacity-90">
                         Update Group
+                    </button>
+
+                     <button type="submit" wire:loading wire:target="updateGroup"
+                        class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-blue transition-all duration-200 ease-in-out hover:bg-opacity-90">
+                                    <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                     </button>
                 </div>
             </form>

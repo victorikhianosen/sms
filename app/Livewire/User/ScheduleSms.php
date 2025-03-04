@@ -60,7 +60,8 @@ class ScheduleSms extends Component
     {
 
         $user = Auth::user();
-        $this->allGroups = $user->groups;
+        // $this->allGroups = $user->groups;
+        $this->allGroups = $user->groups()->orderBy('created_at', 'desc')->get();
         $this->sendersAll = $user->smssenders;
 
         return view('livewire.user.schedule-sms')->extends('layouts.auth_layout')->section('auth-section');
@@ -108,7 +109,14 @@ class ScheduleSms extends Component
         $numbersArray = explode(',', $numbersToSend);
         $numberCount = count($numbersArray);
 
-        $smsRate = $user->sms_rate;
+        // $smsRate = $user->sms_rate;
+        $smsRate = (float) $user->sms_rate;
+
+        if (!$smsRate) {
+            $this->dispatch('alert', type: 'error', text: 'Sorry, your rate has not been fixed. Contact support.', position: 'center', timer: 10000, button: false);
+            return;
+        }
+
         $smsCharLimit = $user->sms_char_limit;
         $accountBalance = $user->balance;
         $messageLength = strlen($validated['message']);
@@ -126,6 +134,14 @@ class ScheduleSms extends Component
         $this->smsUnits = $smsUnits;
         $this->numbersToSend = $numbersToSend;
         $this->scheduleTime = date("Y-m-d h:i A", strtotime(str_replace('T', ' ', $validated['date_time'])));
+
+
+        //  dd([
+        //     'smsRate' => $smsRate,
+        //     'smsCharLimit' => $smsCharLimit,
+        //     'smsUnits' => $smsUnits,
+        //     'totalCharge' => $totalCharge,
+        // ]);
 
         $this->showModal = true;
     }

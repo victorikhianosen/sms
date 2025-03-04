@@ -27,12 +27,8 @@ class SendScheduledMessages extends Command
         $now = Carbon::now();
         LogService::scheduleSms("Checking for scheduled messages to send at: " . $now);
 
-        // $scheduledMessages = ScheduledMessage::where('status', 'pending')->get();
-        $scheduledMessages = ScheduledMessage::where('status', 'pending')
-        ->whereTime('scheduled_time', '<=', $now) // Compare time only
-        ->get();
-
-
+        $scheduledMessages = ScheduledMessage::where('status', 'pending')->get();
+       
         LogService::scheduleSms("Pending Scheduled messages found: " . $scheduledMessages->count());
 
         foreach ($scheduledMessages as $scheduled) {

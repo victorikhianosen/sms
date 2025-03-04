@@ -80,7 +80,6 @@
 
 
                     <li>
-                <div class=space-y->
                         <a href="<?php echo e(route('admin.adminmessage')); ?>" wire:navigate.hover
                             :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
@@ -88,6 +87,17 @@
                             Admins Messages
                         </a>
                     </li>
+
+                    <li>
+                        <a href="<?php echo e(route('admin.schedulelist')); ?>" wire:navigate.hover
+                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            Schedule Messages
+                        </a>
+                    </li>
+
+
 
                     <li>
                         <a href="<?php echo e(route('admin.smssender')); ?>" wire:navigate.hover

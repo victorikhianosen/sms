@@ -69,6 +69,11 @@ class User extends Authenticatable
         return $this->hasMany(SmsSender::class);
     }
 
+    public function schedule()
+    {
+        return $this->hasMany(ScheduledMessage::class);
+    }
+
     public function messages()
     {
         return $this->hasMany(Message::class, 'message_id');

@@ -282,9 +282,9 @@
                                 <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allPayment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            <?php echo e($payment->transaction_id); ?></td>
+                                            <?php echo e(substr($payment->transaction_id, 0, 8)); ?></td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            <?php echo e($payment->reference); ?></td>
+                                            <?php echo e(substr($payment->reference, 0, 8)); ?></td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             <?php echo e($payment->amount); ?></td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">

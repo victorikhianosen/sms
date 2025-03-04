@@ -41,9 +41,6 @@ endif;
 unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                 </div>
 
-
-                
-
                 <div x-data="{ numbers: <?php if ((object) ('numbers') instanceof \Livewire\WireDirective) : ?>window.Livewire.find('<?php echo e($__livewire->getId()); ?>').entangle('<?php echo e('numbers'->value()); ?>')<?php echo e('numbers'->hasModifier('live') ? '.live' : ''); ?><?php else : ?>window.Livewire.find('<?php echo e($__livewire->getId()); ?>').entangle('<?php echo e('numbers'); ?>')<?php endif; ?> }">
                     <label class="text-textPrimary text-sm mb-2 block">Numbers</label>
                     <textarea wire:model="numbers"
@@ -68,9 +65,14 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                     <a href="<?php echo e(route('groups')); ?>" wire:navigate.hover type="button"
                         class="px-6 py-3 rounded-lg text-blue text-sm border-2 border-blue outline-none tracking-wide bg-white transition-all duration-200 ease-in-out hover:bg-blue hover:text-white">Back</a>
 
-                    <button type="button" wire:click.prevent="updateGroup"
+                    <button type="button" wire:loading.remove wire:click.prevent="updateGroup"
                         class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-blue transition-all duration-200 ease-in-out hover:bg-opacity-90">
                         Update Group
+                    </button>
+
+                     <button type="submit" wire:loading wire:target="updateGroup"
+                        class="px-6 py-3 rounded-lg text-white text-sm border-none outline-none tracking-wide bg-blue transition-all duration-200 ease-in-out hover:bg-opacity-90">
+                                    <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                     </button>
                 </div>
             </form>

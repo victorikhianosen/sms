@@ -39,6 +39,7 @@ use App\Http\Controllers\LogoutController;
 use App\Livewire\User\Auth\ForgetPassword;
 use App\Livewire\User\BankTransferPayment;
 use App\Http\Controllers\PaymentController;
+use App\Livewire\Admin\ScheduleMessageList;
 use App\Livewire\User\VerifyPaystackPayment;
 use App\Http\Controllers\PaystackPaymentController;
 
@@ -101,6 +102,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return redirect()->route('admin.login'); // Fixed missing semicolon
     });
     Route::get('login', AdminLogin::class)->name('login');
+
+    
     Route::middleware('auth:admin')->group(function () {
         Route::get('dashboard', AdminDashboard::class)->name('dashboard'); 
         Route::get('user/list', UserList::class)->name('userlist');
@@ -115,6 +118,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('messges', AdminMessageList::class)->name('adminmessage');
 
         Route::get('group-list', GroupList::class)->name('group');
-        Route::get('sendsms', AdminSendSms::class)->name('sendsms');        
+        Route::get('sendsms', AdminSendSms::class)->name('sendsms');
+        Route::get('schedulelist', ScheduleMessageList::class)->name('schedulelist');
+
+
+
+        
     });
 });

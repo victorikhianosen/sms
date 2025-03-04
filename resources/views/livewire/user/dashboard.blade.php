@@ -275,9 +275,9 @@
                                 @foreach ($allPayment as $payment)
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            {{ $payment->transaction_id }}</td>
+                                            {{ substr($payment->transaction_id, 0, 8) }}</td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            {{ $payment->reference }}</td>
+                                            {{ substr($payment->reference, 0, 8) }}</td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             {{ $payment->amount }}</td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">

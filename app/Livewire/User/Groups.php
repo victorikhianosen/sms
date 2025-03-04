@@ -26,6 +26,9 @@ class Groups extends Component
     public $numbers;
 
     public $showModal = false;
+
+    // public $addModal = false;
+
     protected $numberExtractor;
 
     public function __construct()
@@ -42,7 +45,7 @@ class Groups extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-            
+
         // Fetch groups with pagination and pass it to the view
         return view('livewire.user.groups', [
             'allGroups' => $allGroups,
@@ -56,29 +59,69 @@ class Groups extends Component
         $this->reset();
     }
 
+    public function addModal()
+    {
+        $this->showModal = true;
+    }
+
 
     public function addGroup()
     {
         $validated = $this->validate();
 
-        // Save the uploaded file
-        $filePath = $this->numbers->store('uploads/groups', 'public');
-        $validated['user_id'] = Auth::id();
+        $userId = Auth::id();
+        if (Group::where('user_id', $userId)->where('name', $this->name)->exists()) {
+            $this->dispatch('alert', type: 'error', text: 'You already have a group with this name!', position: 'center', timer: 5000, button: false);
+            return;
+        }
 
-        // Extract numbers using the service
+        if (!$this->numbers) {
+            $this->dispatch('alert', type: 'error', text: 'No file uploaded!', position: 'center', timer: 5000, button: false);
+            return;
+        }
+        $filePath = $this->numbers->store('uploads/groups', 'public');
         $fileFullPath = storage_path("app/public/{$filePath}");
         $extension = $this->numbers->getClientOriginalExtension();
-        $validated['numbers'] = $this->numberExtractor->extractNumbersAsJson($fileFullPath, $extension);
+        $extractedNumbers = $this->numberExtractor->extractNumbersAsJson($fileFullPath, $extension);
+        if (empty(json_decode($extractedNumbers, true))) {
+            unlink($fileFullPath);
 
-        // Create the group in the database
+            $this->dispatch('alert', type: 'error', text: 'You can\'t upload an empty file!', position: 'center', timer: 5000, button: false);
+            return;
+        }
+        $validated['user_id'] = Auth::id();
+        $validated['numbers'] = $extractedNumbers;
+
         Group::create($validated);
-
         $this->reset(['name', 'description', 'numbers']);
         $this->closeModal();
 
-
         $this->dispatch('alert', type: 'success', text: 'Upload Successful!', position: 'center', timer: 10000, button: false);
     }
+
+
+    // public function addGroup()
+    // {
+    //     $validated = $this->validate();
+
+    //     // Save the uploaded file
+    //     $filePath = $this->numbers->store('uploads/groups', 'public');
+    //     $validated['user_id'] = Auth::id();
+
+    //     // Extract numbers using the service
+    //     $fileFullPath = storage_path("app/public/{$filePath}");
+    //     $extension = $this->numbers->getClientOriginalExtension();
+    //     $validated['numbers'] = $this->numberExtractor->extractNumbersAsJson($fileFullPath, $extension);
+
+    //     // Create the group in the database
+    //     Group::create($validated);
+
+    //     $this->reset(['name', 'description', 'numbers']);
+    //     $this->closeModal();
+
+
+    //     $this->dispatch('alert', type: 'success', text: 'Upload Successful!', position: 'center', timer: 10000, button: false);
+    // }
 
 
     public function deletGroup($id)
@@ -95,5 +138,4 @@ class Groups extends Component
             $this->dispatch('alert', type: 'error', text: 'You are not authorized to delete this group!', position: 'center', timer: 10000, button: false);
         }
     }
-
 }

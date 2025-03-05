@@ -1,10 +1,6 @@
 <div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2">
     <div class="flex justify-between items-center">
         <h3 class="font-bold text-2xl">Schedule Message</h3>
-
-        <!-- Search Input Field -->
-        <input type="text" wire:model.debounce.50ms="search" placeholder="Search by Amount, Tranx ID, Email"
-            class="px-4 py-2 border rounded-md bg-gray-100 text-gray-600 w-64 placeholder:text-xs">
     </div>
 
     <div class="-m-1.5 overflow-x-auto">
@@ -62,16 +58,37 @@
                                     @adminOrSuperAdmin
                                         <td class="px-4 py-4 whitespace-normal flex items-center gap-2">
                                             <button type="button" wire:click.prevent="viewSchedule({{ $schedule->id }})"
-                                                class="bg-blue py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                class="bg-green-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
                                                 View
                                             </button>
+
+                                            @if ($schedule->status !== 'pending')
+                                                <button type="button"
+                                                    wire:click.prevent="PendSchedule({{ $schedule->id }})"
+                                                    class="bg-blue py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                    Pending
+                                                </button>
+                                            @endif
+
+                                            @if ($schedule->status !== 'cancel')
+                                                <button type="button"
+                                                    wire:click.prevent="CancelSchedule({{ $schedule->id }})"
+                                                    class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                    Cancel
+                                                </button>
+                                            @endif
                                         </td>
+
                                     @endadminOrSuperAdmin
                                 </tr>
                             @endforeach
                         @endif
                     </tbody>
                 </table>
+            </div>
+
+            <div class="py-8">
+                {{ $allSchedule->links() }}
             </div>
         </div>
     </div>
@@ -82,7 +99,7 @@
             <div
                 class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-screen sm:w-[600px] lg:w-[600px] xl:w-[1000px] max-w-6xl">
                 <div class="flex justify-between items-center border-b-2 border-softGray pb-4">
-                    <h3 class="text-2xl font-bold">Schedule Details</h3>
+                    <h3 class="text-2xl font-bold">Schedule Message Details</h3>
                     <button class="text-black text-2xl" wire:click="closeModal">
                         <i class="fas fa-times hover:text-red-600"></i>
                     </button>
@@ -138,12 +155,16 @@
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                         </div>
                         <!-- Destination Count -->
+
+
                         <div>
                             <label class="font-medium text-gray-700">Destination Count</label>
                             <input type="text"
-                                value="{{ is_string($destination) ? count(json_decode($destination, true)) : count($destination) }}"
+                                value="{{ $destination ? count(array_filter(explode(', ', $destination))) : 0 }}"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                         </div>
+
+
 
 
                         <div>
@@ -166,20 +187,18 @@
                     </div>
 
 
+
                     <div class="">
                         <label class="font-medium text-gray-700">Messages</label>
-                        <input type="text" wire:model="message"
-                            class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                        <textarea wire:model="message" readonly class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600"></textarea>
                     </div>
+
+
 
                     <div class="">
                         <label class="font-medium text-gray-700">Destination</label>
-                        <input type="text" wire:model="destination"
-                            class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                        <textarea wire:model="destination" readonly class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600"></textarea>
                     </div>
-
-
-
 
                 </form>
             </div>

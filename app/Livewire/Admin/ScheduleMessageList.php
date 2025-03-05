@@ -25,34 +25,60 @@ class ScheduleMessageList extends Component
     public $message;
     public $amount;
     public $route;
+
+    public $search = '';
     
-    public $search;
     #[Title('Payment List')]
+
+    // public function render()
+    // {
+    //     $allSchedule = ScheduledMessage::query()
+    //         ->when($this->search, function ($query) {
+    //             $query->where(function ($q) {
+    //                 $q->where('transaction_id', 'like', '%' . $this->search . '%')
+    //                     ->orWhereHas('user', function ($query) {
+    //                         $query->where('email', 'like', '%' . $this->search . '%');
+    //                     })
+    //                     ->orWhereHas('admin', function ($query) { // Search by admin email too
+    //                         $query->where('email', 'like', '%' . $this->search . '%');
+    //                     })
+    //                     ->orWhere('amount', 'like', $this->search)
+    //                     ->orWhere('amount', 'like', $this->search . '%')
+    //                     ->orWhere('amount', 'like', '%' . $this->search);
+    //             });
+    //         })
+    //         ->latest()
+    //         ->paginate(10);
+
+    //     return view('livewire.admin.schedule-message-list', compact('allSchedule'))
+    //         ->extends('layouts.admin_layout')
+    //         ->section('admin-section');
+    // }
+
 
     public function render()
     {
+        $search = $this->search;
         $allSchedule = ScheduledMessage::query()
-            ->when($this->search, function ($query) {
-                $query->where(function ($q) {
-                    $q->where('transaction_id', 'like', '%' . $this->search . '%')
-                        ->orWhereHas('user', function ($query) {
-                            $query->where('email', 'like', '%' . $this->search . '%');
-                        })
-                        ->orWhereHas('admin', function ($query) { // Search by admin email too
-                            $query->where('email', 'like', '%' . $this->search . '%');
-                        })
-                        ->orWhere('amount', 'like', $this->search)
-                        ->orWhere('amount', 'like', $this->search . '%')
-                        ->orWhere('amount', 'like', '%' . $this->search);
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('email', 'like', '%' . $search . '%');
+                    })
+                        ->orWhere('sender', 'like', '%' . $search . '%')
+                        ->orWhere('status', 'like', '%' . $search . '%')
+                        ->orWhere('amount', 'like', '%' . $search . '%');
                 });
             })
             ->latest()
-            ->paginate(10);
+            ->paginate(2);
 
         return view('livewire.admin.schedule-message-list', compact('allSchedule'))
             ->extends('layouts.admin_layout')
             ->section('admin-section');
     }
+
+
 
     public function closeModal() {
         $this->showModal = false;
@@ -74,14 +100,35 @@ class ScheduleMessageList extends Component
         // $this->destination = $schedule->destination;
 
         $this->destination = implode(', ', is_string($schedule->destination) ? (json_decode($schedule->destination, true) ?: []) : ($schedule->destination ?: []));
-
-
-
         $this->scheduled_time = $schedule->scheduled_time;
         $this->created_at = $schedule->created_at;
         $this->route = $schedule->route;
     }
+
+
+    public function CancelSchedule($id) {
+     $schedule = ScheduledMessage::find($id);
+     
+     $schedule->status = 'cancel';
+     $schedule->save();
+    }
+
+
+    public function PendSchedule($id)
+    {
+        $schedule = ScheduledMessage::find($id);
+        $schedule->status = 'pending';
+        $schedule->save();
+    }
+
+    
+
+
+    
 }
+
+
+
 
  #attributes: array:15 [▼
 //     "id" => 3

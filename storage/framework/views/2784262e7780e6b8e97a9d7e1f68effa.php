@@ -3,8 +3,7 @@
         <h3 class="font-bold text-2xl">Schedule Message</h3>
 
         <!-- Search Input Field -->
-        <input type="text" wire:model.debounce.50ms="search" placeholder="Search by Amount, Tranx ID, Email"
-            class="px-4 py-2 border rounded-md bg-gray-100 text-gray-600 w-64 placeholder:text-xs">
+        
     </div>
 
     <div class="-m-1.5 overflow-x-auto">
@@ -43,7 +42,7 @@
 
                                     </td>
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        <?php echo e(count($destinations)); ?>
+                                        <?php echo e(is_string($schedule->destination) ? count(json_decode($schedule->destination, true)) : (is_array($schedule->destination) ? count($schedule->destination) : 0)); ?>
 
                                     </td>
 
@@ -68,10 +67,28 @@
                                     <!--[if BLOCK]><![endif]--><?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>
                                         <td class="px-4 py-4 whitespace-normal flex items-center gap-2">
                                             <button type="button" wire:click.prevent="viewSchedule(<?php echo e($schedule->id); ?>)"
-                                                class="bg-blue py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                class="bg-green-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
                                                 View
                                             </button>
+
+                                            <!--[if BLOCK]><![endif]--><?php if($schedule->status !== 'pending'): ?>
+                                                <button type="button"
+                                                    wire:click.prevent="PendSchedule(<?php echo e($schedule->id); ?>)"
+                                                    class="bg-blue py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                    Pending
+                                                </button>
+                                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+
+                                            <!--[if BLOCK]><![endif]--><?php if($schedule->status !== 'cancel'): ?>
+                                                <button type="button"
+                                                    wire:click.prevent="CancelSchedule(<?php echo e($schedule->id); ?>)"
+                                                    class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                    Cancel
+                                                </button>
+                                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                                         </td>
+
+                                        
                                     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
@@ -79,7 +96,18 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="py-8">
+                <?php echo e($allSchedule->links()); ?>
+
+            </div>
+
+
         </div>
+
+
+
+
     </div>
 
 
@@ -88,7 +116,7 @@
             <div
                 class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-screen sm:w-[600px] lg:w-[600px] xl:w-[1000px] max-w-6xl">
                 <div class="flex justify-between items-center border-b-2 border-softGray pb-4">
-                    <h3 class="text-2xl font-bold">Schedule Details</h3>
+                    <h3 class="text-2xl font-bold">Schedule Message Details</h3>
                     <button class="text-black text-2xl" wire:click="closeModal">
                         <i class="fas fa-times hover:text-red-600"></i>
                     </button>
@@ -144,12 +172,16 @@
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                         </div>
                         <!-- Destination Count -->
+
+
                         <div>
                             <label class="font-medium text-gray-700">Destination Count</label>
                             <input type="text"
-                                
+                                value="<?php echo e($destination ? count(array_filter(explode(', ', $destination))) : 0); ?>"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                         </div>
+
+
 
 
                         <div>
@@ -172,20 +204,18 @@
                     </div>
 
 
+
                     <div class="">
                         <label class="font-medium text-gray-700">Messages</label>
-                        <input type="text" wire:model="message"
-                            class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                        <textarea wire:model="message" readonly class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600"></textarea>
                     </div>
+
+
 
                     <div class="">
                         <label class="font-medium text-gray-700">Destination</label>
-                        <input type="text" wire:model="destinations"
-                            class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                        <textarea wire:model="destination" readonly class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600"></textarea>
                     </div>
-
-
-
 
                 </form>
             </div>

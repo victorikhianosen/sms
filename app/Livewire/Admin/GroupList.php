@@ -48,7 +48,7 @@ class GroupList extends Component
         $this->editModel = true;
         $group = Group::find($id);
         $user = User::find($group->user_id);
-        
+
 
         $this->email = $user->email;
         $this->name = $group->name;
@@ -56,18 +56,15 @@ class GroupList extends Component
         $this->numbers = $group->numbers;
         $this->created_at = $group->created_at;
         $this->numbers =    implode(', ', json_decode($this->numbers, true));
-
-
     }
 
 
 
-    public function deleteGroup($id) {
+    public function deleteGroup($id)
+    {
         $group = Group::find($id);
         $group->delete();
 
         $this->dispatch('alert', type: 'success', text: 'Group Delete Successfully', position: 'center', timer: 10000, button: false);
-
     }
-
 }

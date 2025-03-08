@@ -14,14 +14,24 @@ class Messages extends Component
 
     public $selectedMessage;
 
+    public $search = '';
+    
     #[Title('Messages')]
     public function render()
     {
         $userID = Auth::id();
         $allMessage = Message::where('user_id', $userID)
-            ->orderBy('created_at', 'desc')
-            ->paginate(8); // Change number as needed
-
+            ->when($this->search, function ($query) {
+                $searchTerm = $this->search;
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('message_id', 'like', "%{$searchTerm}%")
+                        ->orWhere('destination', 'like', "%{$searchTerm}%")
+                        ->orWhere('status', 'like', "%{$searchTerm}%")
+                        ->orWhere('created_at', 'like', "%{$searchTerm}%");
+                });
+            })
+            ->latest()
+            ->paginate(4);
         return view('livewire.user.messages', compact('allMessage'))
             ->extends('layouts.auth_layout')
             ->section('auth-section');

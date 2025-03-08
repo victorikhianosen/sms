@@ -64,14 +64,7 @@
                             Payments
                         </a>
                     </li>
-                    {{-- <li>
-                        <a href="{{ route('admin.list') }}" wire:navigate.hover @click.prevent="activeLink = 'bulk'"
-                            :class="{ 'text-blue font-semibold': activeLink === 'bulk', 'text-gray': activeLink !== 'bulk' }"
-                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                            All Admins
-                        </a>
-                    </li> --}}
+                   
                 </div>
 
                 <div class=space-y-6>
@@ -124,6 +117,17 @@
                             All Group
                         </a>
                     </li>
+
+                    @adminOrSuperAdmin
+                     <li>
+                        <a href="{{ route('admin.ledgerlist') }}" wire:navigate.hover
+                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            Ledger Accounts
+                        </a>
+                    </li>
+                    @endadminOrSuperAdmin
                 </div>
 
 

@@ -20,12 +20,12 @@
                     @endif
                 </div>
 
-                <div>
+                {{-- <div>
                     <h2 class="text-blue font-semibold">Exchange Balance</h2>
                     <p class="text-sm font-bold transition-all duration-300">
                         &#8358; 20000
                     </p>
-                </div>
+                </div> --}}
 
                 <div class="flex justify-center items-center gap-3 relative"
                     @mouseenter="open = true" 

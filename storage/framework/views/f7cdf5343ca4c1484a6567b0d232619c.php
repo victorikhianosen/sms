@@ -64,7 +64,7 @@
                             Payments
                         </a>
                     </li>
-                    
+                   
                 </div>
 
                 <div class=space-y-6>
@@ -117,6 +117,17 @@
                             All Group
                         </a>
                     </li>
+
+                    <?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>
+                     <li>
+                        <a href="<?php echo e(route('admin.ledgerlist')); ?>" wire:navigate.hover
+                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            Ledger Accounts
+                        </a>
+                    </li>
+                    <?php endif; ?>
                 </div>
 
 

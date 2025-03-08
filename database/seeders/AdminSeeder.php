@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
             [
                 'first_name' => 'Victor',
                 'last_name' => 'Ikhianosen',
-                'email' => 'victor@ggt.com',
+                'email' => 'victor@ggtconnect.com',
                 'phone_number' => '07033274155',
                 'password' => Hash::make('Password'),
                 'role' => 'super_admin',
@@ -28,7 +28,7 @@ class AdminSeeder extends Seeder
                 'email' => 'seunolalani@ggtconnect.com',
                 'phone_number' => '09033992191',
                 'password' => Hash::make('x52xKVS9MDKD'),
-                'role' => 'supervisor',
+                'role' => 'super_admin',
                 'status' => 'active',
                 'created_at' => now(),
                 'updated_at' => now(),

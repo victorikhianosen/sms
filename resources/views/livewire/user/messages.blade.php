@@ -1,5 +1,10 @@
 <div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2">
-    <h3 class="font-bold text-2xl">Messages</h3>
+    <div class="flex justify-between items-center">
+        <h3 class="font-bold text-2xl">Messages</h3>
+        <input type="text" wire:model.live.debounce.500ms="search"
+            placeholder="Search by Message ID, Phone, status, Date "
+            class="px-4 py-2 border rounded-md bg-gray-100 text-gray-600 w-64 placeholder:text-xs">
+    </div>
     <div class="-m-1.5 overflow-x-auto">
         <div class="p-1.5 min-w-full inline-block align-middle">
             <div class="overflow-x-auto">

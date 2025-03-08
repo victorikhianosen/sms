@@ -62,9 +62,6 @@ class PaymentList extends Component
             ->latest()
             ->paginate(perPage: 10);
 
-
-        // dd($payments);
-
         return view('livewire.admin.payment-list', [
             'payments' => $payments,
         ])->extends('layouts.admin_layout')->section('admin-section');
@@ -170,79 +167,4 @@ class PaymentList extends Component
         // Return file as response
         return Response::download($tempPath)->deleteFileAfterSend(true);
     }
-
-
-
-
-
-
-    // public function DownloadPayments()
-    // {
-    //     $this->validate();
-
-    //     $payments = Payment::whereBetween('created_at', [$this->start_date, $this->end_date])->get();
-
-    //     // dd($payments);
-    //     if ($payments->isEmpty()) {
-    //         $this->dispatch('alert', type: 'error', text: 'No payments found for the selected date range', position: 'center', timer: 10000, button: false);
-    //         return;
-    //     }
-
-    //     // Generate a unique file name
-    //     $fileName = 'payments_' . now()->format('Y-m-d_H-i-s') . '.csv';
-
-    //     return response()->streamDownload(function () use ($payments) {
-    //         $file = fopen('php://output', 'w');
-
-    //         // Add CSV headers
-    //         fputcsv($file, [
-    //             'Email',
-    //             'Amount',
-    //             'Status',
-    //             'Transaction ID',
-    //             'Reference',
-    //             'Bank Name',
-    //             'Account Number',
-    //             'Card Last Four',
-    //             'Card Brand',
-    //             'Currency',
-    //             'Description',
-    //             'Payment Type',
-    //             'Created At',
-    //             'Account Type'
-    //         ]);
-
-    //         // Add payment records
-    //         foreach ($payments as $payment) {
-    //             fputcsv($file, [
-    //                 $payment->user->email ?? $payment->admin->email ?? 'N/A',
-    //                 $payment->amount,
-    //                 $payment->status,
-    //                 $payment->transaction_id,
-    //                 $payment->reference,
-    //                 $payment->bank_name,
-    //                 $payment->account_number,
-    //                 $payment->card_last_four,
-    //                 $payment->card_brand,
-    //                 $payment->currency,
-    //                 $payment->description,
-    //                 $payment->payment_type,
-    //                 $payment->created_at,
-    //                 $payment->user ? 'User' : ($payment->admin ? 'Admin' : 'N/A'),
-    //             ]);
-    //         }
-
-    //         fclose($file);
-    //     }, $fileName, [
-    //         "Content-Type" => "text/csv",
-    //         "Cache-Control" => "no-cache, must-revalidate",
-    //         "Expires" => "0"
-    //     ]);
-    // }
-
-
-
-    // public function DownloadPayments() {
-    //     $validated = $this->validate();
-    // }
 }

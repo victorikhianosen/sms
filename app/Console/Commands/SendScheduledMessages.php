@@ -28,7 +28,7 @@ class SendScheduledMessages extends Command
         LogService::scheduleSms("Checking for scheduled messages to send at: " . $now);
 
         $scheduledMessages = ScheduledMessage::where('status', 'pending')->get();
-       
+
         LogService::scheduleSms("Pending Scheduled messages found: " . $scheduledMessages->count());
 
         foreach ($scheduledMessages as $scheduled) {
@@ -80,7 +80,6 @@ class SendScheduledMessages extends Command
 
 
                 LogService::scheduleSms("scheduled message: " . "====================");
-
             }
         }
 

@@ -71,7 +71,7 @@ class ScheduleMessageList extends Component
                 });
             })
             ->latest()
-            ->paginate(2);
+            ->paginate(10);
 
         return view('livewire.admin.schedule-message-list', compact('allSchedule'))
             ->extends('layouts.admin_layout')

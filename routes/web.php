@@ -34,6 +34,7 @@ use App\Livewire\Admin\Auth\AdminLogin;
 use App\Livewire\User\Auth\VerifyToken;
 use App\Livewire\User\ProcessSinglesms;
 use App\Livewire\Admin\AdminMessageList;
+use App\Livewire\Admin\AllGeneralLedger;
 use App\Livewire\User\Auth\ResetPassword;
 use App\Http\Controllers\LogoutController;
 use App\Livewire\User\Auth\ForgetPassword;
@@ -121,8 +122,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('sendsms', AdminSendSms::class)->name('sendsms');
         Route::get('schedulelist', ScheduleMessageList::class)->name('schedulelist');
 
-
-
-        
+        // Route::middleware(['auth:admin', 'super'])->group(function () {
+            Route::get('ledgers', AllGeneralLedger::class)->name('ledgerlist');
+        // });
     });
 });

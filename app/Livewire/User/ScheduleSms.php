@@ -77,7 +77,7 @@ class ScheduleSms extends Component
             $this->addError('date_time', 'You cannot select a past date or time.');
             return;
         }
-        
+
         $user = Auth::user();
         $finalNumbers = [];
 
@@ -180,9 +180,10 @@ class ScheduleSms extends Component
             'page_rate' => $this->smsRate,
             'amount' => $this->totalCharge,
             'message' => $this->message,
+            'status' => 'pending',
             'description' => $this->description,
             'destination' => json_encode($numbersArray),
-            'route' => $smsRoute,  // Now encoding the array as JSON
+            'route' => $smsRoute,
             'scheduled_time' => Carbon::parse($this->date_time),
         ]);
 

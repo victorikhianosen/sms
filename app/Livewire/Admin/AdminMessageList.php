@@ -35,16 +35,7 @@ class AdminMessageList extends Component
             });
         })
         ->latest()
-        ->paginate(8);
-
-        // dd($messages);
-
-
-        // return view('livewire.admin.message-list', compact('messages'))
-        // ->extends('layouts.admin_layout')
-        // ->section('admin-section');
-
-        
+        ->paginate(8);        
         return view('livewire.admin.admin-message-list', compact('messages'))->extends('layouts.admin_layout')->section('admin-section');
     }
 

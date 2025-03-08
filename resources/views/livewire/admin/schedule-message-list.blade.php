@@ -62,23 +62,24 @@
                                                 View
                                             </button>
 
-                                            @if ($schedule->status !== 'pending')
-                                                <button type="button"
-                                                    wire:click.prevent="PendSchedule({{ $schedule->id }})"
-                                                    class="bg-blue py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
-                                                    Pending
-                                                </button>
-                                            @endif
+                                            @if ($schedule->status !== 'sent')
+                                                @if ($schedule->status !== 'pending')
+                                                    <button type="button"
+                                                        wire:click.prevent="PendSchedule({{ $schedule->id }})"
+                                                        class="bg-blue py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                        Pending
+                                                    </button>
+                                                @endif
 
-                                            @if ($schedule->status !== 'cancel')
-                                                <button type="button"
-                                                    wire:click.prevent="CancelSchedule({{ $schedule->id }})"
-                                                    class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
-                                                    Cancel
-                                                </button>
+                                                @if ($schedule->status !== 'cancel')
+                                                    <button type="button"
+                                                        wire:click.prevent="CancelSchedule({{ $schedule->id }})"
+                                                        class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                        Cancel
+                                                    </button>
+                                                @endif
                                             @endif
                                         </td>
-
                                     @endadminOrSuperAdmin
                                 </tr>
                             @endforeach

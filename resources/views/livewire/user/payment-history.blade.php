@@ -1,9 +1,11 @@
 <div>
     <div class="flex flex-col bg-white rounded-lg">
-        <div class="pt-4 md:pt-8 pb-10 px-6">
-            <h3 class="font-bold text-2xl">Payment History</h3>
+    
+        <div class="flex justify-between items-center px-6 py-6">
+            <h3 class="font-bold text-2xl">All Payment</h3>
+            <input type="text" wire:model.live.debounce.50ms="search" placeholder="Search by Amount, Tranx ID, Email"
+                class="px-4 py-2 border rounded-md bg-gray-100 text-gray-600 w-64 placeholder:text-xs">
         </div>
-
 
         <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
@@ -50,7 +52,7 @@
                                 @foreach ($allPayment as $payment)
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            {{ $payment->transaction_id }}
+                                            {{ substr($payment->transaction_id, 0, 10) }}
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             {{ $payment->reference }}

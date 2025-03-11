@@ -6,9 +6,9 @@
 
     <!-- Register Section -->
     <div class="col-span-3">
-         <di class="">
-                <img class="p-6" src="{{ asset('assets/images/logo.png') }}" alt="" />
-            </di>
+        <di class="">
+            <img class="p-6" src="{{ asset('assets/images/logo.png') }}" alt="" />
+        </di>
         <div class="flex-grow flex items-center justify-center">
             <div
                 class="bg-white w-auto md:w-4/5 py-8 px-6 sm:px-12 md:px-24 rounded-lg shadow-sm text-center space-y-10">
@@ -27,8 +27,8 @@
                                     class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                                     placeholder="">
                                 @error('first_name')
-                                    <span
-                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                <span
+                                    class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -38,8 +38,8 @@
                                     class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                                     placeholder="">
                                 @error('last_name')
-                                    <span
-                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                <span
+                                    class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -53,8 +53,8 @@
                                     class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                                     placeholder="victor@example.com">
                                 @error('email')
-                                    <span
-                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                <span
+                                    class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -65,8 +65,8 @@
                                     class="w-full px-3 py-2 border-2 border-softGray rounded-md focus:outline-none focus:ring-blue focus:border-blue"
                                     placeholder="2347033274155">
                                 @error('mobile')
-                                    <span
-                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                <span
+                                    class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -93,10 +93,10 @@
 
                                 <!-- Error Message (if any) -->
                                 @error('password')
-                                    <span
-                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                <span
+                                    class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
 
-                                    </span>
+                                </span>
                                 @enderror
                             </div>
 
@@ -119,8 +119,8 @@
 
                                 <!-- Error Message (if any) -->
                                 @error('password_confirmation')
-                                    <span
-                                        class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
+                                <span
+                                    class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -135,34 +135,34 @@
 
                             @error('company_name')
                                 <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
-                            @enderror
-                        </div> --}}
+                        @enderror
+                </div> --}}
 
 
 
-                        <div class="pt-4">
-                            <button type="submit" wire:loading.remove
-                                class="w-full bg-blue py-3 px-6 rounded-lg text-white transition-all duration-200 hover:opacity-90">
-                                Create Account
-                            </button>
+                <div class="pt-4">
+                    <button type="submit" wire:loading.remove
+                        class="w-full bg-blue py-3 px-6 rounded-lg text-white transition-all duration-200 hover:opacity-90">
+                        Create Account
+                    </button>
 
-                            <button type="submit" wire:loading wire:target="registerUser"
-                                class="w-full bg-blue py-3 px-6 rounded-lg text-white transition-all duration-200 hover:opacity-90">
-                                <i class="fa-solid fa-spinner animate-spin "></i> Loading...
-                            </button>
-
-
-                        </div>
+                    <button type="submit" wire:loading wire:target="registerUser"
+                        class="w-full bg-blue py-3 px-6 rounded-lg text-white transition-all duration-200 hover:opacity-90">
+                        <i class="fa-solid fa-spinner animate-spin "></i> Loading...
+                    </button>
 
 
-                        <div class="">
-                            <a href="{{ route('login') }}" wire:navigate.hover class="text-gray text-sm">Already have
-                                an account? <span class="font-semibold text-blue">Sign in</span></a>
-                        </div>
-
-                    </form>
                 </div>
+
+
+                <div class="">
+                    <a href="{{ route('home') }}" wire:navigate.hover class="text-gray text-sm">Already have
+                        an account? <span class="font-semibold text-blue">Sign in</span></a>
+                </div>
+
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>

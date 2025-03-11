@@ -22,7 +22,7 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::guard('admin')->check()) {
-            return redirect()->route('admin.login'); 
+            return redirect()->route('admin'); 
 
         return $next($request);
     }

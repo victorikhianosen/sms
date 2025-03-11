@@ -95,24 +95,26 @@ class AdminList extends Component
     }
 
 
-    public function deleteAdmin($id) {
+    public function deleteAdmin($id)
+    {
         // dd($id);
         $admin = Admin::find($id);
         $admin->delete();
-        $this->dispatch('alert', type:'success', text: 'Admin Account deleted successfully.', position: 'center', timer: 10000, button: false);
+        $this->dispatch('alert', type: 'success', text: 'Admin Account deleted successfully.', position: 'center', timer: 10000, button: false);
     }
 
-    public function showAddFunds($id) {
+    public function showAddFunds($id)
+    {
         $this->editFundModel = true;
-        $this->adminID=$id;
+        $this->adminID = $id;
         $admin = Admin::find($id);
         $this->admin_email = $admin->email;
         $this->admin_phone = $admin->phone_number;
         $this->admin_available_balance = $admin->balance;
-
     }
 
-    public function addAdminFunds() {
+    public function addAdminFunds()
+    {
 
         $validated = $this->validate([
             'amount' => 'required|numeric|min:1'
@@ -149,7 +151,7 @@ class AdminList extends Component
             'admin_id' => $admin->id,
             'amount' => $this->amount,
             'status' => 'success',
-            'transaction_id' => Str::uuid(),
+            'transaction_number' => Str::uuid(),
             'reference' => $reference,
             'bank_name' => null,
             'account_number' => null,

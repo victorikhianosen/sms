@@ -50,7 +50,7 @@
                                 </button>
                             </div>
                             <div class="pt-4">
-                                <a href="{{ route('login') }}" wire:navigate.hover class="text-gray text-sm ">Remember your password? <span
+                                <a href="{{ route('home') }}" wire:navigate.hover class="text-gray text-sm ">Remember your password? <span
                                         class="font-semibold text-blue transition-all duration-200 hover:font-bold">Sign
                                         in</span></a>
                             </div>

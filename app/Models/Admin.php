@@ -7,6 +7,7 @@ use App\Models\Credit;
 use App\Models\Message;
 use App\Models\Payment;
 use App\Models\SmsSender;
+use App\Models\Transaction;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -72,5 +73,11 @@ class Admin extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Message::class, 'message_id');
+    }
+
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'admin_id');
     }
 }

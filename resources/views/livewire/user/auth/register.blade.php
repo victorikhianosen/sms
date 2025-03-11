@@ -149,7 +149,7 @@
 
 
                             <div class="">
-                                <a href="{{ route('login') }}" wire:navigate.hover class="text-gray text-sm">Already
+                                <a href="{{ route('home') }}" wire:navigate.hover class="text-gray text-sm">Already
                                     have
                                     an account? <span class="font-semibold text-blue">Sign in</span></a>
                             </div>

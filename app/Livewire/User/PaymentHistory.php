@@ -24,9 +24,9 @@ class PaymentHistory extends Component
             // ->paginate(10);
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
-                    $q->where('transaction_id', 'like', '%' . $this->search . '%')
-                    ->orWhere('status', 'like', '%' . $this->search . '%') 
-                    ->orWhereHas('user', function ($query) {
+                    $q->where('transaction_number', 'like', '%' . $this->search . '%')
+                        ->orWhere('status', 'like', '%' . $this->search . '%')
+                        ->orWhereHas('user', function ($query) {
                             $query->where('email', 'like', '%' . $this->search . '%');
                         })
                         ->orWhereHas('admin', function ($query) { // Search by admin email too

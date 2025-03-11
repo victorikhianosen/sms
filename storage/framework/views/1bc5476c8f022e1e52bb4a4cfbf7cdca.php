@@ -30,21 +30,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!--[if BLOCK]><![endif]--><?php if($payments->isEmpty()): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($payments->isEmpty()): ?>
                             <tr>
                                 <td colspan="6" class="text-center py-4 text-gray-600">No Payment Found</td>
                             </tr>
                         <?php else: ?>
-                            <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $payments;
+                                                        $__env->addLoop($__currentLoopData);
+                                                        foreach ($__currentLoopData as $payment): $__env->incrementLoopIndices();
+                                                            $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        <?php echo e(Str::limit($payment['transaction_id'], 10, '')); ?>
+                                        <?php echo e(Str::limit($payment['transaction_number'], 10, '')); ?>
 
                                     </td>
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        
 
-                                        <!--[if BLOCK]><![endif]--><?php if($payment->user): ?>
+
+                                        <!--[if BLOCK]><![endif]--><?php if ($payment->user): ?>
                                             <?php echo e($payment->user->email); ?>
 
                                         <?php else: ?>
@@ -64,9 +67,9 @@
 
                                     <td
                                         class="px-4 py-4 whitespace-normal text-sm 
-                                        <?php if($payment['status'] == 'success'): ?> text-green-600 
-                                        <?php elseif($payment['status'] == 'failed'): ?> text-red-600 
-                                        <?php elseif($payment['status'] == 'pending'): ?> text-yellow-600 
+                                        <?php if ($payment['status'] == 'success'): ?> text-green-600 
+                                        <?php elseif ($payment['status'] == 'failed'): ?> text-red-600 
+                                        <?php elseif ($payment['status'] == 'pending'): ?> text-yellow-600 
                                         <?php else: ?> text-gray-600 <?php endif; ?>">
                                         <?php echo e(ucfirst($payment['status'])); ?>
 
@@ -84,7 +87,9 @@
                                         </td>
                                     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                                 </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endforeach;
+                                                        $__env->popLoop();
+                                                        $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                     </tbody>
                 </table>
@@ -98,7 +103,7 @@
 
     </div>
 
-    <!--[if BLOCK]><![endif]--><?php if($editModel): ?>
+    <!--[if BLOCK]><![endif]--><?php if ($editModel): ?>
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
             <div
                 class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-screen sm:w-[600px] lg:w-[600px] xl:w-[1000px] max-w-6xl">
@@ -112,7 +117,7 @@
                 <form class="mt-4 text-gray-700 space-y-6 pt-6">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                        <!--[if BLOCK]><![endif]--><?php if($email): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($email): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Email</label>
                                 <input type="text" wire:model="email"
@@ -120,7 +125,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($amount): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($amount): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Amount</label>
                                 <input type="text" wire:model="amount"
@@ -128,7 +133,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($status): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($status): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Status</label>
                                 <input type="text" wire:model="status"
@@ -136,15 +141,15 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($transaction_id): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($transaction_number): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Transaction ID</label>
-                                <input type="text" wire:model="transaction_id"
+                                <input type="text" wire:model="transaction_number"
                                     class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($reference): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($reference): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Reference</label>
                                 <input type="text" wire:model="reference"
@@ -152,7 +157,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($bank_name): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($bank_name): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Bank Name</label>
                                 <input type="text" wire:model="bank_name"
@@ -160,7 +165,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($account_number): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($account_number): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Account Number</label>
                                 <input type="text" wire:model="account_number"
@@ -168,7 +173,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($card_last_four): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($card_last_four): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Card Last Four</label>
                                 <input type="text" wire:model="card_last_four"
@@ -176,7 +181,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($card_brand): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($card_brand): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Card Brand</label>
                                 <input type="text" wire:model="card_brand"
@@ -184,7 +189,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($description): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($description): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Description</label>
                                 <input type="text" wire:model="description"
@@ -192,7 +197,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($payment_type): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($payment_type): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Payment Type</label>
                                 <input type="text" wire:model="payment_type"
@@ -200,7 +205,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($account_type): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($account_type): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Account Type</label>
                                 <input type="text" wire:model="account_type"
@@ -208,7 +213,7 @@
                             </div>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                        <!--[if BLOCK]><![endif]--><?php if($created_at): ?>
+                        <!--[if BLOCK]><![endif]--><?php if ($created_at): ?>
                             <div>
                                 <label class="font-medium text-gray-700">Date</label>
                                 <input type="text" wire:model="created_at"
@@ -234,7 +239,7 @@
 
 
 
-    <!--[if BLOCK]><![endif]--><?php if($downloadModel): ?>
+    <!--[if BLOCK]><![endif]--><?php if ($downloadModel): ?>
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
             <div
                 class="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-screen sm:w-[600px] lg:w-[600px] xl:w-[1000px] max-w-2xl">
@@ -253,15 +258,19 @@
                             <input type="datetime-local" wire:model="start_date"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600">
                             <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['start_date'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
+                                                        $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+                                                        if ($__bag->has($__errorArgs[0])) :
+                                                            if (isset($message)) {
+                                                                $__messageOriginal = $message;
+                                                            }
+                                                            $message = $__bag->first($__errorArgs[0]); ?>
                                 <span class="text-sm text-red-600 block text-start italic pt-1"><?php echo e($message); ?></span>
                             <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
+                                                            if (isset($__messageOriginal)) {
+                                                                $message = $__messageOriginal;
+                                                            }
+                                                        endif;
+                                                        unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
 
                         </div>
                         <div>
@@ -269,15 +278,19 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                             <input type="datetime-local" wire:model="end_date"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600">
                             <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['end_date'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
+                                                        $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+                                                        if ($__bag->has($__errorArgs[0])) :
+                                                            if (isset($message)) {
+                                                                $__messageOriginal = $message;
+                                                            }
+                                                            $message = $__bag->first($__errorArgs[0]); ?>
                                 <span class="text-sm text-red-600 block text-start italic pt-1"><?php echo e($message); ?></span>
                             <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
+                                                            if (isset($__messageOriginal)) {
+                                                                $message = $__messageOriginal;
+                                                            }
+                                                        endif;
+                                                        unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
 
                         </div>
                     </div>

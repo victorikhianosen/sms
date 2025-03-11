@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->decimal('amount', 15, 2);
             $table->string('status')->default('pending');
-            $table->string('transaction_id')->unique();
+            $table->string('transaction_number')->unique();
             $table->string('reference')->nullable();
 
             $table->string('bank_name')->nullable();
@@ -32,8 +32,8 @@ return new class extends Migration
             $table->json('verify_response')->nullable();
 
             $table->string('description')->nullable();
-            $table->string('payment_type')->nullable();
-
+            $table->enum('payment_type', ['debit', 'credit', 'failed'])->nullable();
+            $table->string('payment_method');
 
             $table->timestamps();
         });

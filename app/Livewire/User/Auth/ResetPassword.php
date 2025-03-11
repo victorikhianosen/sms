@@ -54,6 +54,6 @@ class ResetPassword extends Component
         $this->dispatch('alert', type: 'success', text: 'Password Reset Successfully.', position: 'center', timer: 10000, button: false);
 
         // Redirect to login route
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }

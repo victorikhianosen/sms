@@ -30,31 +30,6 @@ class ScheduleMessageList extends Component
     
     #[Title('Payment List')]
 
-    // public function render()
-    // {
-    //     $allSchedule = ScheduledMessage::query()
-    //         ->when($this->search, function ($query) {
-    //             $query->where(function ($q) {
-    //                 $q->where('transaction_id', 'like', '%' . $this->search . '%')
-    //                     ->orWhereHas('user', function ($query) {
-    //                         $query->where('email', 'like', '%' . $this->search . '%');
-    //                     })
-    //                     ->orWhereHas('admin', function ($query) { // Search by admin email too
-    //                         $query->where('email', 'like', '%' . $this->search . '%');
-    //                     })
-    //                     ->orWhere('amount', 'like', $this->search)
-    //                     ->orWhere('amount', 'like', $this->search . '%')
-    //                     ->orWhere('amount', 'like', '%' . $this->search);
-    //             });
-    //         })
-    //         ->latest()
-    //         ->paginate(10);
-
-    //     return view('livewire.admin.schedule-message-list', compact('allSchedule'))
-    //         ->extends('layouts.admin_layout')
-    //         ->section('admin-section');
-    // }
-
 
     public function render()
     {
@@ -97,8 +72,6 @@ class ScheduleMessageList extends Component
         $this->message = $schedule->message;
         $this->status = $schedule->status;
         $this->amount = $schedule->amount;
-        // $this->destination = $schedule->destination;
-
         $this->destination = implode(', ', is_string($schedule->destination) ? (json_decode($schedule->destination, true) ?: []) : ($schedule->destination ?: []));
         $this->scheduled_time = $schedule->scheduled_time;
         $this->created_at = $schedule->created_at;

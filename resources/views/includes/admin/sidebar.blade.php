@@ -64,7 +64,7 @@
                             Payments
                         </a>
                     </li>
-                   
+
                 </div>
 
                 <div class=space-y-6>
@@ -119,14 +119,42 @@
                     </li>
 
                     @adminOrSuperAdmin
-                     <li>
-                        <a href="{{ route('admin.ledgerlist') }}" wire:navigate.hover
-                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
-                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                            Ledger Accounts
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('admin.ledgers') }}" wire:navigate.hover
+                                :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                                class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                                <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                                Ledger Accounts
+                            </a>
+                        </li>
+                    @endadminOrSuperAdmin
+                </div>
+
+
+
+
+                <div class=space-y-6>
+                    <p class="text-textSecondary font-light text-sm pt-4 uppercase">Transactions</p>
+
+
+                    @adminOrSuperAdmin
+                        <li>
+                            <a href="{{ route('admin.ledgers') }}" wire:navigate.hover
+                                :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                                class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                                <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                                Ledger Accounts
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('admin.transactions') }}" wire:navigate.hover
+                                :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                                class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                                <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                                Transactions
+                            </a>
+                        </li>
                     @endadminOrSuperAdmin
                 </div>
 

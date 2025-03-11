@@ -26,8 +26,6 @@ class Login extends Component
 
     public function loginUser()
     {
-        Auth::logout();
-        Auth::guard('admin')->logout(); 
         $validated = $this->validate();
 
         // dd($validated['email']);

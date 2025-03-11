@@ -17,12 +17,13 @@ class LogoutController extends Controller
             'timer' => 4000,
             'button' => false,
         ]);
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
-    
-    public function adminLogout(Request $request) {
-        Auth::guard('admin')->logout(); 
+
+    public function adminLogout(Request $request)
+    {
+        Auth::guard('admin')->logout();
         session()->flash('alert', [
             'type' => 'success',
             'text' => 'Logout Successful!',
@@ -30,8 +31,6 @@ class LogoutController extends Controller
             'timer' => 4000,
             'button' => false,
         ]);
-        return redirect()->route('admin.login'); 
+        return redirect()->route('admin');
     }
 }
-
-

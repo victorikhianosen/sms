@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             {{-- <div class="flex justify-between mb-4" wire:init='getBalance'> --}}
-                <div class="flex justify-between mb-4" wire:poll.5s="getBalance">
+            <div class="flex justify-between mb-4" wire:poll.5s="getBalance">
 
                 <div>
                     <div class="flex items-center mb-1">
@@ -84,12 +84,14 @@
                     </ul>
                 </div>
             </div>
-            <a href="{{ route('message') }}" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
+            <a href="{{ route('message') }}" wire:navigate.hover
+                class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
 
 
 
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5" wire:poll.5s="getAllGroups">
+        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5"
+            wire:poll.5s="getAllGroups">
             <div class="flex justify-between mb-4">
                 <div>
 
@@ -110,7 +112,7 @@
                         @endif
                     </div>
 
-        
+
                     <div class="text-sm font-medium text-gray-400">Number of Phone Groups</div>
                 </div>
                 <div class="dropdown">
@@ -133,7 +135,8 @@
                     </ul>
                 </div>
             </div>
-            <a href="{{ route('groups') }}" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
+            <a href="{{ route('groups') }}" wire:navigate.hover
+                class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
     </div>
 
@@ -275,7 +278,7 @@
                                 @foreach ($allPayment as $payment)
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            {{ substr($payment->transaction_id, 0, 8) }}</td>
+                                            {{ substr($payment->transaction_number, 0, 8) }}</td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             {{ substr($payment->reference, 0, 8) }}</td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">

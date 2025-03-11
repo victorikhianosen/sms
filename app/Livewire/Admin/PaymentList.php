@@ -17,9 +17,9 @@ class PaymentList extends Component
 {
     use WithPagination;
 
-    public $email, $amount, $status, $transaction_id, $reference;
+    public $email, $amount, $status, $transaction_number, $reference;
     public $bank_name, $account_number, $card_last_four, $card_brand;
-    public $currency, $description, $payment_type, $created_at;
+    public $currency, $description, $payment_type, $created_at, $payment_method;
 
     #[Title('Payment List')]
     public $search = '';
@@ -41,17 +41,19 @@ class PaymentList extends Component
         $this->resetPage();
     }
 
+
     public function render()
     {
         $payments = Payment::query()
             ->with(['user', 'admin']) // Load both relationships
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
-                    $q->where('transaction_id', 'like', '%' . $this->search . '%')
+                    $q->where('transaction_number', 'like', '%' . $this->search . '%')
+                        ->orWhere('reference', 'like', '%' . $this->search . '%') // Search by reference
                         ->orWhereHas('user', function ($query) {
                             $query->where('email', 'like', '%' . $this->search . '%');
                         })
-                        ->orWhereHas('admin', function ($query) { // Search by admin email too
+                        ->orWhereHas('admin', function ($query) {
                             $query->where('email', 'like', '%' . $this->search . '%');
                         })
                         ->orWhere('amount', 'like', $this->search)
@@ -84,7 +86,7 @@ class PaymentList extends Component
         $this->email = $payment->user->email ?? $payment->admin->email ?? 'N/A';
         $this->amount = $payment->amount;
         $this->status = $payment->status;
-        $this->transaction_id = $payment->transaction_id;
+        $this->transaction_number = $payment->transaction_number;
         $this->reference = $payment->reference;
         $this->bank_name = $payment->bank_name;
         $this->account_number = $payment->account_number;
@@ -93,11 +95,14 @@ class PaymentList extends Component
         $this->currency = $payment->currency;
         $this->description = $payment->description;
         $this->payment_type = $payment->payment_type;
+        $this->payment_type = $payment->payment_type;
+        $this->payment_method = $payment->payment_method;
         $this->created_at = $payment->created_at->toDateTimeString();
         $this->account_type = $payment->user ? 'User' : ($payment->admin ? 'Admin' : 'N/A');
     }
 
-    public function showDownload() {
+    public function showDownload()
+    {
         $this->downloadModel = true;
     }
 
@@ -143,7 +148,7 @@ class PaymentList extends Component
                 $payment->user->email ?? $payment->admin->email ?? 'N/A',
                 $payment->amount,
                 $payment->status,
-                $payment->transaction_id,
+                $payment->transaction_number,
                 $payment->reference,
                 $payment->bank_name,
                 $payment->account_number,

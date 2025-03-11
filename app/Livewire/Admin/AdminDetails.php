@@ -78,25 +78,6 @@ class AdminDetails extends Component
         $admin->save();
         $this->dispatch('alert', type: 'success', text: 'Admin account updated successfully.', position: 'center', timer: 10000, button: false);
 
-        // session()->flash('success', 'Admin account updated successfully');
-        // $this->reset(['first_name', 'last_name', 'email', 'phone_number', 'role','status']);
+  
     }
 }
-
-
-
-
-//     "id" => 12
-//     "first_name" => "kakado"
-//     "last_name" => "Alright"
-//     "email" => "Grtt@gmai.lcom"
-//     "phone_number" => "078070797966"
-//     "email_verified_at" => null
-//     "password" => "$2y$12$PTybiKAAwOa3DsGk/l.cD.WZ5oB6bubZBE/xVMaIIYvL3WWfF0Hvq"
-//     "role" => "admin"
-//     "status" => "pending"
-//     "otp" => null
-//     "otp_expired_at" => null
-//     "created_at" => "2025-02-15 22:30:15"
-//     "updated_at" => "2025-02-15 22:30:15"
-//   ]

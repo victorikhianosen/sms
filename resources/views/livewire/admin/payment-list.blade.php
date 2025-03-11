@@ -21,6 +21,8 @@
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-60">Email</th>
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Payment Type</th>
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Amount</th>
+                                                        <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Reference</th>
+
 
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Status</th>
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-60">Date</th>
@@ -38,7 +40,7 @@
                             @foreach ($payments as $payment)
                                 <tr>
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        {{ Str::limit($payment['transaction_id'], 10, '') }}
+                                        {{ Str::limit($payment['transaction_number'], 10, '') }}
                                     </td>
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                         {{-- {{ $payment['user']['email'] }} --}}
@@ -56,6 +58,10 @@
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                         {{ $payment['amount'] }}
                                     </td>
+                                    <td class="px-4 py-4 whitespace-normal text-sm text-gray">
+                                        {{ Str::limit($payment['reference'], 10, '..') }}
+                                    </td>
+
 
                                     <td
                                         class="px-4 py-4 whitespace-normal text-sm 
@@ -128,10 +134,10 @@
                             </div>
                         @endif
 
-                        @if ($transaction_id)
+                        @if ($transaction_number)
                             <div>
                                 <label class="font-medium text-gray-700">Transaction ID</label>
-                                <input type="text" wire:model="transaction_id"
+                                <input type="text" wire:model="transaction_number"
                                     class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                             </div>
                         @endif
@@ -188,6 +194,15 @@
                             <div>
                                 <label class="font-medium text-gray-700">Payment Type</label>
                                 <input type="text" wire:model="payment_type"
+                                    class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                            </div>
+                        @endif
+
+
+                          @if ($payment_method)
+                            <div>
+                                <label class="font-medium text-gray-700">Payment Method</label>
+                                <input type="text" wire:model="payment_method"
                                     class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                             </div>
                         @endif

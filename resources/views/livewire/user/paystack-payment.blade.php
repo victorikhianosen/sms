@@ -8,19 +8,29 @@
         <div class="w-full lg:w-1/2 lg:pr-8 lg:border-r-2 lg:border-slate-300">
             <div class="mb-4">
                 <label class="text-textPrimary font-semibold text-sm mb-2 block">Amount</label>
-                <input id="cardNumber" type="text" wire:model.live="amount"
+               
+                <input id="cardNumber" type="number" min="1" max="20000000" wire:model.live="amount"
+                    oninput="if(this.value.length > 8) this.value = this.value.slice(0, 8);"
                     class="flex h-10 w-full rounded-md border-2 bg-background px-4 py-1.5 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-blue focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    maxlength="19" placeholder="Enter Amount" />
+                    placeholder="Enter Amount" />
+
 
                 @error('amount')
                     <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>
                 @enderror
             </div>
 
-            <div class="flex justify-end items-end">
-                <button wire:click.prevent="makePayment" class="text-white bg-blue py-2 px-8 rounded-lg">
+            <div class="flex justify-start items-center">
+                <button type="submit" wire:loading.remove wire:click.prevent="makePayment"
+                    class="text-white bg-blue py-2 px-12 rounded-lg">
                     Pay
                 </button>
+
+                <button type="submit" wire:loading wire:target="makePayment"
+                    class="text-white bg-blue py-2 px-8 rounded-lg">
+                    <i class="fa-solid fa-spinner animate-spin "></i> Loading...
+                </button>
+
             </div>
         </div>
 
@@ -60,33 +70,12 @@
         </div>
     </form>
 
-    {{-- <script>
-    window.addEventListener('paystackPayment', (event) => {
-        const data = event.detail[0];
-
-        const handler = PaystackPop.setup({
-            key: '{{ env('PAYSTACK_PUBLIC_KEY') }}',
-            email: data.email,
-            first_name: data.first_name,
-            last_name: data.last_name,
-            phone: data.phone,
-            amount: data.amount,
-            currency: data.currency,
-            callback: function(response) {
-                Livewire.emit('verifypayment', response.reference);
-            },
-            onClose: function() {
-                alert('Payment process was closed.');
-            },
-        });
-        handler.openIframe();
-    });
-</script> --}}
-
 
     <script>
         window.addEventListener('paystackPayment', (event) => {
             const data = event.detail[0];
+
+            console.log('Paystack Data:', data); // Debugging
 
             const handler = PaystackPop.setup({
                 key: '{{ env('PAYSTACK_PUBLIC_KEY') }}',
@@ -96,10 +85,17 @@
                 phone: data.phone,
                 amount: data.amount,
                 currency: data.currency,
+                metadata: {
+                    customer_details: {
+                        first_name: data.first_name,
+                        last_name: data.last_name,
+                        phone: data.phone,
+                        email: data.email,
+                        amount: data.amount
+                    }
+                },
                 callback: function(response) {
-                    // After successful payment, redirect to the verifypayment route
                     window.location.href = `/payment/verify/${response.reference}`;
-                    console.log(response);
                 },
                 onClose: function() {
                     alert('Payment process was closed.');

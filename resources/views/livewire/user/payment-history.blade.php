@@ -1,6 +1,6 @@
 <div>
     <div class="flex flex-col bg-white rounded-lg">
-    
+
         <div class="flex justify-between items-center px-6 py-6">
             <h3 class="font-bold text-2xl">All Payment</h3>
             <input type="text" wire:model.live.debounce.50ms="search" placeholder="Search by Amount, Tranx ID, Email"
@@ -52,7 +52,7 @@
                                 @foreach ($allPayment as $payment)
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            {{ substr($payment->transaction_id, 0, 10) }}
+                                            {{ substr($payment->transaction_number, 0, 10) }}
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             {{ $payment->reference }}

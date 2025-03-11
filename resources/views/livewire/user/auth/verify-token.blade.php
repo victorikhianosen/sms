@@ -56,7 +56,7 @@
                                 </button>
                             </div>
                             <div class="pt-4">
-                                <a href="{{ route('login') }}" wire:navigate.hover class="text-gray text-sm ">Don't
+                                <a href="{{ route('home') }}" wire:navigate.hover class="text-gray text-sm ">Don't
                                     have
                                     an account? <span
                                         class="font-semibold text-blue transition-all duration-200 hover:font-bold">Sign

@@ -6,8 +6,10 @@ namespace App\Livewire\Admin;
 use App\Models\User;
 use App\Models\Payment;
 use Livewire\Component;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
+use App\Models\GeneralLedger;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
@@ -50,9 +52,9 @@ class UserList extends Component
 
     public $available_balance;
 
-   public $amount;
+    public $amount;
 
-   public $userID;
+    public $userID;
 
     #[Title('All Users')]
     public function render()
@@ -80,7 +82,6 @@ class UserList extends Component
     {
         $this->editModel = false;
         $this->editFundModel = false;
-
     }
     public function AddUser()
     {
@@ -100,66 +101,75 @@ class UserList extends Component
     }
 
 
-
     public function addUserFund()
     {
-        // Validate the input
         $validated = $this->validate([
             'amount' => 'required|numeric|min:1'
         ]);
 
-        // Find the user by ID
         $user = User::find($this->userID);
-        // dd($user);
-
         if (!$user) {
-            $this->dispatch('alert', type: 'error', text: 'User not found.', position: 'center', timer: 5000, button: false);
+            $this->dispatch('alert', type: 'error', text: 'User not found.', position: 'center', timer: 5000);
             return;
         }
 
-        // Update the user's balance
-        $user->balance += $this->amount;
-        $user->save();
-
         $admin = Auth::guard('admin')->user();
-        $admin_id = $admin->id;
-        $adminFirstname = $admin->first_name;
-        $adminLastname = $admin->last_name;
+        $reference = $this->generateReference($admin);
 
-        // Get first letters of first and last name
-        $initials = strtoupper(substr($adminFirstname, 0, 2) . substr($adminLastname, 0, 2));
+        $balanceBeforeUser = $user->balance;
 
-        // Generate the reference
-        $reference =  $admin_id . $initials . '_' . strtoupper(Str::random(10));
+        // Fetch General Ledger
+        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+        if (!$ledger) {
+            $this->dispatch('alert', type: 'error', text: 'Error in fetching Ledger.', position: 'center', timer: 5000);
+            return;
+        }
 
+        // Store GL previous balance
+        $balanceBeforeGL = $ledger->balance;
+
+        // Update balances
+        $user->balance += $this->amount; // Credit user
+        $ledger->balance += $this->amount; // Debit GL
+
+        // Save updates
+        $user->save();
+        $ledger->save();
+
+        // Create a payment record
         $payment = Payment::create([
             'user_id' => $user->id,
             'amount' => $this->amount,
             'status' => 'success',
-            'transaction_id' => Str::uuid(),
+            'transaction_number' => Str::uuid(),
             'reference' => $reference,
-            'bank_name' => null, 
-            'account_number' => null,
-            'card_last_four' => null,
-            'card_brand' => null,
             'currency' => 'NGN',
-            'payment_type' => 'manual',
-            'paystack_response' => null, 
-            'verify_response' => null,
-            'description' => "Manual fund addition by admin of ₦". $reference  . number_format($this->amount, 2),
+            'payment_type' => 'credit',
+            'payment_method' => 'manual',
+            'description' => "Manual fund addition by admin of ₦" . number_format($this->amount, 2),
         ]);
 
+        Transaction::create([
+            'user_id' => $user->id,
+            'admin_id' => $admin->id,
+            'payment_id' => $payment->id,
+            'general_ledger_id' => $ledger->id,
+            'amount' => $this->amount,
+            'transaction_type' => 'debit',
+            'balance_before' => $balanceBeforeUser,
+            'balance_after' => $user->balance,
+            'method' => 'manual',
+            'reference' => $reference,
+            'description' => "Funds added by admin (₦" . number_format($this->amount, 2) . ")",
+            'status' => 'success',
+        ]);
 
-        // Reset input fields
         $this->reset('amount', 'available_balance');
 
-        // Close the modal
         $this->editFundModel = false;
 
-        // Show success message
-        $this->dispatch('alert', type: 'success', text: 'Funds added successfully.', position: 'center', timer: 5000, button: false);
+        $this->dispatch('alert', type: 'success', text: 'Funds added successfully.', position: 'center', timer: 5000);
     }
-
 
 
     public function AddNewUser()
@@ -192,10 +202,16 @@ class UserList extends Component
 
 
 
-    public function deleteUser($id)
+    private function generateReference($admin)
     {
-        $admin = User::find($id);
-        $admin->delete();
-        $this->dispatch('alert', type: 'success', text: 'User Account deleted successfully.', position: 'center', timer: 10000, button: false);
+        $adminID = $admin['id'];
+        $firstTwoFirstName = strtoupper(substr($admin->first_name, 0, 2));
+        $firstTwoLastName = strtoupper(substr($admin->last_name, 0, 2));
+        $firstThreeDigits = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
+        $fourLetters = strtoupper(Str::random(4));
+        $sevenDigitNumber = random_int(100000, 999999);
+        $lastThreeLetters = ucfirst(Str::random(2)) . 'C';
+
+        return "{$firstThreeDigits}{$fourLetters}{$sevenDigitNumber}{$lastThreeLetters}{$adminID}{$firstTwoFirstName}{$firstTwoLastName}/MAN";
     }
 }

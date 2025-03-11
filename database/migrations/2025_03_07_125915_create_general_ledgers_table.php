@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('general_ledgers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('account_code');
+            $table->string('name')->unique();
+            $table->string('account_number');
             $table->decimal('balance', 15, 2)->default(0.00);
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->string('description')->nullable();

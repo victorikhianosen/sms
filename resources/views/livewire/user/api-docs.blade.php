@@ -271,7 +271,7 @@
         <h2 class="text-xl text-blue font-semibold">Contact Support</h2>
         <div class="">
             <p class="text-sm tracking-wide font-light text-textPrimary">
-                For any issues, contact GGT Connect API support at <span class="font-semibold">support@ggt.com</span>
+                For any issues, contact GGT Connect API support at <span class="font-semibold">support@ggtconnect.com</span>
             </p>
         </div>
     </div>

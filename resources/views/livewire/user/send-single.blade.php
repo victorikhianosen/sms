@@ -60,7 +60,7 @@
 
                         <div class="pt-4" >
                             <button wire:loading.remove wire:click.prevent="previewSMS" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">
-                                Proceed
+                                Process Message
                             </button>
 
                             <button wire:loading wire:target="previewSMS" class="bg-blue ms:w-full py-3 px-12 rounded-lg text-white text-base">

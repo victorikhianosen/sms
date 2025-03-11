@@ -22,13 +22,8 @@ class PaystackPayment extends Component
 
     public function updatedAmount($value)
     {
-        // Remove any non-numeric characters (like commas) before calculating
         $numericValue = preg_replace('/[^\d.]/', '', $value);
-
-        // Format the amount with commas and two decimal places
         $this->formattedAmount = $numericValue !== '' ? number_format((float)$numericValue, 2) : '';
-
-        // Calculate the units and format it
         $this->units = $numericValue !== '' ? round($numericValue / 3.5, 2) : 0;
         $this->formattedUnits = $this->units !== '' ? number_format((float)$this->units, 2) : '';
     }
@@ -41,23 +36,25 @@ class PaystackPayment extends Component
     }
 
 
+
     public function makePayment()
     {
-        // Validate the amount
         $this->validate();
+        $user = Auth::user();
 
-        // Ensure the email is not empty and the user is authenticated
-        $user = Auth::user(); // Fallback if not authenticated
+        // Ensure first name and last name are not empty
+        if (empty($user->first_name) || empty($user->last_name)) {
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'text' => 'Please update your profile with your full name before making a payment.',
+                'position' => 'center',
+                'timer' => 5000
+            ]);
+            return;
+        }
 
-        // dd($email);
-        // Prepare the Paystack payment data
-        $amountInKobo = $this->amount * 100; // Convert to kobo (Paystack's requirement)
+        $amountInKobo = $this->amount * 100;
 
-        // $this->dispatch('paystackPayment', [
-        //     'email' => $email,
-        //     'amount' => $amountInKobo,
-        //     'currency' => 'NGN',
-        // ]);
 
         $this->dispatch('paystackPayment', [
             'email' => $user->email,
@@ -66,11 +63,15 @@ class PaystackPayment extends Component
             'phone' => $user->phone,
             'amount' => $amountInKobo,
             'currency' => 'NGN',
+            'metadata' => [
+                'customer_details' => [
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'phone' => $user->phone,
+                    'email' => $user->email,
+                    'amount' => $amountInKobo,
+                ]
+            ]
         ]);
     }
-
-
-
 }
-
-

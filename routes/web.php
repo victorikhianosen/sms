@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\User\Logs;
+use App\Models\Transaction;
 use App\Livewire\User\Groups;
 use App\Livewire\User\ApiDocs;
 use App\Livewire\User\Payment;
@@ -15,6 +16,7 @@ use App\Livewire\Admin\GroupList;
 use App\Livewire\User\Auth\Login;
 use App\Livewire\User\EditGroups;
 use App\Livewire\User\SendSingle;
+use App\Livewire\Admin\LedgerList;
 use App\Livewire\User\ScheduleSms;
 use App\Livewire\Admin\MessageList;
 use App\Livewire\Admin\PaymentList;
@@ -31,6 +33,7 @@ use App\Livewire\Admin\AdminDashboard;
 use App\Livewire\User\PaystackPayment;
 use App\Livewire\User\ScheduleSmsView;
 use App\Livewire\Admin\Auth\AdminLogin;
+use App\Livewire\Admin\TransactionList;
 use App\Livewire\User\Auth\VerifyToken;
 use App\Livewire\User\ProcessSinglesms;
 use App\Livewire\Admin\AdminMessageList;
@@ -44,17 +47,8 @@ use App\Livewire\Admin\ScheduleMessageList;
 use App\Livewire\User\VerifyPaystackPayment;
 use App\Http\Controllers\PaystackPaymentController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-Route::get('/', function () {
-    return redirect()->route('login');
-})->name('home');
-
-
-
-Route::get('login', Login::class)->name('login');
+Route::get('/', Login::class)->name('home');
 Route::get('register', Register::class)->name('register');
 
 Route::get('forget-password', ForgetPassword::class)->name('forgetpassword');
@@ -99,10 +93,10 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function() {
-        return redirect()->route('admin.login'); // Fixed missing semicolon
-    });
-    Route::get('login', AdminLogin::class)->name('login');
+    // Route::get('/', function() {
+    //     return redirect()->route('admin'); // Fixed missing semicolon
+    // });
+    Route::get('/', AdminLogin::class)->name('admin');
 
     
     Route::middleware('auth:admin')->group(function () {
@@ -123,7 +117,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('schedulelist', ScheduleMessageList::class)->name('schedulelist');
 
         // Route::middleware(['auth:admin', 'super'])->group(function () {
-            Route::get('ledgers', AllGeneralLedger::class)->name('ledgerlist');
+        // Route::get('ledgers', AllGeneralLedger::class)->name('ledgerlist');
         // });
+
+
+        Route::middleware(['auth:admin', 'super'])->group(function () {
+            Route::get('ledger-list', LedgerList::class)->name('ledgers');
+            Route::get('transaction-list', TransactionList::class)->name('transactions');
+        });
+
+
     });
 });

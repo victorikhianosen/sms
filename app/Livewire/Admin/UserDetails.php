@@ -53,11 +53,7 @@ class UserDetails extends Component
     }
 
     public function getUserDetails() {
-    //   dd( User::find($this->userID));
-
         $user = User::findOrFail($this->userID);
-
-        // dd(        $this->profile_picture = $user->profile_picture);
 
         $this->allUsers = $user;
         // dd($user);
@@ -166,7 +162,6 @@ class UserDetails extends Component
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email' => $this->email,
-                // 'balance' => $this->balance,
                 'status' => $this->status,
                 'account_number' => $this->account_number,
                 'phone' => $this->phone,

@@ -5,7 +5,9 @@ namespace App\Livewire\User;
 use App\Models\Message;
 use Livewire\Component;
 use App\Models\SmsSender;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
+use App\Models\GeneralLedger;
 use Livewire\Attributes\Title;
 use App\Services\SendSmsService;
 use Livewire\Attributes\Validate;
@@ -124,9 +126,50 @@ class SendSingle extends Component
             'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
 
+        $reference = $this->generateReference($user);
+
+
+        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+        if (!$ledger) {
+            $this->dispatch('alert', type: 'error', text: 'Error in fetching Ledger.', position: 'center', timer: 5000);
+            return;
+        }
+
+        $balanceBeforeGL = $ledger->balance;
+
+        $ledger->balance += $this->totalCharge;
+        $ledger->save();
+
+        Transaction::create([
+            'user_id' => $user->id,
+            'general_ledger_id' => $ledger->id,
+            'amount' => $this->totalCharge,
+            'transaction_type' => 'credit',
+            'balance_before' => $balanceBeforeGL,
+            'balance_after' => $user->balance,
+            'method' => 'manual',
+            'reference' => $reference,
+            'description' => "Funds added by admin (₦" . number_format($this->totalCharge, 2) . ")",
+            'status' => 'success',
+        ]);
+
         $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message);
         $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
         $this->closeModal();
         $this->reset(['sender','message', 'phone_number']);
+    }
+
+
+    private function generateReference($data)
+    {
+        $adminID = $data['id'];
+        $firstTwoFirstName = strtoupper(substr($data->first_name, 0, 2));
+        $firstTwoLastName = strtoupper(substr($data->last_name, 0, 2));
+        $firstThreeDigits = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
+        $fourLetters = strtoupper(Str::random(4));
+        $sevenDigitNumber = random_int(100000, 999999);
+        $lastThreeLetters = ucfirst(Str::random(2)) . 'C';
+
+        return "{$firstThreeDigits}{$fourLetters}{$sevenDigitNumber}{$lastThreeLetters}{$adminID}{$firstTwoFirstName}{$firstTwoLastName}/MAN";
     }
 }

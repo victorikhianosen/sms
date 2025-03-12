@@ -28,6 +28,14 @@ class PaymentController extends Controller
 
         if($response['status'] === true && $response['message'] === 'Verification successful' && $response['data']['status'] === 'success'){
 
+            session()->flash('alert', [
+                'type' => 'success',
+                'text' => 'Payment Successful!',
+                'position' => 'center',
+                'timer' => 4000,
+                'button' => false,
+            ]);
+   
             $result = $response['data'];
             $user = Auth::user();
 
@@ -36,9 +44,16 @@ class PaymentController extends Controller
             $user->last_payment_reference = $result['reference'];
             $user->save();
 
+            $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+
+            $balanceBeforeGL = $ledger->balance;
+
+            $ledger->balance += $amount;
+            $ledger->save();
+
             $payment = Payment::create([
                 'user_id' => $user->id,
-                'amount' => $result['amount'] / 100, // Convert amount to the correct unit
+                'amount' => $amount,
                 'status' => $result['status'],
                 'transaction_number' => $result['id'],
                 'reference' => $result['reference'],
@@ -54,52 +69,54 @@ class PaymentController extends Controller
                 'description' => "Credit updated for Paystack transaction reference " . $result['reference'],
             ]);
 
-            $balanceBeforeUser = $user->balance;
-            $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
-            if (!$ledger) {   
-
-                session()->flash('alert', [
-                'type' => 'error',
-                'text' => 'Error in fetching Ledger.!',
-                'position' => 'center',
-                'timer' => 4000,
-                'button' => false,
-            ]);
-                
-                return;
-            }
-
-            $balanceBeforeGL = $ledger->balance;
-
-            $ledger->balance += $amount;
-            $ledger->save();
-
+        
             Transaction::create([
                 'user_id' => $user->id,
                 'payment_id' => $payment->id,
                 'general_ledger_id' => $ledger->id,
                 'amount' => $amount,
                 'transaction_type' => 'debit',
-                'balance_before' => $balanceBeforeUser,
+                'balance_before' => $balanceBeforeGL,
                 'balance_after' => $user->balance,
-                'method' => $result['authorization']['channel'] ?? null,
+                'payment_method' => $result['authorization']['channel'] ?? null,
                 'reference' => $result['reference'],
                 'description' => "Funds added by admin (₦" . number_format($amount, 2) . ") . " . $result['reference'],
                 'status' => 'success',
             ]);
 
+
+            return redirect()->route('dashboard');
+
+        }
+        else {
+
+            $user = Auth::user();
+            $failedReference = $reference;
+            $failedStatus = $response['data']['status'] ?? 'failed';
+            $failedMessage = $response['message'] ?? 'Unknown error';
+
+            Payment::create([
+                'user_id' => $user ? $user->id : null,
+                'amount' => 0,
+                'status' => 'failed',
+                'transaction_number' => $failedReference,
+                'reference' => $failedReference,
+                'currency' => 'NGN',
+                'payment_type' => 'credit',
+                'paystack_response' => json_encode($response),
+                'verify_response' => json_encode($response),
+                'description' => "Failed Paystack transaction reference: " . $failedReference,
+            ]);
+
+            Log::error("Payment verification failed: {$failedMessage}", ['reference' => $failedReference]);
+
             session()->flash('alert', [
-                'type' => 'success',
-                'text' => 'Payment Successful!',
+                'type' => 'error',
+                'text' => "Payment failed: {$failedMessage}",
                 'position' => 'center',
                 'timer' => 4000,
                 'button' => false,
             ]);
-
-            return redirect()->route('dashboard');
-        }
-        else {
-            dd('Victor');
         }
     }
 

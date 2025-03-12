@@ -33,8 +33,15 @@ class ScheduleSms extends Component
     public $phone_number;
 
 
-    #[Validate('required')]
+    #[Validate('required|date|after_or_equal:now')]
     public $date_time;
+
+    #[Validate('required|max:20')]
+    public $description;
+
+
+    // #[Validate('required')]
+    // public $date_time;
 
 
     public $showModal = false;
@@ -53,7 +60,8 @@ class ScheduleSms extends Component
     {
 
         $user = Auth::user();
-        $this->allGroups = $user->groups;
+        // $this->allGroups = $user->groups;
+        $this->allGroups = $user->groups()->orderBy('created_at', 'desc')->get();
         $this->sendersAll = $user->smssenders;
 
         return view('livewire.user.schedule-sms')->extends('layouts.auth_layout')->section('auth-section');
@@ -64,6 +72,12 @@ class ScheduleSms extends Component
     public function processSchedule()
     {
         $validated = $this->validate();
+
+        if (Carbon::parse($validated['date_time'])->lessThan(Carbon::now())) {
+            $this->addError('date_time', 'You cannot select a past date or time.');
+            return;
+        }
+
         $user = Auth::user();
         $finalNumbers = [];
 
@@ -95,7 +109,14 @@ class ScheduleSms extends Component
         $numbersArray = explode(',', $numbersToSend);
         $numberCount = count($numbersArray);
 
-        $smsRate = $user->sms_rate;
+        // $smsRate = $user->sms_rate;
+        $smsRate = (float) $user->sms_rate;
+
+        if (!$smsRate) {
+            $this->dispatch('alert', type: 'error', text: 'Sorry, your rate has not been fixed. Contact support.', position: 'center', timer: 10000, button: false);
+            return;
+        }
+
         $smsCharLimit = $user->sms_char_limit;
         $accountBalance = $user->balance;
         $messageLength = strlen($validated['message']);
@@ -113,6 +134,14 @@ class ScheduleSms extends Component
         $this->smsUnits = $smsUnits;
         $this->numbersToSend = $numbersToSend;
         $this->scheduleTime = date("Y-m-d h:i A", strtotime(str_replace('T', ' ', $validated['date_time'])));
+
+
+        //  dd([
+        //     'smsRate' => $smsRate,
+        //     'smsCharLimit' => $smsCharLimit,
+        //     'smsUnits' => $smsUnits,
+        //     'totalCharge' => $totalCharge,
+        // ]);
 
         $this->showModal = true;
     }
@@ -151,8 +180,10 @@ class ScheduleSms extends Component
             'page_rate' => $this->smsRate,
             'amount' => $this->totalCharge,
             'message' => $this->message,
+            'status' => 'pending',
+            'description' => $this->description,
             'destination' => json_encode($numbersArray),
-            'route' => $smsRoute,  // Now encoding the array as JSON
+            'route' => $smsRoute,
             'scheduled_time' => Carbon::parse($this->date_time),
         ]);
 

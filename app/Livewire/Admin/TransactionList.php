@@ -13,36 +13,46 @@ class TransactionList extends Component
     use WithPagination;
 
     public $search = '';
+    public $searchDateTime = '';
     public $viewModal = false;
 
     public $ledgerName, $ledgerNumber, $ledgerBalance, $email, $amount, $transaction_type, $balanceBefore, $balanceAfter, $transaction_method, $reference, $status, $date;
 
 
     #[Title('Transaction')]
+
+
     public function render()
     {
-        $transactions = Transaction::latest()
+        $transactions = Transaction::query()
             ->when($this->search, function ($query) {
-                $query->whereHas('ledger', function ($q) {
-                    $q->where('account_number', 'like', "%{$this->search}%");
-                })
-                    ->orWhere('amount', 'like', "%{$this->search}%")
-                    ->orWhere('status', 'like', "%{$this->search}%")
-                    ->orWhere('reference', 'like', "%{$this->search}%")
-                    ->orWhere('transaction_type', 'like', "%{$this->search}%")
-                    ->orWhereHas('user', function ($q) {
-                        $q->where('email', 'like', "%{$this->search}%");
-                    })
-                    ->orWhereHas('admin', function ($q) {
-                        $q->where('email', 'like', "%{$this->search}%");
-                    });
+                $searchTerm = "%{$this->search}%";
+
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('amount', 'like', $searchTerm)
+                        ->orWhere('reference', 'like', $searchTerm)
+                        ->orWhere('transaction_type', 'like', $searchTerm)
+                        ->orWhere('status', 'like', $searchTerm)
+                        ->orWhereHas('user', function ($q) use ($searchTerm) {
+                            $q->where('email', 'like', $searchTerm);
+                        })
+                        ->orWhereHas('admin', function ($q) use ($searchTerm) {
+                            $q->where('email', 'like', $searchTerm);
+                        });
+                });
             })
+            ->orderBy('created_at', 'desc') // Ensures latest transactions appear first
             ->paginate(10);
 
         return view('livewire.admin.transaction-list', [
             'transactions' => $transactions
         ])->extends('layouts.admin_layout')->section('admin-section');
     }
+
+
+
+
+
 
 
     public function closeModal()
@@ -72,10 +82,9 @@ class TransactionList extends Component
         $this->transaction_type = $transaction->transaction_type;
         $this->balanceBefore =  $transaction->balance_before;
         $this->balanceAfter =  $transaction->balance_after;
-        $this->transaction_method =  $transaction->method;
+        $this->transaction_method =  $transaction->payment_method;
         $this->reference =  $transaction->reference;
         $this->status =  $transaction->status;
         $this->date = $transaction->created_at->format('d M Y, h:i A');
     }
 }
-

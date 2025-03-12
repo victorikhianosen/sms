@@ -54,7 +54,6 @@ class SendScheduledMessages extends Command
                 $finalPhone = '234' . ltrim(preg_replace('/[^0-9]/', '', trim($number)), '0');
                 LogService::scheduleSms("Final phone: " . $finalPhone);
 
-                // Sending SMS (commented out for now)
                 $this->smsService->sendSms(
                     $scheduled->sender,
                     $scheduled->sms_sender_id === 'exchange_trans' ? 'exchange_trans' : 'exchange_pro',
@@ -62,7 +61,6 @@ class SendScheduledMessages extends Command
                     $scheduled->message
                 );
 
-                // Saving message details
                 Message::create([
                     'user_id' => $scheduled->user_id,
                     'sms_sender_id' => $scheduled->sms_sender_id,
@@ -72,10 +70,12 @@ class SendScheduledMessages extends Command
                     'status' => 'sent',
                     'amount' => min($amountPerRecipient, $totalChargePerRecipient), // Amount deducted per recipient
                     'message' => $scheduled->message,
-                    'message_id' => Str::uuid()->toString(),
+                    'message_reference' => Str::uuid()->toString(),
+                    'transaction_number' => $scheduled->reference, // Pass unique reference here
                     'destination' => $finalPhone,
                     'route' => $scheduled->sms_sender_id === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
                 ]);
+
                 $scheduled->update(['status' => 'sent']);
 
 

@@ -45,12 +45,14 @@
                                     </td>
                                     <td
                                         class="px-4 py-4 whitespace-normal text-sm 
-                                        @if ($schedule->status == 'success') text-green-600 
+                                        @if ($schedule->status == 'sent') text-green-600 
                                         @elseif($schedule->status == 'failed') text-red-600 
                                         @elseif($schedule->status == 'pending') text-yellow-600 
+                                        @elseif($schedule->status == 'cancel') text-gray-600 
                                         @else text-gray-600 @endif">
                                         {{ ucfirst($schedule->status) }}
                                     </td>
+
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                         {{ $schedule->created_at }}
                                     </td>
@@ -62,7 +64,7 @@
                                                 View
                                             </button>
 
-                                            @if ($schedule->status !== 'sent')
+                                            @if ($schedule->status !== 'sent' && $schedule->status !== 'cancel')
                                                 @if ($schedule->status !== 'pending')
                                                     <button type="button"
                                                         wire:click.prevent="PendSchedule({{ $schedule->id }})"
@@ -71,13 +73,11 @@
                                                     </button>
                                                 @endif
 
-                                                @if ($schedule->status !== 'cancel')
-                                                    <button type="button"
-                                                        wire:click.prevent="CancelSchedule({{ $schedule->id }})"
-                                                        class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
-                                                        Cancel
-                                                    </button>
-                                                @endif
+                                                <button type="button"
+                                                    wire:click.prevent="CancelSchedule({{ $schedule->id }})"
+                                                    class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                    Cancel
+                                                </button>
                                             @endif
                                         </td>
                                     @endadminOrSuperAdmin

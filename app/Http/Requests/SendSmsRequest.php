@@ -25,7 +25,7 @@ class SendSmsRequest extends FormRequest
             'api_key' => 'required',
             'api_secret' => 'required',
             'sender'   => 'required',
-            'phone' => 'required|numeric|digits:11',
+            'phone_number' => 'required|numeric|digits:11',
             'message'  => 'required',
         ];
     }

@@ -49,13 +49,15 @@
                                     </td>
                                     <td
                                         class="px-4 py-4 whitespace-normal text-sm 
-                                        <?php if($schedule->status == 'success'): ?> text-green-600 
+                                        <?php if($schedule->status == 'sent'): ?> text-green-600 
                                         <?php elseif($schedule->status == 'failed'): ?> text-red-600 
                                         <?php elseif($schedule->status == 'pending'): ?> text-yellow-600 
+                                        <?php elseif($schedule->status == 'cancel'): ?> text-gray-600 
                                         <?php else: ?> text-gray-600 <?php endif; ?>">
                                         <?php echo e(ucfirst($schedule->status)); ?>
 
                                     </td>
+
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                         <?php echo e($schedule->created_at); ?>
 
@@ -68,7 +70,7 @@
                                                 View
                                             </button>
 
-                                            <!--[if BLOCK]><![endif]--><?php if($schedule->status !== 'sent'): ?>
+                                            <!--[if BLOCK]><![endif]--><?php if($schedule->status !== 'sent' && $schedule->status !== 'cancel'): ?>
                                                 <!--[if BLOCK]><![endif]--><?php if($schedule->status !== 'pending'): ?>
                                                     <button type="button"
                                                         wire:click.prevent="PendSchedule(<?php echo e($schedule->id); ?>)"
@@ -77,13 +79,11 @@
                                                     </button>
                                                 <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
-                                                <!--[if BLOCK]><![endif]--><?php if($schedule->status !== 'cancel'): ?>
-                                                    <button type="button"
-                                                        wire:click.prevent="CancelSchedule(<?php echo e($schedule->id); ?>)"
-                                                        class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
-                                                        Cancel
-                                                    </button>
-                                                <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                                <button type="button"
+                                                    wire:click.prevent="CancelSchedule(<?php echo e($schedule->id); ?>)"
+                                                    class="bg-red-600 py-2 px-2 text-sm text-white rounded-lg cursor-pointer">
+                                                    Cancel
+                                                </button>
                                             <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                                         </td>
                                     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->

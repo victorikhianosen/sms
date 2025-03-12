@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\SmsSender;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
+use App\Models\GeneralLedger;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
@@ -20,6 +22,16 @@ class SendSmsService
      * @param array $validated Data containing api_key, api_secret, sender, message, and phone.
      * @return \Illuminate\Http\JsonResponse
      */
+
+
+    protected $referenceService;
+
+    public function __construct()
+    {
+        $this->referenceService = app(ReferenceService::class);
+    }
+
+
     public function send(array $validated)
     {
 
@@ -58,21 +70,30 @@ class SendSmsService
             return $this->error('Insufficient funds', 500);
         }
 
-        // Deduct the balance and save the user
+
+        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+        $balanceBeforeGL = $ledger->balance;
+
+
         $user->balance = $accountBalance - $totalCharge;
         $user->save();
+
+        $ledger->balance -= $totalCharge;
+        $ledger->save();
+
 
         // Generate a unique message ID
         $messageID = Str::uuid()->toString();
 
         // Format the phone number (assuming Nigerian numbers, for example)
-        $phone = $validated['phone'];
+        $phone = $validated['phone_number'];
         $modifiedPhone = substr($phone, 1);
         $finalPhone = '234' . $modifiedPhone;
 
-        // Create a record for the message in the database
-        Message::create([
-            'user_id'        => $user->id,
+        $reference = $this->referenceService->generateReference($user);
+
+
+        $message = $user->messages()->create([
             'sms_sender_id'  => $sender->id,
             'sender'         => $sender->name,
             'page_number'    => $smsUnits,
@@ -80,12 +101,26 @@ class SendSmsService
             'status'         => 'sent',
             'amount'         => $totalCharge,
             'message'        => $validated['message'],
-            'message_id'     => $messageID,
-            'destination'    => $validated['phone'],
+            'message_reference'     => $messageID,
+            'transaction_number' => $reference,
+            'destination'    => $validated['phone_number'],
             'route'          => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
 
-        // Send the SMS via the external provider using dynamic values
+
+        Transaction::create([
+            'user_id' => $user->id,
+            'general_ledger_id' => $ledger->id,
+            'amount' => $totalCharge,
+            'transaction_type' => 'credit',
+            'balance_before' => $balanceBeforeGL,
+            'balance_after' => $user->balance,
+            'payment_method' => 'api sms',
+            'reference' => $message->transaction_number,
+            'description' => "SMS Charge (₦ {$totalCharge}) / {$message->transaction_number} / {$message->message_reference} / {$finalPhone}",
+            'status' => 'success',
+        ]);
+
         $apiResponse = $this->sendSms(
             $sender->name,
             $smsRoute,
@@ -95,7 +130,11 @@ class SendSmsService
 
 
         return $this->success(
-            ['message_id' => $messageID],
+            [
+                'message_ref' => $message->message_reference,
+                'phone_number' => $message->destination,
+                'sent_at' => $message->created_at
+            ],
             'Message sent successfully'
         );
     }
@@ -111,7 +150,7 @@ class SendSmsService
      * @param string $message
      * @return array|null
      */
-    
+
 
 
     public function sendSms(string $senderName, string $smsRoute, string $finalPhone, string $message): ?array
@@ -148,7 +187,4 @@ class SendSmsService
             return null; // ✅ Explicitly return null in case of failure
         }
     }
-
 }
-
-

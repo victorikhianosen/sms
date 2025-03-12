@@ -118,23 +118,13 @@
                         </a>
                     </li>
 
-                    <?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>
-                        <li>
-                            <a href="<?php echo e(route('admin.ledgers')); ?>" wire:navigate.hover
-                                :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
-                                class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                                <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                                Ledger Accounts
-                            </a>
-                        </li>
-                    <?php endif; ?>
                 </div>
 
 
 
 
                 <div class=space-y-6>
-                    <p class="text-textSecondary font-light text-sm pt-4 uppercase">Transactions</p>
+                    <p class="text-textSecondary font-light text-sm pt-4 uppercase">Ledger & Transactions</p>
 
 
                     <?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>

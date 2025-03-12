@@ -3,8 +3,9 @@
         <h3 class="font-bold text-2xl">All Transactions</h3>
 
         <!-- Search Input Field -->
-        <input type="text" wire:model.live.debounce.50ms="search" placeholder="Search by GL Number, Amount, Ref"
+        <input type="text" wire:model.live.debounce.50ms="search" placeholder="Search by Number, Email, Type, Reference"
             class="px-4 py-2 border rounded-md bg-gray-100 text-gray-600 w-64 placeholder:text-xs">
+
 
         <!--[if BLOCK]><![endif]--><?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>
             
@@ -68,7 +69,7 @@
 
                                     </td>
 
-                                      <td
+                                    <td
                                         class="px-4 py-4 whitespace-normal text-sm 
                                         <?php if($transaction['transaction_type'] == 'credit'): ?> text-green-600 
                                         <?php elseif($transaction['transaction_type'] == 'debit'): ?> text-red-600 
@@ -89,7 +90,7 @@
                                     </td>
 
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        <?php echo e($transaction['created_at']); ?>
+                                        <?php echo e($transaction['created_at']->format('d M Y, h:i A')); ?>
 
                                     </td>
                                     <!--[if BLOCK]><![endif]--><?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>

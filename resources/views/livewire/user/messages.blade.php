@@ -1,4 +1,4 @@
-<div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2">
+<div class="flex flex-col bg-white rounded-lg pt-8 mt-8 px-6 space-y-2 mb-24 pb-8">
     <div class="flex justify-between items-center">
         <h3 class="font-bold text-2xl">Messages</h3>
         <input type="text" wire:model.live.debounce.500ms="search"
@@ -37,7 +37,7 @@
                         @forelse ($allMessage as $item)
                             <tr class="odd:bg-white even:bg-gray-100">
                                 <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                    {{ substr($item->message_id, 0, 8) }}
+                                    {{ substr($item->message_reference, 0, 8) }}
                                 </td>
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray">{{ $item->sender }}</td>
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray">
@@ -45,7 +45,9 @@
                                 </td>
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray break-words">
                                     {{-- {{ $item->message }} --}}
-                                    {{ substr($item->message, 0, 20) }}
+                                <td class="px-4 py-4 whitespace-normal text-sm">
+                                    {{ Str::limit($item->message, 20) }}
+                                </td>
 
                                 </td>
 
@@ -55,11 +57,19 @@
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                     {{ $item->amount }}
                                 </td>
-                                <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                    {{ $item->status }}
+
+                                <td
+                                    class="px-4 py-4 whitespace-normal text-sm 
+                                    @if ($item->status == 'sent') text-green-600 
+                                    @elseif($item->status == 'failed') text-red-600 
+                                    @elseif($item->status == 'pending') text-yellow-600 
+                                    @elseif($item->status == 'cancel') text-gray-600 
+                                    @else text-gray-600 @endif">
+                                    {{ ucfirst($item->status) }}
                                 </td>
+
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                    {{ $item->created_at }}
+                                    {{ $item->created_at->format('d M Y, h:i A') }}
                                 </td>
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                     <span class="bg-blue py-2 px-2 text-white rounded-lg cursor-pointer"
@@ -79,7 +89,7 @@
                 </table>
 
                 <!-- Pagination Controls -->
-                <div class="mt-4 py-4">
+                <div class="mt-4 py-8">
                     {{ $allMessage->links() }}
                 </div>
 
@@ -88,14 +98,13 @@
     </div>
 
 
-    @if ($selectedMessage)
-        <div x-data="{ open: false }" x-show="open" x-init="$wire.on('openModal', () => open = true)"
-            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    @if ($viewModal)
+        <div" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
 
-            <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl p-6 relative">
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl p-8 relative">
                 <!-- Close Button (Top Right) -->
-                <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 transition"
-                    @click="open = false">
+                <button wire:click.prevent="closeModal"
+                    class="absolute top-3 right-3 text-gray-500 hover:text-red-600 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -111,7 +120,7 @@
                     <div>
                         <label class="font-medium text-gray-700">Message ID</label>
                         <input type="text" class="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-600"
-                            value="{{ $selectedMessage->message_id }}" readonly>
+                            value="{{ $selectedMessage->message_reference }}" readonly>
                     </div>
 
                     <div>
@@ -141,7 +150,7 @@
                     <div>
                         <label class="font-medium text-gray-700">Date</label>
                         <input type="text" class="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-600"
-                            value="{{ $selectedMessage->created_at }}" readonly>
+                            value="{{ $selectedMessage->created_at->format('d M Y, h:i A') }}" readonly>
                     </div>
                 </div>
 
@@ -151,16 +160,10 @@
                     <textarea class="w-full px-3 py-2 border rounded-md bg-gray-100 text-gray-600 h-32 resize-none" readonly>{{ $selectedMessage->message }}</textarea>
                 </div>
 
-                <!-- Modal Footer with Close Button -->
-                <div class="mt-6 flex justify-end">
-                    <button class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-                        @click="open = false">
-                        Close
-                    </button>
-                </div>
+
             </div>
-        </div>
-    @endif
+</div>
+@endif
 
 
 </div>

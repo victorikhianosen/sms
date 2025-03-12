@@ -277,7 +277,7 @@
 
                             <div>
                                 <label class="font-medium text-gray-700">Amount to Deposit</label>
-                                <input type="text" wire:model="amount" maxlength="11"
+                                <input type="number" wire:model="amount" maxlength="11"
                                     class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600">
                                 @error('amount')
                                     <span class="text-sm text-red-600 block text-start italic pt-1">{{ $message }}</span>

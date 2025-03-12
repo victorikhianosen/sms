@@ -25,5 +25,9 @@ class Message extends Model
         return $this->belongsTo(Admin::class);
     }
 
+    public function transaction(){
+        return $this->hasMany(Transaction::class);
+    }
+
 
 }

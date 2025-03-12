@@ -2,12 +2,12 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
-
+            
             <div class="flex justify-between mb-4" wire:poll.5s="getBalance">
 
                 <div>
                     <div class="flex items-center mb-1">
-                        <!--[if BLOCK]><![endif]--><?php if (!isset($accountBalance)): ?>
+                        <!--[if BLOCK]><![endif]--><?php if(!isset($accountBalance)): ?>
                             <!-- Check if balance is not set or loading -->
                             <div class="flex justify-center items-center space-x-2">
                                 <i class="fa-solid fa-spinner animate-spin text-lg text-blue-500"></i>
@@ -52,7 +52,7 @@
             <div class="flex justify-between mb-4">
                 <div>
                     <div class="flex items-center mb-1">
-                        <!--[if BLOCK]><![endif]--><?php if (!isset($messageCount)): ?>
+                        <!--[if BLOCK]><![endif]--><?php if(!isset($messageCount)): ?>
                             <!-- Check if messageCount is not set (loading) -->
                             <div class="flex justify-center items-center space-x-2">
                                 <i class="fa-solid fa-spinner animate-spin text-lg text-blue-500"></i>
@@ -85,18 +85,20 @@
                     </ul>
                 </div>
             </div>
-            <a href="<?php echo e(route('message')); ?>" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
+            <a href="<?php echo e(route('message')); ?>" wire:navigate.hover
+                class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
 
 
 
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5" wire:poll.5s="getAllGroups">
+        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5"
+            wire:poll.5s="getAllGroups">
             <div class="flex justify-between mb-4">
                 <div>
 
 
                     <div class="flex items-center mb-1">
-                        <!--[if BLOCK]><![endif]--><?php if (!isset($groupCount)): ?>
+                        <!--[if BLOCK]><![endif]--><?php if(!isset($groupCount)): ?>
                             <!-- Check if groupCount is not set (loading) -->
                             <div class="flex justify-center items-center space-x-2">
                                 <i class="fa-solid fa-spinner animate-spin text-lg text-blue-500"></i>
@@ -134,7 +136,8 @@
                     </ul>
                 </div>
             </div>
-            <a href="<?php echo e(route('groups')); ?>" wire:navigate.hover class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
+            <a href="<?php echo e(route('groups')); ?>" wire:navigate.hover
+                class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
     </div>
 
@@ -169,7 +172,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!--[if BLOCK]><![endif]--><?php if ($allMessage === null): ?>
+                            <!--[if BLOCK]><![endif]--><?php if($allMessage === null): ?>
                                 <!-- Loader placed inside the table body -->
                                 <tr>
                                     <td colspan="9" class="text-center py-6">
@@ -177,7 +180,7 @@
                                         <p class="text-xl text-gray-600 mt-2 animate-pulse">Loading...</p>
                                     </td>
                                 </tr>
-                            <?php elseif ($allMessage->isEmpty()): ?>
+                            <?php elseif($allMessage->isEmpty()): ?>
                                 <!-- If no messages found -->
                                 <tr>
                                     <td colspan="9" class="px-4 py-4 text-center text-sm text-gray">
@@ -186,10 +189,7 @@
                                 </tr>
                             <?php else: ?>
                                 <!-- Display messages if available -->
-                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allMessage;
-                                                            $__env->addLoop($__currentLoopData);
-                                                            foreach ($__currentLoopData as $item): $__env->incrementLoopIndices();
-                                                                $loop = $__env->getLastLoop(); ?>
+                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allMessage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
                                             <?php echo e(substr($item->message_id, 0, 8)); ?>
@@ -218,9 +218,7 @@
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             <?php echo e($item->created_at); ?></td>
                                     </tr>
-                                <?php endforeach;
-                                                            $__env->popLoop();
-                                                            $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
                             <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                         </tbody>
                     </table>
@@ -253,7 +251,7 @@
                                     Amount
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-36">
-                                    Payment type
+                                    Payment Method
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">
                                     Status
@@ -267,7 +265,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!--[if BLOCK]><![endif]--><?php if (!$allPayment): ?>
+                            <!--[if BLOCK]><![endif]--><?php if(!$allPayment): ?>
                                 <!-- Loader Row Below the Header -->
                                 <tr>
                                     <td colspan="9" class="text-center py-6">
@@ -275,7 +273,7 @@
                                         <p class="text-xl text-gray-600 mt-2 animate-pulse">Loading...</p>
                                     </td>
                                 </tr>
-                            <?php elseif ($allPayment->isEmpty()): ?>
+                            <?php elseif($allPayment->isEmpty()): ?>
                                 <!-- No Payment Row Below the Header -->
                                 <tr>
                                     <td colspan="9" class="px-4 py-4 text-center text-sm text-gray">
@@ -284,10 +282,7 @@
                                 </tr>
                             <?php else: ?>
                                 <!-- Display Payments -->
-                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allPayment;
-                                                            $__env->addLoop($__currentLoopData);
-                                                            foreach ($__currentLoopData as $payment): $__env->incrementLoopIndices();
-                                                                $loop = $__env->getLastLoop(); ?>
+                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allPayment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
                                             <?php echo e(substr($payment->transaction_number, 0, 8)); ?></td>
@@ -296,11 +291,11 @@
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             <?php echo e($payment->amount); ?></td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            <?php echo e($payment->payment_type); ?></td>
+                                            <?php echo e($payment->payment_method); ?></td>
                                         <td
                                             class="px-4 py-4 whitespace-normal text-sm
-                                        <?php if ($payment->status == 'success'): ?> text-green-600
-                                        <?php elseif ($payment->status == 'failed'): ?> text-red-600
+                                        <?php if($payment->status == 'success'): ?> text-green-600
+                                        <?php elseif($payment->status == 'failed'): ?> text-red-600
                                         <?php else: ?> text-gray-600 <?php endif; ?>">
                                             <?php echo e($payment->status); ?>
 
@@ -310,9 +305,7 @@
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             <?php echo e($payment->currency); ?></td>
                                     </tr>
-                                <?php endforeach;
-                                                            $__env->popLoop();
-                                                            $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
                             <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                         </tbody>
                     </table>
@@ -320,6 +313,20 @@
             </div>
         </div>
     </div>
+
+    <!--[if BLOCK]><![endif]--><?php if(session('alert')): ?>
+        <script>
+            Swal.fire({
+                icon: "<?php echo e(session('alert.type')); ?>",
+                title: "<?php echo e(session('alert.text')); ?>",
+                position: "<?php echo e(session('alert.position')); ?>",
+                timer: <?php echo e(session('alert.timer')); ?>,
+                showConfirmButton: <?php echo e(session('alert.button') ? 'true' : 'false'); ?>
+
+            });
+        </script>
+    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+
 
 
 

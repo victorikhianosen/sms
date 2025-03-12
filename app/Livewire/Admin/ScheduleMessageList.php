@@ -99,24 +99,3 @@ class ScheduleMessageList extends Component
 
     
 }
-
-
-
-
- #attributes: array:15 [▼
-//     "id" => 3
-//     "user_id" => 1
-//     "sms_sender_id" => 1
-//     "sender" => "AssetMatrix"
-//     "description" => "biro"
-//     "page_number" => "1"
-//     "page_rate" => "3"
-//     "message" => "Testing Chwdule adminf"
-//     "status" => "pending"
-//     "amount" => "24.00"
-//     "destination" => "["07063640410","70070707007"," 07070707077"," 70707769696"," 96969696969"," 69696969696"," 69968574748"," 83674848494"]"
-//     "route" => "exchange_pro"
-//     "scheduled_time" => "2025-03-13 17:55:00"
-//     "created_at" => "2025-03-04 16:56:21"
-//     "updated_at" => "2025-03-04 16:56:21"
-//   ]

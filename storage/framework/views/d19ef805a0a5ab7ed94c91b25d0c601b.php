@@ -40,13 +40,6 @@
         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
 
-
-
-
-
-
-
-
     </div>
 
       <div class="mt-12">

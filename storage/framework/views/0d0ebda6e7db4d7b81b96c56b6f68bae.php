@@ -338,7 +338,7 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
 
                             <div>
                                 <label class="font-medium text-gray-700">Amount to Deposit</label>
-                                <input type="text" wire:model="amount" maxlength="11"
+                                <input type="number" wire:model="amount" maxlength="11"
                                     class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600">
                                 <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['amount'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

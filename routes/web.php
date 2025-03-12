@@ -48,6 +48,10 @@ use App\Livewire\User\VerifyPaystackPayment;
 use App\Http\Controllers\PaystackPaymentController;
 
 
+Route::get('login', function () {
+    return redirect()->route('home');
+})->name('login');
+
 Route::get('/', Login::class)->name('home');
 Route::get('register', Register::class)->name('register');
 
@@ -93,9 +97,9 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Route::get('/', function() {
-    //     return redirect()->route('admin'); // Fixed missing semicolon
-    // });
+    Route::get('', function() {
+        return redirect()->route('admin'); // Fixed missing semicolon
+    });
     Route::get('/', AdminLogin::class)->name('admin');
 
     
@@ -106,7 +110,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('logout', [LogoutController::class, 'adminLogout'])->name('logout');
         Route::get('list', AdminList::class)->name(name: 'list');
         Route::get('details/{id}', AdminDetails::class)->name('details');
-        // Route::get('route-list', SmsRouteList::class)->name('smsroute');
         Route::get('sender-list', SmsSenderList::class)->name('smssender');
         Route::get('payment-list', PaymentList::class)->name('payment');
         Route::get('message-list', MessageList::class)->name('message');
@@ -115,12 +118,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('group-list', GroupList::class)->name('group');
         Route::get('sendsms', AdminSendSms::class)->name('sendsms');
         Route::get('schedulelist', ScheduleMessageList::class)->name('schedulelist');
-
-        // Route::middleware(['auth:admin', 'super'])->group(function () {
-        // Route::get('ledgers', AllGeneralLedger::class)->name('ledgerlist');
-        // });
-
-
         Route::middleware(['auth:admin', 'super'])->group(function () {
             Route::get('ledger-list', LedgerList::class)->name('ledgers');
             Route::get('transaction-list', TransactionList::class)->name('transactions');

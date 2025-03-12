@@ -15,6 +15,8 @@ class Messages extends Component
     public $selectedMessage;
 
     public $search = '';
+
+    public $viewModal = false;
     
     #[Title('Messages')]
     public function render()
@@ -24,23 +26,28 @@ class Messages extends Component
             ->when($this->search, function ($query) {
                 $searchTerm = $this->search;
                 $query->where(function ($q) use ($searchTerm) {
-                    $q->where('message_id', 'like', "%{$searchTerm}%")
+                    $q->where('message_reference', 'like', "%{$searchTerm}%")
                         ->orWhere('destination', 'like', "%{$searchTerm}%")
                         ->orWhere('status', 'like', "%{$searchTerm}%")
                         ->orWhere('created_at', 'like', "%{$searchTerm}%");
                 });
             })
             ->latest()
-            ->paginate(4);
+            ->paginate(10);
         return view('livewire.user.messages', compact('allMessage'))
             ->extends('layouts.auth_layout')
             ->section('auth-section');
     }
 
-    public function showMessage($messageId)
+
+    public function closeModal() {
+        $this->viewModal = false;
+    }
+
+    public function showMessage($id)
     {
-        $this->selectedMessage = Message::find($messageId);
-        $this->dispatch('openModal');
+        $this-> viewModal = true;
+        $this->selectedMessage = Message::find($id);
     }
 
 }

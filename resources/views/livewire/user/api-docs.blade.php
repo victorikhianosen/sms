@@ -173,14 +173,14 @@
                                         <td class="px-4 py-2 whitespace-normal text-sm text-gray">string</td>
                                         <td class="px-4 py-2 whitespace-normal text-sm text-gray">Yes</td>
                                         <td class="px-4 py-2 whitespace-normal text-sm text-gray">The sender name that
-                                            will appear on the recipient's phone.</td>
+                                            will appear on the recipient's phone number.</td>
                                     </tr>
                                     <tr class="odd:bg-white even:bg-gray-100 border-b border-gray-300">
-                                        <td class="px-4 py-2 whitespace-normal text-sm text-gray">phone</td>
+                                        <td class="px-4 py-2 whitespace-normal text-sm text-gray">phone_number</td>
                                         <td class="px-4 py-2 whitespace-normal text-sm text-gray">string</td>
                                         <td class="px-4 py-2 whitespace-normal text-sm text-gray">Yes</td>
                                         <td class="px-4 py-2 whitespace-normal text-sm text-gray">The recipient's phone
-                                            number in international format.</td>
+                                            number in local format.</td>
                                     </tr>
                                     <tr class="odd:bg-white even:bg-gray-100 border-b border-gray-300">
                                         <td class="px-4 py-2 whitespace-normal text-sm text-gray">message</td>
@@ -208,8 +208,8 @@
     "api_key": "YkDOxQKqofdIF3jPGO8U73z6mz7qzGjj",
     "api_secret": "PAOxcBHL53mr2b96v4v7pqbMmSMHUu0J",
     "sender": "GGT Connect",
-    "phone": "07033274155",
-    "message": "Testing API"
+    "phone_number": "07033274155",
+    "message": "Testing The API"
 }
         </code></pre>
                 </div>
@@ -271,7 +271,8 @@
         <h2 class="text-xl text-blue font-semibold">Contact Support</h2>
         <div class="">
             <p class="text-sm tracking-wide font-light text-textPrimary">
-                For any issues, contact GGT Connect API support at <span class="font-semibold">support@ggtconnect.com</span>
+                For any issues, contact GGT Connect API support at <span
+                    class="font-semibold">support@ggtconnect.com</span>
             </p>
         </div>
     </div>

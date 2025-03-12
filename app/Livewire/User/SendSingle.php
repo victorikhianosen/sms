@@ -11,6 +11,7 @@ use App\Models\GeneralLedger;
 use Livewire\Attributes\Title;
 use App\Services\SendSmsService;
 use Livewire\Attributes\Validate;
+use App\Services\ReferenceService;
 use Illuminate\Support\Facades\Auth;
 
 class SendSingle extends Component
@@ -32,10 +33,13 @@ class SendSingle extends Component
     public $messageLength;
 
     protected $sendSmsService;
+    protected $referenceService;
+
 
     public function __construct()
     {
         $this->sendSmsService = app(SendSmsService::class);
+        $this->referenceService = app(ReferenceService::class);
     }
 
     #[Title('Messages')]
@@ -52,27 +56,21 @@ class SendSingle extends Component
         $validated = $this->validate();
 
         $user = Auth::user();
-        // $smsRate = $user->sms_rate;
-        // $smsCharLimit = $user->sms_char_limit;
+    
         $smsRate = (float) $user->sms_rate;
 
-        if (!$smsRate) { 
+        if (!$smsRate) {
             $this->dispatch('alert', type: 'error', text: 'Sorry, your rate has not been fixed.', position: 'center', timer: 10000, button: false);
             return;
         }
-        
+
         $smsCharLimit = (int) $user->sms_char_limit;
         $accountBalance = $user['balance'];
         $messageLength = strlen($validated['message']);
         $smsUnits = ceil($messageLength / $smsCharLimit);
         $totalCharge = $smsUnits * $smsRate;
 
-        // dd([
-        //     'smsRate' => $smsRate,
-        //     'smsCharLimit' => $smsCharLimit,
-        //     'smsUnits' => $smsUnits,
-        //     'totalCharge' => $totalCharge,
-        // ]);
+   
 
         if ($accountBalance < $totalCharge) {
             $this->dispatch('alert', type: 'error', text: 'Insufficient funds!', position: 'center', timer: 10000, button: false);
@@ -106,14 +104,25 @@ class SendSingle extends Component
         }
 
         $user = Auth::user();
+        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+        if (!$ledger) {
+            $this->dispatch('alert', type: 'error', text: 'Unable to process your request at the moment. Please contact support.', position: 'center', timer: 5000);
+            return;
+        }
+
+        $balanceBeforeGL = $ledger->balance;
         $user->balance -= $this->totalCharge;
         $user->save();
 
-        $finalPhone = '234' . substr($this->phone_number, 1);
-        $messageID = Str::uuid()->toString();
+        $ledger->balance -= $this->totalCharge;
+        $ledger->save();
 
-        Message::create([
-            'user_id' => $user->id,
+        $finalPhone = '234' . substr($this->phone_number, 1);
+        $message_reference = Str::uuid()->toString();
+
+        $transaction_number = $this->referenceService->generateReference($user);
+
+        $user->messages()->create([
             'sms_sender_id' => $sender->id,
             'sender' => $sender->name,
             'page_number' => $this->smsUnits,
@@ -121,24 +130,11 @@ class SendSingle extends Component
             'status' => 'sent',
             'amount' => $this->totalCharge,
             'message' => $this->message,
-            'message_id' => $messageID,
+            'message_reference' => $message_reference,
+            'transaction_number' => $transaction_number,
             'destination' => $finalPhone,
             'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
-
-        $reference = $this->generateReference($user);
-
-
-        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
-        if (!$ledger) {
-            $this->dispatch('alert', type: 'error', text: 'Error in fetching Ledger.', position: 'center', timer: 5000);
-            return;
-        }
-
-        $balanceBeforeGL = $ledger->balance;
-
-        $ledger->balance += $this->totalCharge;
-        $ledger->save();
 
         Transaction::create([
             'user_id' => $user->id,
@@ -147,29 +143,16 @@ class SendSingle extends Component
             'transaction_type' => 'credit',
             'balance_before' => $balanceBeforeGL,
             'balance_after' => $user->balance,
-            'method' => 'manual',
-            'reference' => $reference,
-            'description' => "Funds added by admin (₦" . number_format($this->totalCharge, 2) . ")",
+            'payment_method' => 'single sms',
+            'reference' => $transaction_number,
+            'description' => "SMS Charge (₦ {$this->totalCharge}) / {$transaction_number} / {$message_reference} / {$finalPhone}",
             'status' => 'success',
         ]);
 
         $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message);
         $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
         $this->closeModal();
-        $this->reset(['sender','message', 'phone_number']);
+        $this->reset(['sender', 'message', 'phone_number']);
     }
 
-
-    private function generateReference($data)
-    {
-        $adminID = $data['id'];
-        $firstTwoFirstName = strtoupper(substr($data->first_name, 0, 2));
-        $firstTwoLastName = strtoupper(substr($data->last_name, 0, 2));
-        $firstThreeDigits = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
-        $fourLetters = strtoupper(Str::random(4));
-        $sevenDigitNumber = random_int(100000, 999999);
-        $lastThreeLetters = ucfirst(Str::random(2)) . 'C';
-
-        return "{$firstThreeDigits}{$fourLetters}{$sevenDigitNumber}{$lastThreeLetters}{$adminID}{$firstTwoFirstName}{$firstTwoLastName}/MAN";
-    }
 }

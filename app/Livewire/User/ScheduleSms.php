@@ -5,12 +5,15 @@ namespace App\Livewire\User;
 use App\Models\Message;
 use Livewire\Component;
 use App\Models\SmsSender;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
+use App\Models\GeneralLedger;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\Title;
 use App\Models\ScheduledMessage;
 use Livewire\Attributes\Validate;
+use App\Services\ReferenceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -53,8 +56,17 @@ class ScheduleSms extends Component
     public $smsUnits;
     public $numbersToSend;
     public $scheduleTime;
-
     public $smsRate;
+
+    protected $referenceService;
+
+
+    public function __construct()
+    {
+        $this->referenceService = app(ReferenceService::class);
+    }
+
+
     #[Title('Schedule')]
     public function render()
     {
@@ -150,6 +162,9 @@ class ScheduleSms extends Component
 
     public function sendScheduleMessage()
     {
+
+        $user = Auth::user();
+
         if (!$this->numbersToSend) {
             $this->dispatch('alert', type: 'error', text: 'No numbers found!', position: 'center', timer: 5000, button: false);
             return;
@@ -161,18 +176,26 @@ class ScheduleSms extends Component
             return;
         }
 
+        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+
+        if (!$ledger) {
+            $this->dispatch('alert', type: 'error', text: 'Unable to process your request at the moment. Please contact support.[GL]', position: 'center', timer: 5000);
+            return;
+        }
+
         $smsRoute = $sender->smsroute->name;
+        $reference = $this->referenceService->generateReference($user);
+        $numbersArray = explode(',', $this->numbersToSend);
 
-        // dd($smsRoute);
-
-        $user = Auth::user();
         $user->balance -= $this->totalCharge;
         $user->save();
 
-        // Convert the string to an array first before encoding as JSON
-        $numbersArray = explode(',', $this->numbersToSend);
+        $balanceBeforeGL = $ledger->balance;
+        $ledger->balance -= $this->totalCharge;
+        $ledger->save();
 
-        ScheduledMessage::create([
+
+        $scheduledMessage = ScheduledMessage::create([
             'user_id' => $user['id'],
             'sms_sender_id' => $sender->id,
             'sender' => $sender['name'],
@@ -184,7 +207,22 @@ class ScheduleSms extends Component
             'description' => $this->description,
             'destination' => json_encode($numbersArray),
             'route' => $smsRoute,
+            'reference' => $reference,
             'scheduled_time' => Carbon::parse($this->date_time),
+        ]);
+
+        Transaction::create([
+            'user_id' => $user->id,
+            'general_ledger_id' => $ledger->id,
+            'scheduled_message_id' => $scheduledMessage->id, // Add this line
+            'amount' => $this->totalCharge,
+            'transaction_type' => 'credit',
+            'balance_before' => $balanceBeforeGL,
+            'balance_after' => $ledger->balance,
+            'payment_method' => 'schedule sms',
+            'reference' => $reference,
+            'description' => "SMS Charge (₦ {$this->totalCharge}) / {$reference} / " . implode(',', $numbersArray),
+            'status' => 'success',
         ]);
 
         $this->reset();

@@ -23,7 +23,7 @@
                                     Amount
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-36">
-                                    Payment type
+                                    Payment Method
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">
                                     Status
@@ -37,8 +37,8 @@
                             </tr>
                         </thead>
 
-
-                        <!--[if BLOCK]><![endif]--><?php if (!$allPayment): ?>
+                        
+                        <!--[if BLOCK]><![endif]--><?php if(!$allPayment): ?>
                             <tbody>
                                 <tr>
                                     <td colspan="7" class="text-center py-4">
@@ -49,10 +49,7 @@
                             </tbody>
                         <?php else: ?>
                             <tbody>
-                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allPayment;
-                                                            $__env->addLoop($__currentLoopData);
-                                                            foreach ($__currentLoopData as $payment): $__env->incrementLoopIndices();
-                                                                $loop = $__env->getLastLoop(); ?>
+                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allPayment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
                                             <?php echo e(substr($payment->transaction_number, 0, 10)); ?>
@@ -67,13 +64,13 @@
 
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            <?php echo e($payment->payment_type); ?>
+                                            <?php echo e($payment->payment_method); ?>
 
                                         </td>
                                         <td
                                             class="px-4 py-4 whitespace-normal text-sm
-                                    <?php if ($payment->status == 'success'): ?> text-green-600
-                                    <?php elseif ($payment->status == 'failed'): ?> text-red-600
+                                    <?php if($payment->status == 'success'): ?> text-green-600
+                                    <?php elseif($payment->status == 'failed'): ?> text-red-600
                                     <?php else: ?> text-gray-600 <?php endif; ?>">
                                             <?php echo e($payment->status); ?>
 
@@ -86,9 +83,7 @@
                                             (<?php echo e($payment->currency); ?>)
                                         </td>
                                     </tr>
-                                <?php endforeach;
-                                                            $__env->popLoop();
-                                                            $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
                             </tbody>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                     </table>

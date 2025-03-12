@@ -42,13 +42,6 @@
         @endif
 
 
-
-
-
-
-
-
-
     </div>
 
       <div class="mt-12">

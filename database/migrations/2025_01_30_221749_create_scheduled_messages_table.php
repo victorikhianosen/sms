@@ -26,6 +26,7 @@ return new class extends Migration
             $table->decimal('amount', 15, 2);
             $table->json('destination');
             $table->string('route');
+            $table->string('reference');
             $table->dateTime('scheduled_time');
             $table->timestamps();
         });

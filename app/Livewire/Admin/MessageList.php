@@ -11,7 +11,7 @@ class MessageList extends Component
 {
 
 
-    public $sms_sender_id, $sender, $page_number, $page_rate, $status, $amount, $message, $message_id, $destination, $route, $created_at;
+    public $sms_sender_id, $sender, $page_number, $page_rate, $status, $amount, $message, $transaction_number, $destination, $route, $created_at, $message_reference;
 
     public $editModel = false;
 
@@ -31,7 +31,7 @@ class MessageList extends Component
         ->when($this->search, function ($query) {
             $searchTerm = $this->search;
             $query->where(function ($q) use ($searchTerm) {
-                $q->where('message_id', 'like', "%{$searchTerm}%")
+                $q->where('message_reference', 'like', "%{$searchTerm}%")
                 ->orWhere('destination', 'like', "%{$searchTerm}%")
                 ->orWhere('status', 'like', "%{$searchTerm}%")
                 ->orWhere('created_at', 'like', "%{$searchTerm}%");
@@ -63,14 +63,16 @@ class MessageList extends Component
         $this->email = $message->user->email;
         $this->sms_sender_id = $message->sms_sender_id;
         $this->sender = $message->sender;
+        $this->message_reference = $message->message_reference;
+
         $this->page_number = $message->page_number;
         $this->page_rate = $message['page_rate'];
         $this->status = $message->status;
         $this->amount = $message->amount;
         $this->message = $message->message;
-        $this->message_id = $message->message_id;
+        $this->transaction_number = $message->transaction_number;
         $this->destination = $message->destination;
         $this->route = $message->route;
-        $this->created_at = $message->created_at;
+        $this->created_at = $message->created_at->format('d M Y, h:i A');
     }
 }

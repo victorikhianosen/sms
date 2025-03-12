@@ -15,15 +15,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('admin_id')->nullable()->constrained('admins')->cascadeOnDelete();
+            $table->foreignId('message_id')->nullable()->constrained('messages')->cascadeOnDelete();
             $table->foreignId('payment_id')->nullable()->constrained('payments')->cascadeOnDelete();
             $table->foreignId('general_ledger_id')->constrained('general_ledgers')->cascadeOnDelete();
+            $table->foreignId('scheduled_message_id')->nullable()->constrained('scheduled_messages')->cascadeOnDelete(); // Add this line
+
             $table->decimal('amount', 15, 2);
-            $table->enum('transaction_type', ['credit', 'debit']);
+            $table->string('transaction_type');
+            $table->string('payment_method')->nullable();
             $table->decimal('balance_before', 15, 2)->nullable();
             $table->decimal('balance_after', 15, 2)->nullable();
-            $table->enum('method', ['bank_transfer', 'card', 'ussd', 'manual'])->nullable();
             $table->string('reference')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->enum('status', ['success', 'failed', 'pending'])->default('pending');
             $table->timestamps();
         });

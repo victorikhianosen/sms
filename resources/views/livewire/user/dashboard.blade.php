@@ -244,7 +244,7 @@
                                     Amount
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-36">
-                                    Payment type
+                                    Payment Method
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">
                                     Status
@@ -284,7 +284,7 @@
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             {{ $payment->amount }}</td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            {{ $payment->payment_type }}</td>
+                                            {{ $payment->payment_method }}</td>
                                         <td
                                             class="px-4 py-4 whitespace-normal text-sm
                                         @if ($payment->status == 'success') text-green-600
@@ -305,6 +305,19 @@
             </div>
         </div>
     </div>
+
+    @if (session('alert'))
+        <script>
+            Swal.fire({
+                icon: "{{ session('alert.type') }}",
+                title: "{{ session('alert.text') }}",
+                position: "{{ session('alert.position') }}",
+                timer: {{ session('alert.timer') }},
+                showConfirmButton: {{ session('alert.button') ? 'true' : 'false' }}
+            });
+        </script>
+    @endif
+
 
 
 

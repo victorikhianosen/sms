@@ -3,7 +3,8 @@
         <h3 class="font-bold text-2xl">All Messages</h3>
 
         <!-- Search Input Field -->
-        <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search by Message ID, Phone, status, Date "
+        <input type="text" wire:model.live.debounce.500ms="search"
+            placeholder="Search by Message ID, Phone, status, Date "
             class="px-4 py-2 border rounded-md bg-gray-100 text-gray-600 w-64 placeholder:text-xs">
     </div>
 
@@ -42,7 +43,7 @@
                             @foreach ($messages as $message)
                                 <tr>
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        {{ Str::limit($message['message_id'], 8) }}
+                                        {{ Str::limit($message['transaction_number'], 8) }}
                                     </td>
 
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
@@ -75,7 +76,7 @@
                                         {{ ucfirst($message['status']) }}
                                     </td>
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        {{ $message['created_at'] }}
+                                        {{ \Carbon\Carbon::parse($message['created_at'])->format('d M Y, h:i A') }}
                                     </td>
                                     @adminOrSuperAdmin
                                         <td class="px-4 py-4 whitespace-normal flex items-center gap-2">
@@ -120,6 +121,12 @@
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                         </div>
 
+
+                        <div>
+                            <label class="font-medium text-gray-700">Message Reference</label>
+                            <input type="text" wire:model="message_reference"
+                                class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
+                        </div>
                         <div>
                             <label class="font-medium text-gray-700">Destination</label>
                             <input type="text" wire:model="destination"
@@ -166,8 +173,8 @@
                         </div>
 
                         <div>
-                            <label class="font-medium text-gray-700">Message ID</label>
-                            <input type="text" wire:model="message_id"
+                            <label class="font-medium text-gray-700">Transaction Number</label>
+                            <input type="text" wire:model="transaction_number"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                         </div>
 
@@ -179,30 +186,21 @@
 
 
                         <div>
-                            <label class="font-medium text-gray-700">Messege</label>
-                            <textarea rows="1" cols="1" wire:model="message" class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly></textarea>
-                        </div>
-
-
-                        {{-- <div>
-                            <label class="font-medium text-gray-700">Message</label>
-                            <input type="text" wire:model="message"
-                                class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
-                        </div> --}}
-
-                        <div>
                             <label class="font-medium text-gray-700">Date</label>
                             <input type="text" wire:model="created_at"
                                 class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600" readonly>
                         </div>
+
+
+                        <div class="col-span-1 md:col-span-3">
+                            <label class="font-medium text-gray-700">Message</label>
+                            <textarea rows="3" wire:model="message"
+                                class="w-full px-4 py-2 border rounded-md bg-gray-100 text-gray-600 resize-none" readonly></textarea>
+                        </div>
+
                     </div>
 
-                    <div class="mt-6 flex justify-start pt-4 space-x-4">
-                        <button type="button" wire:click="closeModal"
-                            class="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-opacity-90 transition text-sm">
-                            Close
-                        </button>
-                    </div>
+
                 </form>
 
             </div>

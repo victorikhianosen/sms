@@ -103,10 +103,8 @@ class UserList extends Component
 
     public function addUserFund()
     {
-        $validated = $this->validate([
-            'amount' => 'required|numeric|min:1'
-        ]);
 
+    $validated = $this->validate(['amount' => ['required', 'numeric', 'min:5', 'regex:/^[1-9][0-9]*$/']]);
         $user = User::find($this->userID);
         if (!$user) {
             $this->dispatch('alert', type: 'error', text: 'User not found.', position: 'center', timer: 5000);
@@ -158,7 +156,7 @@ class UserList extends Component
             'transaction_type' => 'debit',
             'balance_before' => $balanceBeforeUser,
             'balance_after' => $user->balance,
-            'method' => 'manual',
+            'payment_method' => 'manual',
             'reference' => $reference,
             'description' => "Funds added by admin (₦" . number_format($this->amount, 2) . ")",
             'status' => 'success',
@@ -200,18 +198,14 @@ class UserList extends Component
         $this->editModel = false;
     }
 
-
-
     private function generateReference($admin)
     {
         $adminID = $admin['id'];
-        $firstTwoFirstName = strtoupper(substr($admin->first_name, 0, 2));
-        $firstTwoLastName = strtoupper(substr($admin->last_name, 0, 2));
-        $firstThreeDigits = str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
-        $fourLetters = strtoupper(Str::random(4));
-        $sevenDigitNumber = random_int(100000, 999999);
-        $lastThreeLetters = ucfirst(Str::random(2)) . 'C';
+        $firstTwoFirstName = strtoupper(substr($admin->first_name, 0, 1));
+        $firstTwoLastName = strtoupper(substr($admin->last_name, 0, 1));
+        $fourLetters = strtoupper(Str::random(1)) . strtolower(Str::random(1)) . strtoupper(Str::random(1)) . strtolower(Str::random(1));
+        $sevenDigitNumber = random_int(10000000, 99999999);
 
-        return "{$firstThreeDigits}{$fourLetters}{$sevenDigitNumber}{$lastThreeLetters}{$adminID}{$firstTwoFirstName}{$firstTwoLastName}/MAN";
+        return "{$fourLetters}{$sevenDigitNumber}/{$adminID}{$firstTwoFirstName}{$firstTwoLastName}";
     }
 }

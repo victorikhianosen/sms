@@ -23,7 +23,7 @@
                                     Amount
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-36">
-                                    Payment type
+                                    Payment Method
                                 </th>
                                 <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">
                                     Status
@@ -61,7 +61,7 @@
                                             {{ $payment->amount }}
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            {{ $payment->payment_type }}
+                                            {{ $payment->payment_method }}
                                         </td>
                                         <td
                                             class="px-4 py-4 whitespace-normal text-sm

@@ -6,9 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('messages', function (Blueprint $table) {
@@ -22,16 +20,15 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('amount')->nullable();
             $table->string('message')->nullable();
-            $table->string('message_id')->nullable();
+            $table->string('message_reference')->nullable();
+            $table->string('transaction_number')->nullable();
             $table->string('destination')->nullable();
             $table->string('route')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('messages');

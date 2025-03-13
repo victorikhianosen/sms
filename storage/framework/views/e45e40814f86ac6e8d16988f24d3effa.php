@@ -28,21 +28,7 @@
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
                             class="ri-more-fill"></i></button>
-                    <ul
-                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+           
                 </div>
             </div>
         </div>
@@ -68,24 +54,11 @@
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
                             class="ri-more-fill"></i></button>
-                    <ul
-                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
+              
                     </ul>
                 </div>
             </div>
-            <a href="<?php echo e(route('message')); ?>" wire:navigate.hover
+            <a href="<?php echo e(route('admin.payment')); ?>" wire:navigate.hover
                 class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
 
@@ -110,24 +83,10 @@
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
                             class="ri-more-fill"></i></button>
-                    <ul
-                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+                
                 </div>
             </div>
-            <a href="<?php echo e(route('message')); ?>" wire:navigate.hover
+            <a href="<?php echo e(route('admin.message')); ?>" wire:navigate.hover
                 class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
 
@@ -160,24 +119,10 @@
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
                             class="ri-more-fill"></i></button>
-                    <ul
-                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
+              
                 </div>
             </div>
-            <a href="<?php echo e(route('groups')); ?>" wire:navigate.hover
+            <a href="<?php echo e(route('admin.group')); ?>" wire:navigate.hover
                 class="text-[#F7941D] font-medium text-sm hover:text-red-800">View</a>
         </div>
     </div>
@@ -232,7 +177,7 @@
                                 <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allAdminMessage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            <?php echo e(substr($item->message_id, 0, 8)); ?>
+                                            <?php echo e(substr($item->message_reference, 0, 8)); ?>
 
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray"><?php echo e($item->sender); ?>

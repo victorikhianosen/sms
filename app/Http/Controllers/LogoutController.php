@@ -9,7 +9,8 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-        Auth::logout();
+        
+        Auth::logout();                     
         session()->flash('alert', [
             'type' => 'success',
             'text' => 'Logout Successful!',
@@ -17,6 +18,7 @@ class LogoutController extends Controller
             'timer' => 4000,
             'button' => false,
         ]);
+        
         return redirect()->route('home');
     }
 

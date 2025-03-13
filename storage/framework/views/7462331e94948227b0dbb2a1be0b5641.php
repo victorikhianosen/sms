@@ -46,8 +46,10 @@
                                 </td>
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray break-words">
                                     
-                                    <?php echo e(substr($item->message, 0, 20)); ?>
+                                <td class="px-4 py-4 whitespace-normal text-sm">
+                                    <?php echo e(Str::limit($item->message, 20)); ?>
 
+                                </td>
 
                                 </td>
 

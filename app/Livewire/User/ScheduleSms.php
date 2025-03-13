@@ -232,9 +232,7 @@ class ScheduleSms extends Component
 
     public function closeModal()
     {
-        // Reset modal state and other properties
         $this->showModal = false;
-        // $this->resetErrorBag();
-        // $this->reset(['sender', 'message', 'phone_number']);
+
     }
 }

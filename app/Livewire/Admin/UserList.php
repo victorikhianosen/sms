@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 use App\Models\GeneralLedger;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
+use App\Services\ReferenceService;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\CreateVirtualAccountJob;
 
@@ -56,6 +57,15 @@ class UserList extends Component
 
     public $userID;
 
+
+    protected $referenceService;
+
+    public function __construct()
+    {
+        $this->referenceService = app(ReferenceService::class);
+    }
+
+    
     #[Title('All Users')]
     public function render()
     {
@@ -95,8 +105,6 @@ class UserList extends Component
         $this->email = $user->email;
         $this->phone = $user->phone;
         $this->available_balance = $user->balance;
-
-        // dd($user);
         $this->editFundModel = true;
     }
 
@@ -112,34 +120,27 @@ class UserList extends Component
         }
 
         $admin = Auth::guard('admin')->user();
-        $reference = $this->generateReference($admin);
+        $reference = $this->referenceService->referenceWithDetails(data: $admin);
+        $transaction_number = $this->referenceService->generateReference($admin);
 
-        $balanceBeforeUser = $user->balance;
-
-        // Fetch General Ledger
         $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
         if (!$ledger) {
             $this->dispatch('alert', type: 'error', text: 'Error in fetching Ledger.', position: 'center', timer: 5000);
             return;
         }
 
-        // Store GL previous balance
         $balanceBeforeGL = $ledger->balance;
+        $user->balance += $this->amount; 
+        $ledger->balance += $this->amount; 
 
-        // Update balances
-        $user->balance += $this->amount; // Credit user
-        $ledger->balance += $this->amount; // Debit GL
-
-        // Save updates
         $user->save();
         $ledger->save();
 
-        // Create a payment record
         $payment = Payment::create([
             'user_id' => $user->id,
             'amount' => $this->amount,
             'status' => 'success',
-            'transaction_number' => Str::uuid(),
+            'transaction_number' => $transaction_number,
             'reference' => $reference,
             'currency' => 'NGN',
             'payment_type' => 'credit',
@@ -154,7 +155,7 @@ class UserList extends Component
             'general_ledger_id' => $ledger->id,
             'amount' => $this->amount,
             'transaction_type' => 'debit',
-            'balance_before' => $balanceBeforeUser,
+            'balance_before' => $balanceBeforeGL,
             'balance_after' => $user->balance,
             'payment_method' => 'manual',
             'reference' => $reference,
@@ -198,14 +199,5 @@ class UserList extends Component
         $this->editModel = false;
     }
 
-    private function generateReference($admin)
-    {
-        $adminID = $admin['id'];
-        $firstTwoFirstName = strtoupper(substr($admin->first_name, 0, 1));
-        $firstTwoLastName = strtoupper(substr($admin->last_name, 0, 1));
-        $fourLetters = strtoupper(Str::random(1)) . strtolower(Str::random(1)) . strtoupper(Str::random(1)) . strtolower(Str::random(1));
-        $sevenDigitNumber = random_int(10000000, 99999999);
 
-        return "{$fourLetters}{$sevenDigitNumber}/{$adminID}{$firstTwoFirstName}{$firstTwoLastName}";
-    }
 }

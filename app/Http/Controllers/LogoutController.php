@@ -20,7 +20,6 @@ class LogoutController extends Controller
         return redirect()->route('home');
     }
 
-
     public function adminLogout(Request $request)
     {
         Auth::guard('admin')->logout();
@@ -31,6 +30,6 @@ class LogoutController extends Controller
             'timer' => 4000,
             'button' => false,
         ]);
-        return redirect()->route('admin');
+        return redirect()->route('admin.login');
     }
 }

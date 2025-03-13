@@ -5,11 +5,14 @@ namespace App\Livewire\Admin;
 use App\Models\Admin;
 use App\Models\Payment;
 use Livewire\Component;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
+use App\Models\GeneralLedger;
 use Livewire\WithFileUploads;
 use App\Mail\AdminCreatedMail;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
+use App\Services\ReferenceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\GgtSmsNotification;
@@ -50,6 +53,12 @@ class AdminList extends Component
     public $admin_email, $admin_phone, $admin_available_balance, $adminID, $amount;
 
 
+    protected $referenceService;
+
+    public function __construct()
+    {
+        $this->referenceService = app(ReferenceService::class);
+    }
     #[Title('User Details')]
     public function render()
     {
@@ -129,48 +138,57 @@ class AdminList extends Component
             return;
         }
 
-        // Update the user's balance
+        $Authadmin = Auth::guard('admin')->user();
+
+        $reference = $this->referenceService->referenceWithDetails($Authadmin);
+        $transaction_number = $this->referenceService->generateReference($Authadmin);
+
+        // dd($reference, $transaction_number);
+
+
+        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+        // dd($ledger );
+        if (!$ledger) {
+            $this->dispatch('alert', type: 'error', text: 'Error in fetching Ledger.', position: 'center', timer: 5000);
+            return;
+        }
+
+        $balanceBeforeGL = $ledger->balance;
+
         $admin->balance += $this->amount;
+        $ledger->balance += $this->amount;
+
         $admin->save();
-
-
-
-        $AuthAdmin = Auth::guard('admin')->user();
-
-        $AuthAdmin_id = $AuthAdmin->id;
-        $AuthAdminFirstname = $AuthAdmin->first_name;
-        $AuthAdminLastname = $AuthAdmin->last_name;
-
-        // Get first letters of first and last name
-        $initials = strtoupper(substr($AuthAdminFirstname, 0, 2) . substr($AuthAdminLastname, 0, 2));
-
-        // Generate the reference
-        $reference =  $AuthAdmin_id . $initials . '_' . strtoupper(Str::random(10));
+        $ledger->save();
 
         $payment = Payment::create([
             'admin_id' => $admin->id,
             'amount' => $this->amount,
             'status' => 'success',
-            'transaction_number' => Str::uuid(),
+            'transaction_number' => $transaction_number,
             'reference' => $reference,
-            'bank_name' => null,
-            'account_number' => null,
-            'card_last_four' => null,
-            'card_brand' => null,
             'currency' => 'NGN',
-            'payment_type' => 'manual',
-            'paystack_response' => null,
-            'verify_response' => null,
+            'payment_type' => 'credit',
+            'payment_method' => 'manual',
             'description' => "Manual fund addition by admin of ₦" . $reference  . number_format($this->amount, 2),
         ]);
 
+        Transaction::create([
+            'admin_id' => $admin->id,
+            'payment_id' => $payment->id,
+            'general_ledger_id' => $ledger->id,
+            'amount' => $this->amount,
+            'transaction_type' => 'debit',
+            'balance_before' => $balanceBeforeGL,
+            'balance_after' => $ledger->balance,
+            'payment_method' => 'manual',
+            'reference' => $payment->reference,
+            'description' => "Funds added by admin (₦" . number_format($this->amount, 2) . ")",
+            'status' => 'success',
+        ]);
 
-        // Reset input fields
         $this->reset('amount');
-
         $this->editFundModel = false;
-
-        // Show success message
         $this->dispatch('alert', type: 'success', text: 'Funds added successfully.', position: 'center', timer: 5000, button: false);
     }
 }

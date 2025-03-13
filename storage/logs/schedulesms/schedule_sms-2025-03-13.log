@@ -1,0 +1,47 @@
+[2025-03-13 00:00:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:00:02  
+[2025-03-13 00:00:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:01:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:01:02  
+[2025-03-13 00:01:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:02:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:02:02  
+[2025-03-13 00:02:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:03:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:03:02  
+[2025-03-13 00:03:02] local.INFO: Pending Scheduled messages found: 1  
+[2025-03-13 00:03:02] local.INFO: Processing message for User ID: 1  
+[2025-03-13 00:03:02] local.INFO: Final phone: 2347033273415  
+[2025-03-13 00:03:02] local.INFO: scheduled message: ====================  
+[2025-03-13 00:03:02] local.INFO: Final phone: 23450703640410  
+[2025-03-13 00:03:02] local.INFO: scheduled message: ====================  
+[2025-03-13 00:04:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:04:02  
+[2025-03-13 00:04:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:05:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:05:02  
+[2025-03-13 00:05:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:06:01] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:06:01  
+[2025-03-13 00:06:01] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:07:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:07:02  
+[2025-03-13 00:07:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:08:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:08:02  
+[2025-03-13 00:08:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:09:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:09:02  
+[2025-03-13 00:09:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:10:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:10:02  
+[2025-03-13 00:10:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:11:01] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:11:01  
+[2025-03-13 00:11:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:12:01] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:12:01  
+[2025-03-13 00:12:01] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:13:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:13:02  
+[2025-03-13 00:13:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:14:03] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:14:03  
+[2025-03-13 00:14:03] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:15:03] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:15:03  
+[2025-03-13 00:15:03] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:16:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:16:02  
+[2025-03-13 00:16:02] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:17:03] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:17:03  
+[2025-03-13 00:17:03] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:18:03] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:18:03  
+[2025-03-13 00:18:03] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:22:03] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:22:03  
+[2025-03-13 00:22:03] local.INFO: Pending Scheduled messages found: 0  
+[2025-03-13 00:23:02] local.INFO: Checking for scheduled messages to send at: 2025-03-13 00:23:02  
+[2025-03-13 00:23:02] local.INFO: Pending Scheduled messages found: 0  

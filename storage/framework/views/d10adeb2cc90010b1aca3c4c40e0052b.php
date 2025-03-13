@@ -1,30 +1,48 @@
-<div wire:poll.2000ms="getAllUserBalance">
+<div wire:poll="getAllUserBalance">
     <div x-data="{ open: false, accountBalance: 1000 }">
         <div class="flex items-end justify-between relative">
             <div>
                 <h2 class="font-bold text-2xl">Admin</h2>
             </div>
             <div class="flex items-center gap-8">
+
+
+
                 <div>
-                    <h2 class="text-blue font-semibold">Total User Balance</h2>
-                    <!--[if BLOCK]><![endif]--><?php if(is_null($allUserBalance)): ?>
+                    <h2 class="text-blue font-semibold">All Users Balance</h2>
+                    <!--[if BLOCK]><![endif]--><?php if(is_null($totalBalance)): ?>
                         <div class="flex items-center gap-2">
                             <i class="fa-solid fa-spinner animate-spin text-sm text-blue-500"></i>
                             <p class="text-md text-gray-600 mt-2 animate-pulse">Loading...</p>
                         </div>
-                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
-                    <!--[if BLOCK]><![endif]--><?php if(!is_null($allUserBalance)): ?>
-                        <p class="text-sm font-bold transition-all duration-300 <?php echo e($allUserBalance < 500 ? 'text-red-500' : 'text-green-500'); ?>">
-                            &#8358; <?php echo e($allUserBalance); ?>
+                    <?php else: ?>
+                        <p
+                            class="text-sm font-bold transition-all duration-300 <?php echo e($totalBalance < 500 ? 'text-red-500' : 'text-green-500'); ?>">
+                            &#8358; <?php echo e($totalBalance); ?>
 
                         </p>
                     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                 </div>
 
-                
+                <div>
+                    <h2 class="text-blue font-semibold">Ledger Balance</h2>
+                    <!--[if BLOCK]><![endif]--><?php if(is_null($ledgerBalance)): ?>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-spinner animate-spin text-sm text-blue-500"></i>
+                            <p class="text-md text-gray-600 mt-2 animate-pulse">Loading...</p>
+                        </div>
+                    <?php else: ?>
+                        <p
+                            class="text-sm font-bold transition-all duration-300 <?php echo e($ledgerBalance < 500 ? 'text-red-500' : 'text-green-500'); ?>">
+                            &#8358; <?php echo e($ledgerBalance); ?>
 
-                <div class="flex justify-center items-center gap-3 relative"
-                    @mouseenter="open = true" 
+                        </p>
+                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                </div>
+
+
+
+                <div class="flex justify-center items-center gap-3 relative" @mouseenter="open = true"
                     @mouseleave="open = false">
                     <div>
                         <!--[if BLOCK]><![endif]--><?php if(is_null($first_name)): ?>
@@ -35,7 +53,8 @@
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                         <!--[if BLOCK]><![endif]--><?php if(!is_null($first_name)): ?>
                             <h4 class="text-base font-semibold text-blue"><?php echo e($first_name); ?></h4>
-                            <p class="text-sm font-bold transition-all duration-300 <?php echo e($allUserBalance < 500 ? 'text-red-500' : 'text-green-500'); ?>">
+                            <p
+                                class="text-sm font-bold transition-all duration-300 <?php echo e($allUserBalance < 500 ? 'text-red-500' : 'text-green-500'); ?>">
                                 &#8358; <span><?php echo e($balance); ?></span>
                             </p>
                         <?php endif; ?><!--[if ENDBLOCK]><![endif]-->

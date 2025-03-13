@@ -14,7 +14,7 @@
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Destination</th>
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Amount</th>
                             <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Status</th>
-                            <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-60">Date</th>
+                            <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-60">Schedule Date</th>
 
                             <!--[if BLOCK]><![endif]--><?php if (\Illuminate\Support\Facades\Blade::check('adminOrSuperAdmin')): ?>
                                 <th class="px-4 py-3 text-start text-xs font-semibold uppercase w-40">Action</th>
@@ -59,7 +59,7 @@
                                     </td>
 
                                     <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                        <?php echo e($schedule->created_at); ?>
+<?php echo e(\Carbon\Carbon::parse($schedule->scheduled_time)->format('d M Y, h:i:s A')); ?>
 
                                     </td>
 

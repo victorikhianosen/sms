@@ -96,13 +96,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('', function() {
-        return redirect()->route('admin'); // Fixed missing semicolon
+        return redirect()->route('admin.login'); // Updated route name
     });
-    Route::get('/', AdminLogin::class)->name('admin');
-
-    
+    Route::get('/', AdminLogin::class)->name('login'); // Added name to this route
     Route::middleware('auth:admin')->group(function () {
         Route::get('dashboard', AdminDashboard::class)->name('dashboard'); 
         Route::get('user/list', UserList::class)->name('userlist');
@@ -125,4 +125,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
     });
+
+
 });
+

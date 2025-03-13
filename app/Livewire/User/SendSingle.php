@@ -142,7 +142,7 @@ class SendSingle extends Component
             'amount' => $this->totalCharge,
             'transaction_type' => 'credit',
             'balance_before' => $balanceBeforeGL,
-            'balance_after' => $user->balance,
+            'balance_after' => $ledger->balance,
             'payment_method' => 'single sms',
             'reference' => $transaction_number,
             'description' => "SMS Charge (₦ {$this->totalCharge}) / {$transaction_number} / {$message_reference} / {$finalPhone}",

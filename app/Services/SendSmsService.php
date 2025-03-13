@@ -133,24 +133,11 @@ class SendSmsService
             [
                 'message_ref' => $message->message_reference,
                 'phone_number' => $message->destination,
-                'sent_at' => $message->created_at
+                'sent_at' => $message->created_at->format('Y-m-d H:i:s')
             ],
             'Message sent successfully'
         );
     }
-
-    /**
-     * Sends the SMS message to the external provider.
-     *
-     * Only the sender, smsRoute, message, and phone are dynamic; the remaining values are loaded from environment variables.
-     *
-     * @param string $senderName
-     * @param string $smsRoute
-     * @param string $finalPhone
-     * @param string $message
-     * @return array|null
-     */
-
 
 
     public function sendSms(string $senderName, string $smsRoute, string $finalPhone, string $message): ?array

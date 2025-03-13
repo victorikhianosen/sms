@@ -229,7 +229,9 @@
   "status": "success",
   "message": "Message sent successfully",
   "data": {
-    "message_id": "adfed204-d201-44d1-b9c0-8771d2981433"
+    "message_ref": "adfed204-d201-44d1-b9c0-8771d2981433",
+    "phone_number": "07033274155",
+    "sent_at": "2025-03-12 19:20:33"
   }
 }
         </code></pre>
@@ -265,8 +267,6 @@
 
     </div>
 
-
-
     <div class="space-y-4 pb-24">
         <h2 class="text-xl text-blue font-semibold">Contact Support</h2>
         <div class="">
@@ -276,7 +276,5 @@
             </p>
         </div>
     </div>
-
-
 
 </div>

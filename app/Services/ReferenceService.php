@@ -14,4 +14,15 @@ class ReferenceService
         $uniqueNumber = Str::uuid()->toString();
         return "{$uniqueNumber}/{$adminID}{$firstTwoFirstName}{$firstTwoLastName}";
     }
+
+    public function referenceWithDetails($data)
+    {
+        $adminID = $data['id'];
+        $firstCharFirstName = strtoupper(substr($data['first_name'], 0, 1));
+        $firstCharLastName = strtoupper(substr($data['last_name'], 0, 1));
+        $randomLetters = Str::random(4);
+        $randomNumbers = mt_rand(1000000, 9999999);
+
+        return "{$randomLetters}{$randomNumbers}/{$adminID}{$firstCharFirstName}{$firstCharLastName}";
+    }
 }

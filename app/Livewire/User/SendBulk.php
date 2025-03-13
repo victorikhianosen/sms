@@ -159,7 +159,6 @@ class SendBulk extends Component
             return;
         }
 
-        // Dispatch job to handle processing in the background
         ProcessBulkSms::dispatch(
             $user->id,
             $sender->id,

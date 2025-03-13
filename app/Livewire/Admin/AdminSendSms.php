@@ -5,9 +5,13 @@ namespace App\Livewire\Admin;
 use App\Models\Message;
 use Livewire\Component;
 use App\Models\SmsSender;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
+use App\Models\GeneralLedger;
 use Livewire\Attributes\Title;
+use App\Services\SendSmsService;
 use Livewire\Attributes\Validate;
+use App\Services\ReferenceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -22,6 +26,18 @@ class AdminSendSms extends Component
     #[Validate('required|digits:11')]
     public $phone_number;
 
+
+
+    protected $sendSmsService;
+    protected $referenceService;
+
+
+    public function __construct()
+    {
+        $this->sendSmsService = app(SendSmsService::class);
+        $this->referenceService = app(ReferenceService::class);
+    }
+    
     public function mount()
     {
         $this->allSender = SmsSender::all();
@@ -60,53 +76,58 @@ class AdminSendSms extends Component
             return;
         }
 
-    
-
         $admin = Auth::guard('admin')->user();
 
-        $accountBalance = $admin->balance;
 
+        $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+        if (!$ledger) {
+            $this->dispatch('alert', type: 'error', text: 'Unable to process your request at the moment. Please contact support.', position: 'center', timer: 5000);
+            return;
+        }
+
+        $balanceBeforeGL = $ledger->balance;
+        $accountBalance = $admin->balance;
         $admin->balance = $accountBalance - $totalCharge;
         $admin->save();
 
-        $baseURL = env('EXCHANGE_BASEURL');
-        $username = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
-        $password = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
-        $smsDoc = env('EXCHANGE_SMS_DCS');
-        $enternalID = env(key: 'EXCHANGE_SMS_ENTERNAL_ID');
-        $callURL = env('SMS_CALLBACK');
+        $ledger->balance -= $totalCharge;
+        $ledger->save();
 
-        $messageID = Str::uuid()->toString();
-        $finalPhone = '234' . substr($this->phone_number, 1);
-        $message = Message::create([
-            'admin_id' => $admin->id,
+        $message_reference = Str::uuid()->toString();
+
+        $transaction_number = $this->referenceService->generateReference($admin);
+        // dd(vars: $transaction_number);
+
+        Message::create([
             'sms_sender_id' => $sender->id,
-            'sender' => $sender['name'],
-            'page_number' => 1,
-            'page_rate' => 3,
+            'admin_id' => $admin->id,
+            'sender' => $sender->name,
+            'page_number' => '1',
+            'page_rate' => $admin->sms_rate,
             'status' => 'sent',
             'amount' => $totalCharge,
             'message' => $this->message,
-            'message_id' => $messageID,
-            'destination' => $finalPhone,
+            'message_reference' => $message_reference,
+            'transaction_number' => $transaction_number,
+            'destination' => $this->phone_number,
             'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
+        
+        Transaction::create([
+            'admin_id' => $admin->id,
+            'general_ledger_id' => $ledger->id,
+            'amount' => $totalCharge,
+            'transaction_type' => 'credit',
+            'balance_before' => $balanceBeforeGL,
+            'balance_after' => $ledger->balance,
+            'payment_method' => 'SAS',
+            'reference' => $transaction_number,
+            'description' => "SMS Charge (₦ {$totalCharge}) / {$admin->transaction_number} / {admin->$message_reference} / {$admin->phone_number}",
+            'status' => 'success',
+        ]);
 
-
-        $url = $baseURL .
-            '?X-Service=' . strval($username) .
-            '&X-Password=' . strval($password) .
-            '&X-Sender=' . strval($sender['name']) .
-            '&X-Recipient=' . strval($finalPhone) .
-            '&X-Message=' . strval($this->message) .
-            '&X-SMS-DCS=' . strval($smsDoc) .
-            '&X-External-Id=' . strval($enternalID) .
-            '&X-Delivery-URL=' . strval($callURL);
-        $response = Http::withHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-        ])->get($url)->json();
-        $this->reset();
+        $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $this->phone_number, $this->message);
         $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
+        $this->reset(['sender', 'message', 'phone_number']);
     }
 }

@@ -163,7 +163,6 @@ class PaymentList extends Component
             $row++;
         }
 
-        // Save the Excel file to a temporary path
         $fileName = 'payments_' . now()->format('Y-m-d_H-i-s') . '.xlsx';
         $tempPath = storage_path($fileName);
         $writer = new Xlsx($spreadsheet);

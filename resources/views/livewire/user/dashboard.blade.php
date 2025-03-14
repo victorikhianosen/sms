@@ -191,7 +191,7 @@
                                 @foreach ($allMessage as $item)
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            {{ substr($item->message_id, 0, 8) }}
+                                            {{ substr($item->message_reference, 0, 8) }}
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">{{ $item->sender }}
                                         </td>

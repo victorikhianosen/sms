@@ -71,7 +71,7 @@
                             </a>
 
                             <!-- Top-up Menu with Dropdown -->
-                            <div class="relative">
+                            {{-- <div class="relative">
                                 <button id="topupButton"
                                     class="flex items-center space-x-2 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-md transition-all duration-200 hover:translate-x-2 hover:text-blue ease-in-out">
                                     <i class="fa-solid fa-mobile-screen-button"></i>
@@ -100,7 +100,7 @@
                                     </ul>
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                             <a href="{{ route('single') }}"
                                 class="flex items-center space-x-2 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-md transition-all duration-200 hover:translate-x-2 hover:text-blue ease-in-out">

@@ -83,11 +83,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('groups', Groups::class)->name('groups');
     Route::get('groups/{id}', EditGroups::class)->name('editgroups');
     Route::prefix('payment')->name('payment.')->group(function () {
-        Route::get('paystack', PaystackPayment::class)->name('paystack');
-        Route::get('transfer', BankTransferPayment::class)->name('bank');
+        // Route::get('paystack', PaystackPayment::class)->name('paystack');
+        // Route::get('transfer', BankTransferPayment::class)->name('bank');
 
-        // Route::get('verify/{reference}', VerifyPaystackPayment::class)->name('verifypayment');
-        Route::get('verify/{reference}', [PaymentController::class, 'verifyPayment'])->name('verifypayment');
+        // // Route::get('verify/{reference}', VerifyPaystackPayment::class)->name('verifypayment');
+        // Route::get('verify/{reference}', [PaymentController::class, 'verifyPayment'])->name('verifypayment');
 
         // PaystackPaymentController
         Route::get('history', PaymentHistory::class)->name('history');

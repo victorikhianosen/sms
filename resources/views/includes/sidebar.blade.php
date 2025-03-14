@@ -21,7 +21,7 @@
 
                 </div>
 
-                <div class="space-y-4">
+                {{-- <div class="space-y-4">
                     <p class="text-textSecondary font-light text-sm uppercase">Top-up</p>
 
                     <li>
@@ -57,7 +57,7 @@
 
                         </ul>
                     </li>
-                </div>
+                </div> --}}
 
 
                 <div class="space-y-4">
@@ -150,16 +150,7 @@
                             Add Groups
                         </a>
                     </li>
-                    {{-- <li>
-                        <a href="{{ route('message') }}" wire:navigate.hover @click.prevent="activeLink = 'single'"
-                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
-                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                            Create Group
-                        </a>
-                    </li> --}}
-
-
+          
                 </div>
 
 

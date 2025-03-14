@@ -192,7 +192,7 @@
                                 <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $allMessage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="odd:bg-white even:bg-gray-100">
                                         <td class="px-4 py-4 whitespace-normal text-sm font-medium text-gray">
-                                            <?php echo e(substr($item->message_id, 0, 8)); ?>
+                                            <?php echo e(substr($item->message_reference, 0, 8)); ?>
 
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray"><?php echo e($item->sender); ?>

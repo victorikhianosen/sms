@@ -21,43 +21,7 @@
 
                 </div>
 
-                <div class="space-y-4">
-                    <p class="text-textSecondary font-light text-sm uppercase">Top-up</p>
-
-                    <li>
-                        <a href="#" @click.prevent="openMenu = openMenu === 'topup' ? null : 'topup'"
-                            class="flex justify-between items-center">
-
-                            <div
-                                class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                                <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
-                                Buy SMS Units
-                            </div>
-
-
-                            <span class="">
-                                <i
-                                    :class="openMenu === 'topup' ? 'fa-solid fa-chevron-down text-sm' :
-                                        'fa-solid fa-chevron-right text-sm'"></i>
-                            </span>
-                        </a>
-                        <ul x-show="openMenu === 'topup'" x-transition:enter="transition ease-out duration-500"
-                            x-transition:enter-start="opacity-0 transform scale-y-0"
-                            x-transition:enter-end="opacity-100 transform scale-y-100"
-                            x-transition:leave="transition ease-in duration-500"
-                            x-transition:leave-start="opacity-100 transform scale-y-100"
-                            x-transition:leave-end="opacity-0 transform scale-y-0"
-                            class="pl-6 pt-4 space-y-4 origin-top transform-gpu overflow-hidden">
-                            <li><a href="<?php echo e(route('payment.bank')); ?>" wire:navigate.hover
-                                    class="text-textPrimary font-light text-sm flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">Via
-                                    Bank Transfer</a></li>
-                            <li><a href="<?php echo e(route('payment.paystack')); ?>" wire:navigate.hover
-                                    class="text-textPrimary font-light text-sm flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">Via
-                                    Card</a></li>
-
-                        </ul>
-                    </li>
-                </div>
+                
 
 
                 <div class="space-y-4">
@@ -150,9 +114,7 @@
                             Add Groups
                         </a>
                     </li>
-                    
-
-
+          
                 </div>
 
 

@@ -65,36 +65,7 @@
                             </a>
 
                             <!-- Top-up Menu with Dropdown -->
-                            <div class="relative">
-                                <button id="topupButton"
-                                    class="flex items-center space-x-2 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-md transition-all duration-200 hover:translate-x-2 hover:text-blue ease-in-out">
-                                    <i class="fa-solid fa-mobile-screen-button"></i>
-                                    <span>Top-up</span>
-                                    <i class="fa-solid fa-chevron-down"></i> <!-- Dropdown icon -->
-                                </button>
-                                <!-- Dropdown Menu -->
-                                <!-- Top-up Dropdown Menu -->
-                                <div id="topupDropdown"
-                                    class="absolute top-full left-0 w-full bg-white shadow-lg mt-2 hidden p-4">
-                                    <ul class="space-y-4">
-                                        <li>
-                                            <a href="<?php echo e(route('payment.bank')); ?>"
-                                                class="text-textPrimary font-light text-sm flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                                                <i class="fa-solid fa-university mr-2"></i> <!-- Bank icon -->
-                                                Via Bank Transfer
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo e(route('payment.paystack')); ?>"
-                                                class="text-textPrimary font-light text-sm flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
-                                                <i class="fa-brands fa-cc-visa mr-2"></i> <!-- Visa card icon -->
-                                                Via Card
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
+                            
 
                             <a href="<?php echo e(route('single')); ?>"
                                 class="flex items-center space-x-2 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-md transition-all duration-200 hover:translate-x-2 hover:text-blue ease-in-out">

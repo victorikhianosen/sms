@@ -8,6 +8,7 @@ use App\Models\SmsSender;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use App\Models\GeneralLedger;
+use App\Models\ExchangeWallet;
 use Livewire\Attributes\Title;
 use App\Services\SendSmsService;
 use Livewire\Attributes\Validate;
@@ -110,6 +111,18 @@ class SendSingle extends Component
             return;
         }
 
+        $exchange = ExchangeWallet::where('route', $smsRoute)->first();
+        
+        if ($exchange['available_unit'] < $this->smsUnits) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[U].', position: 'center', timer: 5000);
+            return;
+        }
+
+        if ($exchange['available_balance'] < $this->totalCharge) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[M].', position: 'center', timer: 5000);
+            return;
+        }
+
         $balanceBeforeGL = $ledger->balance;
         $user->balance -= $this->totalCharge;
         $user->save();
@@ -117,8 +130,12 @@ class SendSingle extends Component
         $ledger->balance -= $this->totalCharge;
         $ledger->save();
 
+        $exchange->available_balance -= $this->totalCharge;
+        $exchange->available_unit -= $this->smsUnits;
+        $exchange->save();
+
         $finalPhone = '234' . substr($this->phone_number, 1);
-        $message_reference = Str::uuid()->toString();
+        $message_reference = str_replace('-', '', Str::uuid()->toString());
 
         $transaction_number = $this->referenceService->generateReference($user);
 
@@ -149,7 +166,8 @@ class SendSingle extends Component
             'status' => 'success',
         ]);
 
-        $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message);
+        $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message, $message_reference);
+        // dd($response);
         $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
         $this->closeModal();
         $this->reset(['sender', 'message', 'phone_number']);

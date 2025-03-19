@@ -23,6 +23,7 @@ use App\Livewire\Admin\PaymentList;
 use App\Livewire\Admin\UserDetails;
 use App\Livewire\Admin\AdminDetails;
 use App\Livewire\Admin\AdminSendSms;
+use App\Livewire\Admin\ExchangeList;
 use App\Livewire\Admin\SmsRouteList;
 use App\Livewire\User\Auth\Register;
 use App\Livewire\Admin\SmsSenderList;
@@ -34,6 +35,7 @@ use App\Livewire\User\PaystackPayment;
 use App\Livewire\User\ScheduleSmsView;
 use App\Livewire\Admin\Auth\AdminLogin;
 use App\Livewire\Admin\TransactionList;
+use App\Livewire\User\Auth\VerifyEmail;
 use App\Livewire\User\Auth\VerifyToken;
 use App\Livewire\User\ProcessSinglesms;
 use App\Livewire\Admin\AdminMessageList;
@@ -45,8 +47,8 @@ use App\Livewire\User\BankTransferPayment;
 use App\Http\Controllers\PaymentController;
 use App\Livewire\Admin\ScheduleMessageList;
 use App\Livewire\User\VerifyPaystackPayment;
+use App\Livewire\User\Auth\EmailVerification;
 use App\Http\Controllers\PaystackPaymentController;
-
 
 Route::get('login', function () {
     return redirect()->route('home');
@@ -54,6 +56,8 @@ Route::get('login', function () {
 
 Route::get('/', Login::class)->name('home');
 Route::get('register', Register::class)->name('register');
+Route::get('verify-email/{email}', VerifyEmail::class)->name('verifyemail');
+
 
 Route::get('forget-password', ForgetPassword::class)->name('forgetpassword');
 
@@ -61,6 +65,7 @@ Route::get('verify-token/{email}', VerifyToken::class)->name('verifytoken');
 
 Route::get('reset-password/{email}', ResetPassword::class)->name('resetpassword');
 
+Route::get('verify-email/{email}/{otp}', EmailVerification::class)->name('verifyemail.link');
 
 
 
@@ -118,9 +123,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('group-list', GroupList::class)->name('group');
         Route::get('sendsms', AdminSendSms::class)->name('sendsms');
         Route::get('schedulelist', ScheduleMessageList::class)->name('schedulelist');
+
+        // Only Supper Admin
         Route::middleware(['auth:admin', 'super'])->group(function () {
             Route::get('ledger-list', LedgerList::class)->name('ledgers');
             Route::get('transaction-list', TransactionList::class)->name('transactions');
+            Route::get('exchange-list', ExchangeList::class)->name('exchange');
         });
 
 

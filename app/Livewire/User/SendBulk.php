@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Jobs\ProcessBulkSms;
 use App\Models\GeneralLedger;
 use Livewire\WithFileUploads;
+use App\Models\ExchangeWallet;
 use Livewire\Attributes\Title;
 use App\Services\SendSmsService;
 use Livewire\Attributes\Validate;
@@ -159,6 +160,20 @@ class SendBulk extends Component
             return;
         }
 
+        $exchange = ExchangeWallet::where('route', $smsRoute)->first();
+        if ($exchange['available_unit'] < $this->smsUnits) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[U].', position: 'center', timer: 5000);
+            return;
+        }
+        if ($exchange['available_balance'] < $this->totalCharge) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[M].', position: 'center', timer: 5000);
+            return;
+        }
+
+        $exchange->available_balance -= $this->totalCharge;
+        $exchange->available_unit -= $this->smsUnits;
+        $exchange->save();
+
         ProcessBulkSms::dispatch(
             $user->id,
             $sender->id,
@@ -176,93 +191,5 @@ class SendBulk extends Component
         $this->dispatch('alert', type: 'success', text: 'Bulk messages sent successfully!', position: 'center', timer: 5000, button: false);
         $this->closeModal();
     }
-
-
-
-    // public function sendBulkMessage()
-    // {
-    //     if (!$this->numbersToSend) {
-    //         $this->dispatch('alert', type: 'error', text: 'No numbers found!', position: 'center', timer: 5000, button: false);
-    //         return;
-    //     }
-
-    //     $sender = SmsSender::whereRaw('BINARY name = ?', [$this->sender])->first();
-    //     if (!$sender) {
-    //         $this->dispatch('alert', type: 'error', text: 'Invalid Sender ID', position: 'center', timer: 5000, button: false);
-    //         return;
-    //     }
-
-    //     $smsRoute = $sender->smsroute->name;
-    //     if (!in_array($smsRoute, ['exchange_trans', 'exchange_pro'])) {
-    //         $this->dispatch('alert', type: 'error', text: 'Unknown sender', position: 'center', timer: 10000, button: false);
-    //         return;
-    //     }
-
-    //     $user = Auth::user();
-    //    $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
-
-    //     if (!$ledger) {
-    //         $this->dispatch('alert', type: 'error', text: 'Unable to process your request at the moment. Please contact support.[GL]', position: 'center', timer: 5000);
-    //         return;
-    //     }
-
-    //     $numbersArray = explode(',', $this->numbersToSend);
-    //     $chargePerMessage = $this->totalCharge / count($numbersArray); // Charge per SMS
-
-    //     foreach ($numbersArray as $number) {
-    //         $number = trim($number); // Ensure no spaces
-    //         if (empty($number)) {
-    //             continue;
-    //         }
-
-    //         // Get balance before deduction
-    //         $balanceBeforeGL = $ledger->balance;
-
-    //         // Deduct charge
-    //         $user->balance -= $chargePerMessage;
-    //         $user->save();
-
-    //         $ledger->balance -= $chargePerMessage;
-    //         $ledger->save();
-
-    //         $finalPhone = '234' . substr($number, 1);
-    //         $message_reference = Str::uuid()->toString();
-    //         $transaction_number = $this->referenceService->generateReference($user);
-
-    //         $user->messages()->create([
-    //             'sms_sender_id' => $sender->id,
-    //             'sender' => $sender->name,
-    //             'page_number' => $this->smsUnits,
-    //             'page_rate' => $this->smsRate,
-    //             'status' => 'sent',
-    //             'amount' => $chargePerMessage,
-    //             'message' => $this->message,
-    //             'message_reference' => $message_reference,
-    //             'transaction_number' => $transaction_number,
-    //             'destination' => $finalPhone,
-    //             'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
-    //         ]);
-
-    //         Transaction::create([
-    //             'user_id' => $user->id,
-    //             'general_ledger_id' => $ledger->id,
-    //             'amount' => $chargePerMessage,
-    //             'transaction_type' => 'credit',
-    //             'balance_before' => $balanceBeforeGL,
-    //             'balance_after' => $ledger->balance, // Get the updated balance
-    //             'payment_method' => 'bulk sms',
-    //             'reference' => $transaction_number,
-    //             'description' => "SMS Charge (₦ {$chargePerMessage}) / {$transaction_number} / {$finalPhone}",
-    //             'status' => 'success',
-    //         ]);
-
-    //         $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message);
-    //     }
-
-    //     $this->reset();
-    //     $this->dispatch('alert', type: 'success', text: 'SMS is being sent!', position: 'center', timer: 5000, button: false);
-    //     $this->closeModal();
-    // }
-
 
 }

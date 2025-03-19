@@ -8,8 +8,39 @@
 
 
 
+
                 <div>
-                    <h2 class="text-blue font-semibold">All Users Balance</h2>
+                    <h2 class="text-blue font-semibold">Transactional</h2>
+                    @if (is_null($exchangeTransBalance))
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-spinner animate-spin text-sm text-blue-500"></i>
+                            <p class="text-md text-gray-600 mt-2 animate-pulse">Loading...</p>
+                        </div>
+                    @else
+                        <p
+                            class="text-sm font-bold transition-all duration-300 {{ $exchangeTransBalance < 500 ? 'text-red-500' : 'text-green-500' }}">
+                            &#8358; {{ number_format($exchangeTransBalance, 2) }} / {{ $exchangeTransUnit }}Units
+                        </p>
+                    @endif
+                </div>
+
+
+                 <div>
+                    <h2 class="text-blue font-semibold">Promotional</h2>
+                    @if (is_null($exchangeProBalance))
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-spinner animate-spin text-sm text-blue-500"></i>
+                            <p class="text-md text-gray-600 mt-2 animate-pulse">Loading...</p>
+                        </div>
+                    @else
+                        <p
+                            class="text-sm font-bold transition-all duration-300 {{ $exchangeProBalance < 500 ? 'text-red-500' : 'text-green-500' }}">
+                            &#8358; {{ number_format($exchangeProBalance, 2) }} / {{ $exchangeProUnit }}Units
+                        </p>
+                    @endif
+                </div>
+                <div>
+                    <h2 class="text-blue font-semibold">Users Balance</h2>
                     @if (is_null($totalBalance))
                         <div class="flex items-center gap-2">
                             <i class="fa-solid fa-spinner animate-spin text-sm text-blue-500"></i>
@@ -18,7 +49,7 @@
                     @else
                         <p
                             class="text-sm font-bold transition-all duration-300 {{ $totalBalance < 500 ? 'text-red-500' : 'text-green-500' }}">
-                            &#8358; {{ $totalBalance }}
+                            &#8358; {{ number_format($totalBalance, 2) }}
                         </p>
                     @endif
                 </div>
@@ -33,7 +64,7 @@
                     @else
                         <p
                             class="text-sm font-bold transition-all duration-300 {{ $ledgerBalance < 500 ? 'text-red-500' : 'text-green-500' }}">
-                            &#8358; {{ $ledgerBalance }}
+                            &#8358; {{ number_format($ledgerBalance, 2) }}
                         </p>
                     @endif
                 </div>

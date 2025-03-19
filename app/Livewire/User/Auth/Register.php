@@ -2,15 +2,18 @@
 
 namespace App\Livewire\User\Auth;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use App\Mail\RegistrationMail;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use App\Jobs\CreateVirtualAccountJob; // Correct namespace for the User model
 
 class Register extends Component
@@ -50,17 +53,26 @@ class Register extends Component
         $validated = $this->validate();
         unset($validated['password_confirmation']);
 
+        $otp = rand(100000, 999999);
+        $otp_expired_at = Carbon::now()->addMinutes(5)->toDateTimeString();
+
+        $validated['otp'] = $otp;
+        $validated['otp_expired_at'] = $otp_expired_at;
+        $validated['status'] = 'pending';
+
         $user = User::create($validated);
+        $verificationLink = url('verify-email/' . $user->email . '/' . $otp);
+        Mail::to($user->email)->send(new RegistrationMail($validated['first_name'], $otp, $verificationLink));
         $this->generateApiCredentials($user);
-        CreateVirtualAccountJob::dispatch($user, $validated);
+        
+        // CreateVirtualAccountJob::dispatch($user);
 
-        // $this->createVirtualAccount($validated, $user);
+        $this->dispatch('alert', type: 'success', text: 'OTP has been sent to your email.', position: 'center', timer: 10000, button: false);
+        $this->reset('first_name', 'last_name', 'phone', 'password', 'password_confirmation');
+        return redirect()->route('verifyemail', [
+            'email' => $user->email
+        ]);
 
-        $this->reset();
-        Auth::login($user);
-
-        $this->dispatch('alert', type: 'success', text: 'Registration successful.', position: 'center', timer: 10000, button: false);
-        return redirect()->route('dashboard');
     }
 
 
@@ -79,20 +91,6 @@ class Register extends Component
         $user->save();
     }
 
-
-    // private function generateApiCredentials(User $user)
-    // {
-    //     $apiKey = Str::random(length: 32);
-    //     while (User::where('api_key', $apiKey)->exists()) {
-    //         $apiKey = Str::random(32);
-    //     }
-    //     $apiSecret = Str::random(32);
-    //     $user->api_key = $apiKey;
-    //     $user->api_secret = $apiSecret;
-    //     $user->save();
-    // }
-
-
     public function createVirtualAccount($validated, $user)
     {
         $url = rtrim(env('CASHMATRIX_BASE_URL'), '/') . '/virtual-account/create'; // Ensure proper URL format
@@ -102,13 +100,7 @@ class Register extends Component
             'secretkey' => env('CASHMATRIX_SECRET_KEY')
         ];
 
-        // dd($user);
-
         $fetchUser = User::where('id', $user['id'])->where('email', $user['email'])->first();
-
-        // dd($fetchUser);
-
-
         $full_name = $fetchUser['first_name'] . ' ' . $fetchUser['last_name'];
 
         $account_number = substr($fetchUser, 1);
@@ -119,13 +111,8 @@ class Register extends Component
         ];
 
         $response = Http::withHeaders($headers)->post($url, $payload)->json();
-
-        // $response['accountNumber'] = $account_number;
-        // return $response;
-
         if($response['status'] === true && $response['responseCode'] === "00") {
             $fetchUser->update(['account_number' => $account_number]);
-            // return $account_number;
         } else {
             Log::info("MAtricPay Account creation {$account_number} not found.");
         }

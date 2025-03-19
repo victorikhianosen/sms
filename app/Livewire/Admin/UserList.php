@@ -112,7 +112,7 @@ class UserList extends Component
     public function addUserFund()
     {
 
-    $validated = $this->validate(['amount' => ['required', 'numeric', 'min:5', 'regex:/^[1-9][0-9]*$/']]);
+    $validated = $this->validate(['amount' => ['required', 'numeric', 'min:100']]);
         $user = User::find($this->userID);
         if (!$user) {
             $this->dispatch('alert', type: 'error', text: 'User not found.', position: 'center', timer: 5000);

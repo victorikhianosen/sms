@@ -27,8 +27,6 @@ class Login extends Component
     public function loginUser()
     {
         $validated = $this->validate();
-
-        // dd($validated['email']);
         $user = User::Where('email', $validated['email'])->first();
 
         if (!$user) {
@@ -37,6 +35,13 @@ class Login extends Component
             return;
         }
 
+
+        if (!empty($user->otp) && !empty($user->otp_expired_at) && now()->lt(Carbon::parse($user->otp_expired_at))) {
+            $this->addError('email', 'Your account must be verified first.');
+            $this->dispatch('alert', type: 'error', text: 'Your account must be verified before login.', position: 'center', timer: 10000, button: false);
+            return;
+        }
+        
 
         if ($user['status'] !== 'active') {
             $this->addError('email', 'Your account has been deactivated');

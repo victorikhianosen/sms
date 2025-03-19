@@ -1,0 +1,4354 @@
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:16:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:17:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:18:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:19:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:20:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:21:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:22:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:23:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:24:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:25:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:26:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:27:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:28:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:29:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:30:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:31:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-17 16:32:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+22 vendor frames [22m
+
+  23  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  37  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:52:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:53:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:54:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:55:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:56:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:57:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:58:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 12:59:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:00:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:01:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:02:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:03:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:04:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:05:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:06:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:07:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:08:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:09:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:10:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:11:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:12:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:13:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:14:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:15:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:16:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:17:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:18:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:19:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:20:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:21:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:22:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:23:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:24:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:25:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:26:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:27:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:28:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:29:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:30:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:31:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:32:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:33:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:34:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:35:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:36:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:37:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:38:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:39:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:40:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:41:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:42:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:43:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:44:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:45:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:46:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:47:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:48:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:49:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:50:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:51:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:52:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:53:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:54:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:55:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:56:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:57:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:58:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 13:59:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:00:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:01:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:02:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:03:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:04:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:05:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:06:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:07:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:08:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:09:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:10:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:11:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:12:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 14:13:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:23:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:24:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:25:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:26:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:27:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:28:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:29:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:30:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:31:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:32:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:33:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:34:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:35:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:36:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:37:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:38:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:39:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:40:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:41:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:42:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:43:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:44:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:45:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:46:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:47:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:48:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:49:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:50:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:51:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:52:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:53:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:54:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:55:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:56:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:57:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:58:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-18 17:59:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+Scheduled messages processed.
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-19 11:08:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+Scheduled messages processed.
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-19 11:10:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-19 11:11:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-19 11:12:02)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[08004] [1040] Too many connections (Connection: mysql, SQL: select * from `scheduled_messages` where `status` = pending and `scheduled_time` <= 2025-03-19 11:13:01)
+
+  at Documents/Ggt/sms/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+      [2m+19 vendor frames [22m
+
+  20  Documents/Ggt/sms/app/Console/Commands/SendScheduledMessages.php:35
+      Illuminate\Database\Eloquent\Builder::get()
+      [2m+13 vendor frames [22m
+
+  34  Documents/Ggt/sms/artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+Scheduled messages processed.

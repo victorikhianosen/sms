@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Str;
 use App\Models\GeneralLedger;
 use Livewire\WithFileUploads;
+use App\Models\ExchangeWallet;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\Title;
 use App\Models\ScheduledMessage;
@@ -158,8 +159,6 @@ class ScheduleSms extends Component
         $this->showModal = true;
     }
 
-
-
     public function sendScheduleMessage()
     {
 
@@ -176,12 +175,31 @@ class ScheduleSms extends Component
             return;
         }
 
+        $smsRoute = $sender->smsroute->name;
+        if (!in_array($smsRoute, ['exchange_trans', 'exchange_pro'])) {
+            $this->dispatch('alert', type: 'error', text: 'Unknown sender', position: 'center', timer: 10000, button: false);
+            return;
+        }
+
         $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
 
         if (!$ledger) {
             $this->dispatch('alert', type: 'error', text: 'Unable to process your request at the moment. Please contact support.[GL]', position: 'center', timer: 5000);
             return;
         }
+
+        $exchange = ExchangeWallet::where('route', $smsRoute)->first();
+        if ($exchange['available_unit'] < $this->smsUnits) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[U].', position: 'center', timer: 5000);
+            return;
+        }
+        if ($exchange['available_balance'] < $this->totalCharge) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[M].', position: 'center', timer: 5000);
+            return;
+        }
+        $exchange->available_balance -= $this->totalCharge;
+        $exchange->available_unit -= $this->smsUnits;
+        $exchange->save();
 
         $smsRoute = $sender->smsroute->name;
         $reference = $this->referenceService->generateReference($user);
@@ -193,7 +211,6 @@ class ScheduleSms extends Component
         $balanceBeforeGL = $ledger->balance;
         $ledger->balance -= $this->totalCharge;
         $ledger->save();
-
 
         $scheduledMessage = ScheduledMessage::create([
             'user_id' => $user['id'],
@@ -214,7 +231,7 @@ class ScheduleSms extends Component
         Transaction::create([
             'user_id' => $user->id,
             'general_ledger_id' => $ledger->id,
-            'scheduled_message_id' => $scheduledMessage->id, // Add this line
+            'scheduled_message_id' => $scheduledMessage->id, 
             'amount' => $this->totalCharge,
             'transaction_type' => 'credit',
             'balance_before' => $balanceBeforeGL,

@@ -78,14 +78,13 @@ class ProcessBulkSms implements ShouldQueue
             // Get balance before deduction
             $balanceBeforeGL = $ledger->balance;
 
-            // Deduct charge
             $user->balance -= $chargePerMessage;
             $user->save();
             $ledger->balance -= $chargePerMessage;
             $ledger->save();
 
             $finalPhone = '234' . substr($number, 1);
-            $message_reference = Str::uuid()->toString();
+            $message_reference = str_replace('-', '', Str::uuid()->toString());
             $transaction_number = $referenceService->generateReference($user);
 
             // Create message record
@@ -103,7 +102,6 @@ class ProcessBulkSms implements ShouldQueue
                 'route' => $route,
             ]);
 
-            // Create transaction record
             Transaction::create([
                 'user_id' => $user->id,
                 'general_ledger_id' => $ledger->id,
@@ -117,8 +115,7 @@ class ProcessBulkSms implements ShouldQueue
                 'status' => 'success',
             ]);
 
-            // Send the actual SMS
-            $sendSmsService->sendSms($this->senderName, $this->smsRoute, $finalPhone, $this->message);
+            $sendSmsService->sendSms($this->senderName, $this->smsRoute, $finalPhone, $this->message, $message_reference);
         }
     }
 }

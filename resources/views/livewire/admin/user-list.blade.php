@@ -50,13 +50,13 @@
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray break-words">
                                             {{ $item['phone'] }}</td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            {{ $item->balance }}
+                                            {{ number_format($item->balance, 2) }}
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                             {{ $item->status }}
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal text-sm text-gray">
-                                            {{ $item->account_number?: 'Unavailable' }}
+                                            {{ $item->account_number ?: 'Unavailable' }}
                                         </td>
                                         <td class="px-4 py-4 whitespace-normal flex items-center gap-2">
 
@@ -287,7 +287,7 @@
                         </div>
 
                         <div class="mt-6 flex justify-start pt-4 space-x-4">
-                     
+
 
 
                             <button type="submit" wire:loading.remove wire:click.prevent="addUserFund"

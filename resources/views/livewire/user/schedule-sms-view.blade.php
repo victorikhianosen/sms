@@ -30,8 +30,16 @@
                             class="mt-6 px-5 py-2 block w-full rounded-lg text-white text-xs tracking-wider font-light border-none outline-none bg-blue hover:opacity-90">
                             View
                         </a> --}}
-                        <button type="button" wire:click.prevent="cancelSchedule({{ $item['id'] }})"
-                            class="mt-6 px-5 py-2 w-full rounded-lg text-white text-xs tracking-wider font-light border-none outline-none bg-red-600 hover:opacity-90">Cancel</button>
+
+                          @if ($item['status'] !== 'sent')
+                            <button type="button" wire:click.prevent="cancelSchedule({{ $item['id'] }})"
+                                class="mt-6 px-5 py-2 w-full rounded-lg text-white text-xs tracking-wider font-light border-none outline-none bg-red-600 hover:opacity-90">
+                                Cancel
+                            </button>
+                        @endif
+                        {{-- <button type="button" wire:click.prevent="cancelSchedule({{ $item['id'] }})"
+                            class="mt-6 px-5 py-2 w-full rounded-lg text-white text-xs tracking-wider font-light border-none outline-none bg-red-600 hover:opacity-90">Cancel
+                        </button> --}}
                     </div>
                     <span
                         class="block absolute top-0 right-4 {{ $statusColor }} text-white py-1 px-2 rounded-lg text-[12px]">
@@ -44,7 +52,7 @@
 
     </div>
 
-      <div class="mt-12">
+    <div class="mt-12">
         {{ $allSchedule->links() }}
     </div>
 

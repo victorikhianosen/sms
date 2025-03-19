@@ -11,7 +11,7 @@ class ReferenceService
         $adminID = $data['id'];
         $firstTwoFirstName = strtoupper(substr($data->first_name, 0, 1));
         $firstTwoLastName = strtoupper(substr($data->last_name, 0, 1));
-        $uniqueNumber = Str::uuid()->toString();
+        $uniqueNumber = str_replace('-', '', Str::uuid()->toString());
         return "{$uniqueNumber}/{$adminID}{$firstTwoFirstName}{$firstTwoLastName}";
     }
 

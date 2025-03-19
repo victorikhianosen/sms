@@ -13,6 +13,7 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/sendsms', [SendSMSController::class,'sendSMS']);
+Route::post('/sendbulk', [SendSMSController::class, 'sendBulk']);
 Route::post('/callback', [CallBackController::class, 'callback']);
 Route::post('/matrixcallback', [CallBackController::class, 'matrixCallback']);
 // Route::post('/matrixcallback', function () {

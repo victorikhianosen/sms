@@ -6,9 +6,9 @@ namespace App\Livewire\User\Auth;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use App\Mail\ForgetPasswordMail;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ForgetPasswordMail;
 
 class VerifyToken extends Component
 {
@@ -16,24 +16,15 @@ class VerifyToken extends Component
     public $email;
 
     #[Validate('required|numeric|digits:6')]
-    public $otp; // Changed from $token to $otp to match the input in the view
+    public $otp;
 
-    public $tokenExpired = false; // Track if the OTP is expired
+    public $tokenExpired = false;
 
     #[Title('Verify Token')]
     public function render()
     {
         return view('livewire.user.auth.verify-token')->extends('layouts.guest_layout')->section('guest-section');
     }
-
-    // public function mount()
-    // {
-    //     $user = User::where('email', $this->email)->first();
-
-    //     if ($user && $user->otp_expired_at && $user->otp_expired_at < now()) {
-    //         $this->tokenExpired = true; // Set flag if token has expired
-    //     }
-    // }
 
     public function resendToken()
     {

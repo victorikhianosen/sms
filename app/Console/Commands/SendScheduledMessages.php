@@ -24,12 +24,19 @@ class SendScheduledMessages extends Command
 
     public function handle()
     {
-        $now = Carbon::now();
-        LogService::scheduleSms("Checking for scheduled messages to send at: " . $now);
+        // $now = Carbon::now();
+        $now = Carbon::now('Africa/Lagos');
+        LogService::scheduleSms("Checking for Scheduled Messages To Send At: " . $now);
 
-        $scheduledMessages = ScheduledMessage::where('status', 'pending')->get();
+        // $scheduledMessages = ScheduledMessage::where('status', 'pending')->get();
+
+        $scheduledMessages = ScheduledMessage::where('status', 'pending')
+            ->where('scheduled_time', '<=', $now)
+            ->get();
 
         LogService::scheduleSms("Pending Scheduled messages found: " . $scheduledMessages->count());
+
+        $message_reference = str_replace('-', '', Str::uuid()->toString());
 
         foreach ($scheduledMessages as $scheduled) {
             LogService::scheduleSms("Processing message for User ID: " . $scheduled->user_id);
@@ -58,7 +65,8 @@ class SendScheduledMessages extends Command
                     $scheduled->sender,
                     $scheduled->sms_sender_id === 'exchange_trans' ? 'exchange_trans' : 'exchange_pro',
                     $finalPhone,
-                    $scheduled->message
+                    $scheduled->message,
+                    $message_reference
                 );
 
                 Message::create([
@@ -70,7 +78,7 @@ class SendScheduledMessages extends Command
                     'status' => 'sent',
                     'amount' => min($amountPerRecipient, $totalChargePerRecipient), // Amount deducted per recipient
                     'message' => $scheduled->message,
-                    'message_reference' => Str::uuid()->toString(),
+                    'message_reference' => $message_reference,
                     'transaction_number' => $scheduled->reference, // Pass unique reference here
                     'destination' => $finalPhone,
                     'route' => $scheduled->sms_sender_id === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',

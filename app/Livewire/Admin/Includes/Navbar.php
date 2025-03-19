@@ -7,6 +7,7 @@ use App\Models\Admin;
 use Livewire\Component;
 use App\Models\Transaction;
 use App\Models\GeneralLedger;
+use App\Models\ExchangeWallet;
 use Illuminate\Support\Facades\Auth;
 
 class Navbar extends Component
@@ -19,6 +20,13 @@ class Navbar extends Component
     public $ledgerBalance;
 
     public $totalBalance;
+
+    public $exchangeTransBalance;
+    public $exchangeProBalance;
+
+    public $exchangeTransUnit;
+    public $exchangeProUnit;
+
 
 
 
@@ -39,7 +47,15 @@ class Navbar extends Component
         $this->allAdminBalance = Admin::sum(column: 'balance');
         $this->ledgerBalance = GeneralLedger::sum('balance');
         $this->totalBalance = $this->allUserBalance + $this->allAdminBalance;
-        // dd($this->allUserBalance, $this->allAdminBalance, $this->totalBalance);
+        $exchangeTrans = ExchangeWallet::where('username', 'ggttxmt')->first();
+        $exchangePro = ExchangeWallet::where('username', 'ggtprmt')->first();
+        $this->exchangeTransUnit = $exchangeTrans->available_unit;
+        $this->exchangeProUnit = $exchangePro->available_unit;
+        
+        $this->exchangeTransBalance = $exchangeTrans->available_balance;
+        $this->exchangeProBalance = $exchangePro->available_balance;
+
+        
         $admins = Auth::guard('admin')->user();
         $this->first_name = $admins->first_name;
         $this->balance = $admins->balance;

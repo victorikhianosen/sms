@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Str;
 use App\Models\GeneralLedger;
 use App\Traits\HttpResponses;
+use App\Models\ExchangeWallet;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
@@ -35,8 +36,6 @@ class SendSmsService
     public function send(array $validated)
     {
 
-        // return $validated;
-        // Get the sender from the database
         $sender = SmsSender::whereRaw('BINARY name = ?', [$validated['sender']])->first();
         if (!$sender) {
             return $this->error('Invalid Sender ID', 500);
@@ -46,52 +45,54 @@ class SendSmsService
         if (!in_array($smsRoute, ['exchange_trans', 'exchange_pro'])) {
             return $this->error('Unknown Sender', 500);
         }
-
-        // Get the user from the API credentials
         $user = User::where('api_key', $validated['api_key'])
             ->where('api_secret', $validated['api_secret'])
             ->first();
+
         if (!$user) {
             return $this->error('Invalid Credentials', 500);
         }
-
-        // SMS rate and character limit
         $smsRate = $user->sms_rate;
         $smsCharLimit = $user->sms_char_limit;
         $accountBalance = $user->balance;
 
-        // Calculate message length and cost
         $messageLength = strlen($validated['message']);
         $smsUnits = ceil($messageLength / $smsCharLimit);
         $totalCharge = $smsUnits * $smsRate;
 
-        // Check if the user has sufficient funds
         if ($accountBalance < $totalCharge) {
             return $this->error('Insufficient funds', 500);
         }
 
-
         $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
+        $exchange = ExchangeWallet::where('route', $smsRoute)->first();
+        if ($exchange['available_unit'] < $smsUnits) {
+            return $this->error('Switcher error! Please contact support[U]',500);
+        }
+
+        if ($exchange['available_balance'] < $totalCharge) {
+
+            return $this->error('Switcher error! Please contact support[M]', 500);
+        }
+
         $balanceBeforeGL = $ledger->balance;
-
-
-        $user->balance = $accountBalance - $totalCharge;
+        $user->balance -= $totalCharge;
         $user->save();
 
         $ledger->balance -= $totalCharge;
         $ledger->save();
+        
+        $exchange->available_balance -= $totalCharge;
+        $exchange->available_unit -= $smsUnits;
+        $exchange->save();
 
+        $message_reference = str_replace('-', '', Str::uuid()->toString());
 
-        // Generate a unique message ID
-        $messageID = Str::uuid()->toString();
-
-        // Format the phone number (assuming Nigerian numbers, for example)
         $phone = $validated['phone_number'];
         $modifiedPhone = substr($phone, 1);
         $finalPhone = '234' . $modifiedPhone;
 
         $reference = $this->referenceService->generateReference($user);
-
 
         $message = $user->messages()->create([
             'sms_sender_id'  => $sender->id,
@@ -101,7 +102,7 @@ class SendSmsService
             'status'         => 'sent',
             'amount'         => $totalCharge,
             'message'        => $validated['message'],
-            'message_reference'     => $messageID,
+            'message_reference'     => $message_reference,
             'transaction_number' => $reference,
             'destination'    => $validated['phone_number'],
             'route'          => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
@@ -125,7 +126,8 @@ class SendSmsService
             $sender->name,
             $smsRoute,
             $finalPhone,
-            $validated['message']
+            $validated['message'],
+            $message_reference
         );
 
 
@@ -139,16 +141,17 @@ class SendSmsService
         );
     }
 
-
-    public function sendSms(string $senderName, string $smsRoute, string $finalPhone, string $message): ?array
+    public function sendSms(string $senderName, string $smsRoute, string $finalPhone, string $message , $message_reference): ?array
     {
+       
         $baseURL     = env('EXCHANGE_BASEURL');
         $username    = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
         $password    = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
         $smsDoc      = env('EXCHANGE_SMS_DCS');
-        $externalID  = env('EXCHANGE_SMS_ENTERNAL_ID');
-        $callbackURL = env('SMS_CALLBACK');
+        $externalID  = $message_reference;
+        $callbackURL = 'https://sms.assetmatrixmfb.com/api/callback';
 
+      
         $url = sprintf(
             '%s?X-Service=%s&X-Password=%s&X-Sender=%s&X-Recipient=%s&X-Message=%s&X-SMS-DCS=%s&X-External-Id=%s&X-Delivery-URL=%s',
             $baseURL,
@@ -162,6 +165,18 @@ class SendSmsService
             $callbackURL
         );
 
+        $data = [
+            'timestamp'  => now()->toDateTimeString(),
+            'url'        => $url,
+            'parameters' => [
+                'senderName' => $senderName,
+                'smsRoute'   => $smsRoute,
+                'finalPhone' => $finalPhone,
+                'message'    => $message,
+            ]
+        ];
+
+        Log::info('SMS Request', $data);
         try {
             $response = Http::withHeaders([
                 'Accept'       => 'application/json',

@@ -8,6 +8,7 @@ use App\Models\SmsSender;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use App\Models\GeneralLedger;
+use App\Models\ExchangeWallet;
 use Livewire\Attributes\Title;
 use App\Services\SendSmsService;
 use Livewire\Attributes\Validate;
@@ -37,7 +38,8 @@ class AdminSendSms extends Component
         $this->sendSmsService = app(SendSmsService::class);
         $this->referenceService = app(ReferenceService::class);
     }
-    
+
+
     public function mount()
     {
         $this->allSender = SmsSender::all();
@@ -54,7 +56,6 @@ class AdminSendSms extends Component
         $validate = $this->validate();
 
         $admin = Auth::guard('admin')->user();
-        // dd($admin);
 
         $totalCharge = 3;
 
@@ -84,6 +85,16 @@ class AdminSendSms extends Component
             $this->dispatch('alert', type: 'error', text: 'Unable to process your request at the moment. Please contact support.', position: 'center', timer: 5000);
             return;
         }
+        $exchange = ExchangeWallet::where('route', $smsRoute)->first();
+        if ($exchange['available_unit'] < 1) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[U].', position: 'center', timer: 5000);
+            return;
+        }
+
+        if ($exchange['available_balance'] < $totalCharge) {
+            $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[M].', position: 'center', timer: 5000);
+            return;
+        }
 
         $balanceBeforeGL = $ledger->balance;
         $accountBalance = $admin->balance;
@@ -93,11 +104,14 @@ class AdminSendSms extends Component
         $ledger->balance -= $totalCharge;
         $ledger->save();
 
-        $message_reference = Str::uuid()->toString();
+        $exchange->available_balance -= $totalCharge;
+        $exchange->available_unit -= 1;
+        $exchange->save();
 
+        $modifiedPhone = substr($this->phone_number, 1);
+        $finalPhone = '234' . $modifiedPhone;
+        $message_reference = str_replace('-', '', Str::uuid()->toString());
         $transaction_number = $this->referenceService->generateReference($admin);
-        // dd(vars: $transaction_number);
-
         Message::create([
             'sms_sender_id' => $sender->id,
             'admin_id' => $admin->id,
@@ -109,10 +123,10 @@ class AdminSendSms extends Component
             'message' => $this->message,
             'message_reference' => $message_reference,
             'transaction_number' => $transaction_number,
-            'destination' => $this->phone_number,
+            'destination' => $finalPhone,
             'route' => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
-        
+
         Transaction::create([
             'admin_id' => $admin->id,
             'general_ledger_id' => $ledger->id,
@@ -122,11 +136,12 @@ class AdminSendSms extends Component
             'balance_after' => $ledger->balance,
             'payment_method' => 'SAS',
             'reference' => $transaction_number,
-            'description' => "SMS Charge (₦ {$totalCharge}) / {$admin->transaction_number} / {admin->$message_reference} / {$admin->phone_number}",
+            'description' => "SMS Charge (₦ {$totalCharge}) / {$admin->transaction_number} / {admin->$message_reference} / {$finalPhone}",
             'status' => 'success',
         ]);
 
-        $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $this->phone_number, $this->message);
+        $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message, $message_reference);
+        // dd($response);
         $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
         $this->reset(['sender', 'message', 'phone_number']);
     }

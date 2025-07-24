@@ -30,15 +30,11 @@ class SendSMSController extends Controller
         // return $sms =  $this->sendSmsService->sendBulk($validated);
     }
 
-    // This for cicd
-
-
-
     // ftp
     // smstrix
     // z!7WB4Wf5BRg
 
-//     FTP Username: smstrix@sms.assetmatrixmfb.com
+// FTP Username: smstrix@sms.assetmatrixmfb.com
 // FTP server: ftp.sms.assetmatrixmfb.com
 // FTP & explicit FTPS port:  21
 

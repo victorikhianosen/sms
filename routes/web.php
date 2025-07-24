@@ -46,8 +46,10 @@ use App\Livewire\User\Auth\ForgetPassword;
 use App\Livewire\User\BankTransferPayment;
 use App\Http\Controllers\PaymentController;
 use App\Livewire\Admin\ScheduleMessageList;
+use App\Livewire\Admin\Settings\SmsProvider;
 use App\Livewire\User\VerifyPaystackPayment;
 use App\Livewire\User\Auth\EmailVerification;
+use App\Livewire\Admin\Settings\SmsProviderList;
 use App\Http\Controllers\PaystackPaymentController;
 
 Route::get('login', function () {
@@ -104,12 +106,12 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('', function() {
+    Route::get('', function () {
         return redirect()->route('admin.login'); // Updated route name
     });
     Route::get('/', AdminLogin::class)->name('login'); // Added name to this route
     Route::middleware('auth:admin')->group(function () {
-        Route::get('dashboard', AdminDashboard::class)->name('dashboard'); 
+        Route::get('dashboard', AdminDashboard::class)->name('dashboard');
         Route::get('user/list', UserList::class)->name('userlist');
         Route::get('user/details/{id}', UserDetails::class)->name('userdetails');
         Route::get('logout', [LogoutController::class, 'adminLogout'])->name('logout');
@@ -124,16 +126,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('sendsms', AdminSendSms::class)->name('sendsms');
         Route::get('schedulelist', ScheduleMessageList::class)->name('schedulelist');
 
+        Route::get('provider', SmsProviderList::class)->name('providers');
+
         // Only Supper Admin
         Route::middleware(['auth:admin', 'super'])->group(function () {
             Route::get('ledger-list', LedgerList::class)->name('ledgers');
             Route::get('transaction-list', TransactionList::class)->name('transactions');
             Route::get('exchange-list', ExchangeList::class)->name('exchange');
         });
-
-
     });
-
-
 });
-

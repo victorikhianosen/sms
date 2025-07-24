@@ -58,10 +58,7 @@
                                     class="w-full bg-blue py-3 px-6 rounded-lg text-white transition-all duration-200 hover:opacity-90">
                                     <i class="fa-solid fa-spinner animate-spin "></i> Loading...
                                 </button>
-
-
                             </div>
-
 
                             <div class="">
                                 <a href="{{ route('home') }}" wire:navigate.hover class="text-gray text-sm">Already
@@ -69,7 +66,7 @@
                                     an account? <span class="font-semibold text-blue">Sign in</span></a>
                             </div>
 
-                        </form>
+                l        </form>
                     </div>
                 </div>
             </div>

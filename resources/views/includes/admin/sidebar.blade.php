@@ -162,6 +162,16 @@
                 <div class=space-y-4>
                     <p class="text-textSecondary font-light text-sm pt-4 uppercase">Settings</p>
                     <li>
+                        <a href="{{ route('admin.providers') }}"
+                            :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
+                            class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">
+                            <span><i class="fa-solid fa-mobile-screen-button mr-2"></i></span>
+                            Providers
+                        </a>
+                    </li>
+
+
+                     <li>
                         <a href="{{ route('admin.logout') }}"
                             :class="{ 'text-blue font-semibold': activeLink === 'single', 'text-gray': activeLink !== 'single' }"
                             class="text-textPrimary font-light text-base flex items-center transition-all duration-500 hover:translate-x-2 hover:text-blue hover:font-medium">

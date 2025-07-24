@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\SmsSender;
+use App\Models\SmsProvider;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use App\Models\GeneralLedger;
@@ -31,6 +32,14 @@ class SendSmsService
     {
         $this->referenceService = app(ReferenceService::class);
     }
+
+
+
+    public function getActiveSmsProvider()
+    {
+        return SmsProvider::where('is_active', true)->value('slug');
+    }
+
 
 
     public function send(array $validated)
@@ -67,7 +76,7 @@ class SendSmsService
         $ledger = GeneralLedger::where('id', 1)->where('account_number', '99248466')->first();
         $exchange = ExchangeWallet::where('route', $smsRoute)->first();
         if ($exchange['available_unit'] < $smsUnits) {
-            return $this->error('Switcher error! Please contact support[U]',500);
+            return $this->error('Switcher error! Please contact support[U]', 500);
         }
 
         if ($exchange['available_balance'] < $totalCharge) {
@@ -81,7 +90,7 @@ class SendSmsService
 
         $ledger->balance -= $totalCharge;
         $ledger->save();
-        
+
         $exchange->available_balance -= $totalCharge;
         $exchange->available_unit -= $smsUnits;
         $exchange->save();
@@ -108,7 +117,6 @@ class SendSmsService
             'route'          => $smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO',
         ]);
 
-
         Transaction::create([
             'user_id' => $user->id,
             'general_ledger_id' => $ledger->id,
@@ -122,14 +130,26 @@ class SendSmsService
             'status' => 'success',
         ]);
 
-        $apiResponse = $this->sendSms(
-            $sender->name,
-            $smsRoute,
-            $finalPhone,
-            $validated['message'],
-            $message_reference
-        );
+        $activeProvider = $this->getActiveSmsProvider();
 
+        if ($activeProvider === 'africa_is_talking') {
+            $apiResponse = $this->africaIsTalking(
+                $sender->name,
+                $finalPhone,
+                $validated['message'],
+                $message_reference
+            );
+        } elseif ($activeProvider === 'exchange') {
+            $apiResponse = $this->sendSms(
+                $sender->name,
+                $smsRoute,
+                $finalPhone,
+                $validated['message'],
+                $message_reference
+            );
+        } else {
+            return $this->error('No active SMS provider configured.', 500);
+        }
 
         return $this->success(
             [
@@ -140,10 +160,9 @@ class SendSmsService
             'Message sent successfully'
         );
     }
-
-    public function sendSms(string $senderName, string $smsRoute, string $finalPhone, string $message , $message_reference): ?array
+    public function sendSms(string $senderName, string $smsRoute, string $finalPhone, string $message, $message_reference): ?array
     {
-       
+
         $baseURL     = env('EXCHANGE_BASEURL');
         $username    = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_USERNAME' : 'EXCHANGE_PRO_USERNAME');
         $password    = env($smsRoute === 'exchange_trans' ? 'EXCHANGE_TRANS_PASSWORD' : 'EXCHANGE_PRO_PASSWORD');
@@ -151,7 +170,7 @@ class SendSmsService
         $externalID  = $message_reference;
         $callbackURL = 'https://sms.assetmatrixmfb.com/api/callback';
 
-      
+
         $url = sprintf(
             '%s?X-Service=%s&X-Password=%s&X-Sender=%s&X-Recipient=%s&X-Message=%s&X-SMS-DCS=%s&X-External-Id=%s&X-Delivery-URL=%s',
             $baseURL,
@@ -183,10 +202,58 @@ class SendSmsService
                 'Content-Type' => 'application/json',
             ])->get($url)->json();
 
-            return $response; // ✅ Return API response
+            return $response;
         } catch (\Exception $e) {
             Log::error("SMS API Error: " . $e->getMessage());
-            return null; // ✅ Explicitly return null in case of failure
+            return null;
+        }
+    }
+
+
+
+    public function africaIsTalking($senderId, $phones, $message, $reference)
+    {
+        if (!is_array($phones)) {
+            $phones = [$phones];
+        }
+
+        $formattedPhones = array_map(function ($phone) {
+            $phone = trim($phone);
+            if (!str_starts_with($phone, '+')) {
+                $phone = '+' . $phone;
+            }
+            return $phone;
+        }, $phones);
+
+        $aitBaseUrl = env('AIT_BASE_URL');
+        $aitApiKey = env('AIT_API_KEY');
+        $username = env('AIT_USERNAME');
+
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'apiKey' => $aitApiKey,
+        ])->post($aitBaseUrl, [
+            'username' => $username,
+            "message" => $message,
+            // "senderId": $senderId,
+            'phoneNumbers' => $formattedPhones,
+        ])->json();
+
+        $recipient = $response['SMSMessageData']['Recipients'][0] ?? null;
+        $recipient = $response['SMSMessageData']['Recipients'][0] ?? null;
+        $aitMessageId = $response['SMSMessageData']['Recipients'][0]['messageId'] ?? null;
+
+        if ($recipient && isset($recipient['statusCode'], $recipient['status'])) {
+            if ($recipient['statusCode'] === 100 && $recipient['status'] === 'Success') {
+                $message =   Message::where('message_reference', $reference)->first();
+                $message->update([
+                    'message_reference' => $aitMessageId
+                ]);
+            } else {
+            }
+        } else {
         }
     }
 }

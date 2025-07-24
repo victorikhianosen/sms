@@ -57,7 +57,7 @@ class SendSingle extends Component
         $validated = $this->validate();
 
         $user = Auth::user();
-    
+
         $smsRate = (float) $user->sms_rate;
 
         if (!$smsRate) {
@@ -71,7 +71,7 @@ class SendSingle extends Component
         $smsUnits = ceil($messageLength / $smsCharLimit);
         $totalCharge = $smsUnits * $smsRate;
 
-   
+
 
         if ($accountBalance < $totalCharge) {
             $this->dispatch('alert', type: 'error', text: 'Insufficient funds!', position: 'center', timer: 10000, button: false);
@@ -112,7 +112,7 @@ class SendSingle extends Component
         }
 
         $exchange = ExchangeWallet::where('route', $smsRoute)->first();
-        
+
         if ($exchange['available_unit'] < $this->smsUnits) {
             $this->dispatch('alert', type: 'error', text: 'Switcher error! Please contact support[U].', position: 'center', timer: 5000);
             return;
@@ -166,11 +166,28 @@ class SendSingle extends Component
             'status' => 'success',
         ]);
 
-        $response = $this->sendSmsService->sendSms($sender->name, $smsRoute, $finalPhone, $this->message, $message_reference);
+
+        $activeProvider = $this->sendSmsService->getActiveSmsProvider();
+
+
+        if ($activeProvider === 'africa_is_talking') {
+            $response = $this->sendSmsService->africaIsTalking($sender->name, $finalPhone, $this->message, $message_reference);
+        } elseif ($activeProvider === 'exchange') {
+            $response = $this->sendSmsService->sendSms(
+                $sender->name,
+                $smsRoute,
+                $finalPhone,
+                $this->message,
+                $message_reference
+            );
+        } else {
+            $this->dispatch('alert', type: 'error', text: 'No active SMS provider configured.', position: 'center', timer: 5000);
+            return;
+        }
+
         // dd($response);
         $this->dispatch('alert', type: 'success', text: 'Message sent successfully!', position: 'center', timer: 5000, button: false);
         $this->closeModal();
         $this->reset(['sender', 'message', 'phone_number']);
     }
-
 }

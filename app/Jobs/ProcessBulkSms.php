@@ -62,6 +62,9 @@ class ProcessBulkSms implements ShouldQueue
      */
     public function handle(SendSmsService $sendSmsService, ReferenceService $referenceService)
     {
+
+        $activeProvider = $sendSmsService->getActiveSmsProvider();
+
         $user = User::find($this->userId);
         $ledger = GeneralLedger::find($this->ledgerId);
         $route = $this->smsRoute === 'exchange_trans' ? 'EXCH-TRANS' : 'EXCH-PRO';
@@ -75,7 +78,6 @@ class ProcessBulkSms implements ShouldQueue
                 continue;
             }
 
-            // Get balance before deduction
             $balanceBeforeGL = $ledger->balance;
 
             $user->balance -= $chargePerMessage;
@@ -87,7 +89,6 @@ class ProcessBulkSms implements ShouldQueue
             $message_reference = str_replace('-', '', Str::uuid()->toString());
             $transaction_number = $referenceService->generateReference($user);
 
-            // Create message record
             $user->messages()->create([
                 'sms_sender_id' => $this->senderId,
                 'sender' => $this->senderName,
@@ -115,7 +116,20 @@ class ProcessBulkSms implements ShouldQueue
                 'status' => 'success',
             ]);
 
-            $sendSmsService->sendSms($this->senderName, $this->smsRoute, $finalPhone, $this->message, $message_reference);
+            if ($activeProvider === 'africa_is_talking') {
+                $sendSmsService->africaIsTalking($this->senderName, $finalPhone, $this->message, $message_reference);
+            } elseif ($activeProvider === 'exchange') {
+                $sendSmsService->sendSms($this->senderName, $this->smsRoute, $finalPhone, $this->message, $message_reference);
+            } else {
+                // Optional: Log or notify for debugging
+                logger()->error('No active SMS provider configured for bulk SMS dispatch.');
+            }
+
+
+
+
+
+            // $sendSmsService->sendSms($this->senderName, $this->smsRoute, $finalPhone, $this->message, $message_reference);
         }
     }
 }

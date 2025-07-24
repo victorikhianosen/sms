@@ -11,18 +11,13 @@ class ApiCredentialService
 
     public function generateApiCredentials(User $user)
     {
-        // $apiKey = Str::random(32);
         $apiKey = 'TRIX_' . Str::random(32);
-
         while (User::where('api_key', $apiKey)->exists()) {
             $apiKey = Str::random(32);
         }
-        // $apiSecret = Str::random(32);
         $apiSecret = 'TRIX_SECRET_' . Str::random(32);
-
         $user->api_key = $apiKey;
         $user->api_secret = $apiSecret;
-
         $user->save();
     }
 

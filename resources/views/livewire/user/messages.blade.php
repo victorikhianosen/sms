@@ -20,8 +20,6 @@
                             <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-60">
                                 Message</th>
 
-                            {{-- <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-24">
-                                Rate</th> --}}
                             <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-12">
                                 Amount</th>
                             <th scope="col" class="px-4 py-3 text-start text-xs font-semibold uppercase w-24">
@@ -43,8 +41,7 @@
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                     {{ $item->destination }}
                                 </td>
-                                <td class="px-4 py-4 whitespace-normal text-sm text-gray break-words">
-                                    {{-- {{ $item->message }} --}}
+                            
                                 <td class="px-4 py-4 whitespace-normal text-sm">
                                     {{ Str::limit($item->message, 20) }}
                                 </td>
@@ -54,6 +51,7 @@
                                 {{-- <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                     {{ $item->page_rate }}
                                 </td> --}}
+
                                 <td class="px-4 py-4 whitespace-normal text-sm text-gray">
                                     {{ $item->amount }}
                                 </td>

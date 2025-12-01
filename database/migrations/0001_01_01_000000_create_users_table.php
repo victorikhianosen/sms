@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
+
             $table->string('api_key')->nullable()->unique();
             $table->string('api_secret')->nullable();
+            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->decimal('balance', 15, 2)->default('0.00');

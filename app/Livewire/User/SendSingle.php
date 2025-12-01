@@ -172,7 +172,15 @@ class SendSingle extends Component
 
         if ($activeProvider === 'africa_is_talking') {
             $response = $this->sendSmsService->africaIsTalking($sender->name, $finalPhone, $this->message, $message_reference);
-        } elseif ($activeProvider === 'exchange') {
+
+
+        } 
+         elseif ($activeProvider === 'evexin') {
+            $response = $this->sendSmsService->evexin($sender->name, $finalPhone, $this->message, $message_reference);
+
+            
+        } 
+        elseif ($activeProvider === 'exchange') {
             $response = $this->sendSmsService->sendSms(
                 $sender->name,
                 $smsRoute,
